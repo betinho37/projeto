@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Museu Virtual')
 
 @section('content_header')
     <h1>Dashboard</h1>
