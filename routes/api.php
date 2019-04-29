@@ -18,4 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('usuario', 'UsuariosController');
+
 Auth::routes();
+
+Route::get('/', function () {
+    return view('api/login');
+});
+
+Route::get('/home', 'HomeController@index')->name('home');

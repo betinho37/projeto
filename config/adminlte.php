@@ -32,7 +32,7 @@ return [
 
     'logo' => '<b>Museu</b>Virtual',
 
-    'logo_mini' => '<b>A</b>MV',
+    'logo_mini' => '<b></b>MV',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,15 +85,15 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/api/home',
 
-    'logout_url' => 'logout',
+    'logout_url' => '/api/logout',
 
     'logout_method' => null,
 
-    'login_url' => 'login',
+    'login_url' => '/api/login',
 
-    'register_url' => 'register',
+    'register_url' => '/api/register',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,25 +164,13 @@ return [
                         ],
                     ],
                 ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
             ],
         ],
         'LABELS',
         [
             'text'       => 'Important',
             'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
-        ],
+        ]
     ],
 
     /*
