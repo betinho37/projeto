@@ -13,4 +13,8 @@
 
 
 
-
+Route::get('/', function () {
+    return view('/auth/login');
+});
+Route::resource('usuario', 'UsuariosController');
+Route::get('/api/usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);

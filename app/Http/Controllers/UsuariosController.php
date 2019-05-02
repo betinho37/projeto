@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Usuario;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Estado;
+use Illuminate\Support\Facades\Auth;
 
 class UsuariosController extends Controller
 {
@@ -12,9 +16,22 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $usuario, $estado;
+
+
+    public function __construct(User $usuario, Estado $estado)
+    {
+
+        $this->usuario = $usuario;
+        $this->estado = $estado;
+
+    }
+
     public function index()
     {
-        return view ('welcome');
+        $usuario = $this->usuario->all();
+        return view('admin.index', compact('usuario'));
     }
 
     /**
@@ -24,7 +41,8 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        //
+        $list_estado = $this->estado->listEstado();
+        return view('admin.create', compact('list_estado'));
     }
 
     /**
@@ -35,7 +53,36 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+
+          $validator = $this->validator($inputs);
+
+                if ($validator->fails()) {
+                    return redirect('usuario/create')
+                                ->withErrors($validator)
+                                ->withInput();
+                }
+
+          $inputs['password'] = bcrypt($inputs['password']);
+
+
+        
+
+           $this->usuario->create($inputs);
+                
+
+          $credentials = $request->only('email', 'password');
+          if (Auth::check()) {
+                return redirect()->action('UsuariosController@index');
+
+              } else {
+                      if (Auth::attempt($credentials)) {
+
+                      return redirect()->intended('api/home');
+                }
+            }
+
+
     }
 
     /**
@@ -44,7 +91,7 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(User $usuario)
     {
         //
     }
@@ -55,9 +102,11 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit(User $usuario, $id)
     {
-        //
+        $list_estado = $this->estado->listEstado();
+        $usuario = User::find($id);
+        return view('admin.edit', compact('usuario', 'list_estado'));
     }
 
     /**
@@ -67,9 +116,21 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, User $usuario, $id)
     {
-        //
+        $usuario = User::find($id);
+         $usuario->fill($request->all());
+
+         if ($usuario['password'] != null){
+             $usuario['password'] = bcrypt($usuario['password']);
+         }
+         else
+         unset($usuario['password']);
+
+         $usuario->cidade= $request->cidade;
+
+         $usuario->save();
+         return redirect()->action('UsuariosController@index');
     }
 
     /**
@@ -78,8 +139,17 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(User $usuario, $id)
     {
-        //
+        $usuario = User::find($id);
+        $usuario->delete();
+        return redirect()->back();
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => 'required|string|min:6|confirmed',
+        ]);
     }
 }

@@ -133,12 +133,12 @@ return [
             'icon' => 'lock',
         ],
         [
-            'text'    => 'Multilevel',
+            'text'    => 'Opções',
             'icon'    => 'share',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Usuários',
+                    'url'  => '/api/usuario',
                 ],
                 [
                     'text'    => 'Level One',
