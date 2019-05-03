@@ -16,5 +16,7 @@
 Route::get('/', function () {
     return view('/auth/login');
 });
-Route::resource('usuario', 'UsuariosController');
-Route::get('/api/usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/api/usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
+    Route::get('usuario/{id}/edit/', ['as' => 'usuario.edit', 'uses' => 'UsuariosController@edit']);
+});

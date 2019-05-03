@@ -61,7 +61,7 @@
                 >{{ trans('adminlte::adminlte.i_forgot_my_password') }}</a>
                 <br>
                 @if (config('adminlte.register_url', 'register'))
-                    <a href="/usuario/create"
+                    <a href="api/usuario/create"
                        class="text-center"
                     >{{ trans('adminlte::adminlte.register_a_new_membership') }}</a>
                 @endif

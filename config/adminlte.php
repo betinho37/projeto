@@ -115,18 +115,13 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Home',
+            'url'         => '/api/home',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
         ],
         'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
         [
             'text' => 'Change Password',
             'url'  => 'admin/settings',

@@ -110,6 +110,23 @@
                         </span>
                     @endif
                 </div>
+                @if (Auth::check())
+
+                                  <div  align="center">
+                                    {!!Form::label('tipousuario', 'Tipo de Usuário:')!!}
+                                          <label>
+                                          	<input type="radio" name="tipousuario" value="0"
+                                          	{{isset($usuario->tipousuario) && $usuario->tipousuario == 0 ? 'checked' : '' }}
+                                          	required>Administrador
+                                          </label>
+                                          <label>
+                                          	<input type="radio" name="tipousuario" value="1"
+                                          	{{isset($usuario->tipousuario) && $usuario->tipousuario == 1 ? 'checked' : '' }}
+                                          	required>Usuário
+                                          </label><br>
+                                  </div><br>
+                                @else
+                                @endif
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </form>
             <div class="auth-links">

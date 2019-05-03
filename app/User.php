@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use SoftDeletes;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -26,6 +27,9 @@ class User extends Authenticatable
         'estadoid',
         'cidade'
     ];
+    protected $dates = ['deleted_at'];
+
+    
 
     /**
      * The attributes that should be hidden for arrays.

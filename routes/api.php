@@ -18,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::apiResource('usuario', 'UsuariosController');
 Route::apiResource('/home', 'HomeController');
+Route::apiResource('usuario', 'UsuariosController');
+Route::get('/api/usuario/create', ['as' => 'usuario.create', 'uses' => 'UsuariosController@create']);
 
 
 Route::get('/', function () {

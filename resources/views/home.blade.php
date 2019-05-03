@@ -2,10 +2,11 @@
 
 @section('title', 'Museu Virtual')
 
+
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Total de Usuários</h1>
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <p>{{  $registrossemanais }}</p>
 @stop

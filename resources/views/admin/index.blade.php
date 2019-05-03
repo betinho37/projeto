@@ -12,9 +12,10 @@
                     <th>Opcões</th>
                 @foreach($usuario as $usuario)
                     <tr>
+                        
                         <td>{{$usuario -> name }}</td>
                         <td>{{$usuario -> email }}</td>
-                        <td><a href="{{@url('usuario').'/' . 'edit'.'/'. $usuario->id}}" class="btn btn-primary">Editar</a>
+                        <td><a href="{{@url('usuario').'/' . $usuario->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
                             <a  href="{{@url('/api/usuario').'/destroy/'.$usuario->id.''}}" class="btn btn-danger"  onclick="return confirm('Tem certeza de que deseja excluir este item ?');" >Excluir</a></td>
                     </tr>
             @endforeach

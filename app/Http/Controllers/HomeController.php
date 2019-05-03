@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
+use App\User;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +26,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $mes = Carbon::now();
+        $primeiroDiaDoMes = Carbon::now()->startOfMonth();
+        $ultimoDiaDoMes = Carbon::now()->endOfMonth();
+        ////////////////////////////////////////////////////////////////
+        $semana = Carbon::now();
+        $primeiroDiaDaSemana = Carbon::now()->startOfWeek();
+        $ultimoDiaDaSemana = Carbon::now()->endOfWeek();
+        ////////////////////////////////////////////////////////////////
+
+        $registrosmensais = DB::table('users')
+        ->whereDate('created_at', '>=', $primeiroDiaDoMes)
+        ->sum('id');
+
+        $registrossemanais = DB::table('users')
+        ->whereDate('created_at', '>=', $primeiroDiaDaSemana)
+        ->sum('id');
+        
+        return view('home', compact(
+                                    'usuario',
+                                    'registrosmensais',
+                                    'registrossemanais'
+                                
+                                
+                                    ));
     }
 }

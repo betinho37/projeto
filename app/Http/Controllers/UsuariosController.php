@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Estado;
 use Illuminate\Support\Facades\Auth;
+use DB;
+
 
 class UsuariosController extends Controller
 {
@@ -30,8 +32,15 @@ class UsuariosController extends Controller
 
     public function index()
     {
+        
+
+        $ids = DB::table('users')->select('id')->get();
+        $total_ids = $ids->sum('id');
+
         $usuario = $this->usuario->all();
-        return view('admin.index', compact('usuario'));
+        return view('admin.index', compact('usuario', 'total_ids'));
+
+       
     }
 
     /**
@@ -102,7 +111,7 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $usuario, $id)
+    public function edit($id)
     {
         $list_estado = $this->estado->listEstado();
         $usuario = User::find($id);
@@ -116,7 +125,7 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $usuario, $id)
+    public function update(Request $request, $id)
     {
         $usuario = User::find($id);
          $usuario->fill($request->all());
@@ -151,5 +160,14 @@ class UsuariosController extends Controller
         return Validator::make($data, [
             'password' => 'required|string|min:6|confirmed',
         ]);
+    }
+
+    public function perfil($id)
+    {
+
+        $list_estado = $this->estado->listEstado();
+        $usuario = User::find($id);
+        return view('admin.create', compact('usuario', 'list_estado'));
+
     }
 }
