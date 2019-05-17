@@ -115,49 +115,27 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Home',
-            'url'         => '/api/home',
+            'text'        => 'Museu',
+            'url'         => '/api/publicacao',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
         ],
         'ACCOUNT SETTINGS',
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
+    
         [
             'text'    => 'Opções',
             'icon'    => 'share',
             'submenu' => [
-                [
+                [   
+                    
+                    
                     'text' => 'Usuários',
                     'url'  => '/api/usuario',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Publicações',
+                    'url'  => '/publicacoes/controle',
                 ],
             ],
         ],
@@ -186,6 +164,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        
     ],
 
     /*

@@ -75,7 +75,7 @@ $(document).ready(function(){
 
 <div align="Center" class="form-group" >
 	{!!Form::submit('Salvar', ['class="btn btn-primary"'])!!}
-	<a href="/usuario" class="btn btn-primary">Cancelar</a>
+	<a href="/api/usuario" class="btn btn-primary">Cancelar</a>
 </div>
 {!! Form::close() !!}
 
