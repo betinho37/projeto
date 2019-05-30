@@ -1,21 +1,34 @@
 <?php
 
 namespace App;
-use SoftDeletes;
 
-use Illuminate\Notifications\Notifiable;
+use App\Notifications\VerifyUserNotification;
+use Carbon\Carbon;
+use Hash;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use SoftDeletes, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $dates = [
+        'updated_at',
+        'created_at',
+        'deleted_at',
+        'email_verified_at',
+        'last_login_at',
+    ];
+
     protected $fillable = [
         'name',
         'email',
@@ -25,29 +38,26 @@ class User extends Authenticatable
         'telefone',
         'tipousuario',
         'estadoid',
-        'cidade'
+        'cidade',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'remember_token',
+        'email_verified_at',
+        'last_login_at',
     ];
-    protected $dates = ['deleted_at'];
 
-    
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     public static function listUser() {
         

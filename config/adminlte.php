@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        '',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
@@ -121,7 +121,7 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        'ACCOUNT SETTINGS',
+        'Opções',
     
         [
             'text'    => 'Opções',
@@ -132,10 +132,14 @@ return [
                     
                     'text' => 'Usuários',
                     'url'  => '/api/usuario',
+                    'can'         => 'admin'
                 ],
                 [
                     'text' => 'Publicações',
                     'url'  => '/publicacoes/controle',
+                    
+
+
                 ],
             ],
         ],

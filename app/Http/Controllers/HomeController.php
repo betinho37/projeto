@@ -26,29 +26,40 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mes = Carbon::now();
-        $primeiroDiaDoMes = Carbon::now()->startOfMonth();
-        $ultimoDiaDoMes = Carbon::now()->endOfMonth();
-        ////////////////////////////////////////////////////////////////
-        $semana = Carbon::now();
-        $primeiroDiaDaSemana = Carbon::now()->startOfWeek();
-        $ultimoDiaDaSemana = Carbon::now()->endOfWeek();
-        ////////////////////////////////////////////////////////////////
 
-        $registrosmensais = DB::table('users')
-        ->whereDate('created_at', '>=', $primeiroDiaDoMes)
-        ->sum('id');
 
-        $registrossemanais = DB::table('users')
-        ->whereDate('created_at', '>=', $primeiroDiaDaSemana)
-        ->sum('id');
-        
-        return view('home', compact(
-                                    'usuario',
-                                    'registrosmensais',
-                                    'registrossemanais'
-                                
-                                
-                                    ));
+        $number_blocks = [
+            [
+                'title' => 'Usuários conectados hoje',
+                'number' => User::whereDate('last_login_at', today())->count()
+            ],
+            [
+                'title' => 'Conectados nos últimos 7 dias',
+                'number' => User::whereDate('last_login_at', '>', today()->subDays(7))->count()
+            ],
+            [
+                'title' => 'Conectados nos últimos 30 dias',
+                'number' => User::whereDate('last_login_at', '>', today()->subDays(30))->count()
+            ],
+        ];
+
+        $list_blocks = [
+            [
+                'title' => 'Últimos usuários conectados',
+                'entries' => User::orderBy('last_login_at', 'desc')
+                    ->take(5)
+                    ->get(),
+            ],
+            [
+                'title' => 'Usuários não conectados por 30 dias',
+                'entries' => User::where('last_login_at', '<', today()->subDays(30))
+                    ->orwhere('last_login_at', null)
+                    ->orderBy('last_login_at', 'desc')
+                    ->take(5)
+                    ->get()
+            ],
+        ];        
+     return view('home', compact('number_blocks', 'list_blocks', 'chart'));
+
     }
 }

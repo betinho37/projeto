@@ -38,7 +38,8 @@ class UsuariosController extends Controller
         $total_ids = $ids->sum('id');
 
         $usuario = $this->usuario->all();
-        return view('admin.index', compact('usuario', 'total_ids'));
+        $list_estado = $this->estado->listEstado();
+        return view('admin.index', compact('usuario', 'total_ids','list_estado'));
 
        
     }
@@ -62,6 +63,11 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
+
+
         $inputs = $request->all();
 
           $validator = $this->validator($inputs);
@@ -89,7 +95,7 @@ class UsuariosController extends Controller
 
                       return redirect()->intended('api/home');
                 }
-            }
+              }
 
 
     }

@@ -20,7 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('/home', 'HomeController');
 Route::apiResource('usuario', 'UsuariosController');
-Route::get('/api/usuario/create', ['as' => 'usuario.create', 'uses' => 'UsuariosController@create']);
 Route::apiResource('publicacao', 'PublicacoesController');
 
 
