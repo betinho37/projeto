@@ -33,6 +33,7 @@ return [
     'logo' => '<b>Museu</b>Virtual',
 
     'logo_mini' => '<b></b>MV',
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -109,11 +110,7 @@ return [
 
     'menu' => [
         '',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+       
         [
             'text'        => 'Museu',
             'url'         => '/api/publicacao',

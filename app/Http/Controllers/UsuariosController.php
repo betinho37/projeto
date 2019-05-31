@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Estado;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Response;
+use Illuminate\Support\Facades\Input;
 
 
 class UsuariosController extends Controller
@@ -64,11 +66,7 @@ class UsuariosController extends Controller
     public function store(Request $request)
     {
 
-
-
-
-
-        $inputs = $request->all();
+        /* $inputs = $request->all();
 
           $validator = $this->validator($inputs);
 
@@ -80,12 +78,8 @@ class UsuariosController extends Controller
 
           $inputs['password'] = bcrypt($inputs['password']);
 
-
-        
-
            $this->usuario->create($inputs);
                 
-
           $credentials = $request->only('email', 'password');
           if (Auth::check()) {
                 return redirect()->action('UsuariosController@index');
@@ -95,6 +89,27 @@ class UsuariosController extends Controller
 
                       return redirect()->intended('api/home');
                 }
+              } */
+
+              $input = $request->all();
+
+              $validator = $this->validator($input);
+              if ($validator->fails()) {
+                  return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+              } else {
+                  echo "Passei";
+                  $input = $request->all();
+                  $input->name = $request->name;
+                  $input->email = $request->email;
+                  $input->cep = $request->cep;
+                  $input->endereco = $request->endereco;
+                  $input->telefone = $request->telefone;
+                  $input->tipousuario = $request->tipousuario;
+                  $input->estadoid = $request->estadoid;
+                  $input->cidade = $request->cidade;
+                  $input['password'] = bcrypt($input['password']);
+                  $input->save();
+                  return response()->json($input);
               }
 
 
@@ -175,5 +190,18 @@ class UsuariosController extends Controller
         $usuario = User::find($id);
         return view('admin.create', compact('usuario', 'list_estado'));
 
+    }
+
+
+
+    public function changeStatus() 
+    {
+        $id = Input::get('id');
+
+        $usuario = User::findOrFail($id);
+        $usuario->is_published = !$usuario->is_published;
+        $usuario->save();
+
+        return response()->json($usuario);
     }
 }

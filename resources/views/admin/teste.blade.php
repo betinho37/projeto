@@ -79,12 +79,12 @@
 
                         <div class="col-md-6">
                             <label>Senha</label>
-                            <input type="password"  name="password" id="password" class="form-control" >
+                            <input type="password"  name="password" class="form-control" required>
                         </div>
                         <div class="col-md-6">
                             <label>Confirmar Senha</label>
-                            <input type="password"  name="password_confirmation" id="password_confirmation" class="form-control"
-                            placeholder="{{ trans('adminlte::adminlte.retype_password') }}" >
+                            <input type="password"  name="password_confirmation" class="form-control"
+                            placeholder="{{ trans('adminlte::adminlte.retype_password') }}" required>
                             
                         </div>
                         <input type="hidden" id="emailValidateNew" name="emailValidate" value="false">
@@ -159,10 +159,14 @@
     // add a new post
     $(document).on('click', '.add-modal', function() {
         // Empty input fields
-        $('#title_add').val('');
-        $('#content_add').val('');
-        $('#password').val('');
-
+        $('#new_name').val('');
+        $('#new_email').val('');
+        $('#new_password').val('');
+        $('#new_cep').val('');
+        $('#new_endereco').val('');
+        $('#new_telefone').val('');
+        $('#new_cidade').val('');
+        $('#estadoid').val('');
         $('.modal-title').text('Add');
         $('#addModal').modal('show');
     });
@@ -172,14 +176,20 @@
             url: '/api/usuario',
             data: {
                 '_token': $('input[name=_token]').val(),
-                'title': $('#title_add').val(),
-                'content': $('#content_add').val(),
-                'password': $('#password').val(),
-
-              },
+               'name': $('#name').val('');
+                'email':$('#email').val('');
+                'password':$('#password').val('');
+                'cep':$('#cep').val('');
+                'endereco':$('#endereco').val('');
+                'telefone':$('#telefone').val('');
+                'tipousuario':$('#tipousuario').val('');
+                'cidade':$('#cidade').val('');
+                'estadoid':$('#estadoid').val('');
+                $('.modal-title').text('Add');
+                $('#addModal').modal('show');
+            },
             success: function(data) {
-                $('.errorTitle').addClass('hidden');
-                $('.errorContent').addClass('hidden');
+                $('.password').addClass('hidden');
 
                 if ((data.errors)) {
                     setTimeout(function () {
@@ -187,13 +197,9 @@
                         toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
                     }, 500);
 
-                    if (data.errors.title) {
-                        $('.errorTitle').removeClass('hidden');
-                        $('.errorTitle').text(data.errors.title);
-                    }
-                    if (data.errors.content) {
-                        $('.errorContent').removeClass('hidden');
-                        $('.errorContent').text(data.errors.content);
+                    if (data.errors.password) {
+                        $('.password').removeClass('hidden');
+                        $('.password').text(data.errors.password);
                     }
                 } else {
                     toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
