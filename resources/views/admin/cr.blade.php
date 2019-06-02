@@ -1,50 +1,42 @@
 @extends('adminlte::page')
 
 @section('title', 'Museu Virtual')
-    <meta name="_token" content="{{csrf_token()}}" />
 
 @section('content')
 <div class="col-md-8 col-md-offset-2">
-    <h2 class="text-center">Usuarios</h2>
-    <br />
-    <div class="cold-md-8">
-    <button type="button" class="btn btn-success"" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
-    </div><br />
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <table class="table table-striped table-hover ">
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Opcões</th>
-            @foreach($usuario as $usuarios)
-                <tr>
-                    <td>{{$usuarios -> name }}</td>
-                    <td>{{$usuarios -> email }}</td>
-                    <td><a href="{{@url('usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
-                        <a  href="{{@url('/api/usuario').'/destroy/'.$usuarios->id.''}}" class="btn btn-danger"  onclick="return confirm('Tem certeza de que deseja excluir este item ?');" >Excluir</a></td>
-                </tr>
-            @endforeach
-          </table>
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="_token" content="{{csrf_token()}}" />
+    <title>Champion League Goalscorer</title>
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css" rel="stylesheet">  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script> 
+  </head>
+  <body>
 
-        </div><!-- /.panel-body -->
-    </div><!-- /.panel panel-default -->
-</div><!-- /.col-md-8 -->
- 
-
-
-
-<!-- Modal form to add a post -->
-    <form method="post" action="{{url('usuario/store')}}" id="form">
-  
-
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
+  	<div class="container">
+  <h2>Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="open">Open Modal</button>
+    <form method="post" action="{{url('api/usuario')}}" id="form">
+        @csrf
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    	<div class="alert alert-danger" style="display:none"></div>
+      <div class="modal-header">
+      	
+        <h5 class="modal-title">Uefa Champion League</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <div class="modal-body">
+                <form class="form-horizontal" role="form">
                     <div class="row my-9">
                         <div class="col-md-6">
                             <label >Nome</label>
@@ -76,7 +68,7 @@
                                 <input type="text" class="form-control" id="endereco" name="endereco" required>
                                 
                             </div>
-                        
+
                         <div class="col-md-6">
                             <label>Senha</label>
                             <input type="password"  name="password" id="password" class="form-control" >
@@ -89,40 +81,25 @@
                         </div>
                         <input type="hidden" id="emailValidateNew" name="emailValidate" value="false">
                     </div>
-                    
                 </form>
-                <div class="modal-footer">
-                    <button  class="btn btn-success" id="ajaxSubmit">Save changes
-                    </button>
-
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        <span class='glyphicon glyphicon-remove'></span> Close
-                    </button>
-                </div>
+                
             </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button  class="btn btn-success" id="ajaxSubmit">Save changes</button>
         </div>
     </div>
+  </div>
 </div>
-
-
-<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+  </form>
+</div>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+               crossorigin="anonymous">
       </script>
       <!-- Latest compiled and minified JavaScript -->
-
-<!-- Bootstrap JavaScript -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
-
-<!-- toastr notifications -->
-{{-- <script type="text/javascript" src="{{ asset('toastr/toastr.min.js') }}"></script> --}}
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-<!-- icheck checkboxes -->
-<script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
-
-
-
-<!-- AJAX CRUD operations -->
- <script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script>
          jQuery(document).ready(function(){
             jQuery('#ajaxSubmit').click(function(e){
                e.preventDefault();
@@ -132,18 +109,19 @@
                   }
               });
                jQuery.ajax({
-                  url: "{{ url('usuario/store') }}",
+                  url: "{{ url('api/usuario') }}",
                   method: 'post',
                   data: {
-                        'name': $('#name').val(''),
-                        'email': $('#email').val(''),
-                        'password': $('#password').val(''),
-                        'cep': $('#cep').val(''),
-                        'endereco': $('#endereco').val(''),
-                        'telefone': $('#telefone').val(''),
-                        'tipousuario': $('#tipousuario').val(''),
-                        'cidade': $('#cidade').val(''),
-                        'estadoid': $('#estadoid').val(''),
+                        _token: jQuery('input[name=_token]').val(),
+                        name: jQuery('#name').val(''),
+                        email: jQuery('#email').val(''),
+                        password: jQuery('#password').val(''),
+                        cep: jQuery('#cep').val(''),
+                        endereco: jQuery('#endereco').val(''),
+                        telefone: jQuery('#telefone').val(''),
+                        tipousuario: jQuery('#tipousuario').val(''),
+                        cidade: jQuery('#cidade').val(''),
+                        estadoid: jQuery('#estadoid').val(''),
                   },
                   success: function(result){
                   	if(result.errors)
@@ -165,5 +143,10 @@
                });
             });
       </script>
+
+
+</body>
+</html>
+
 
 @endsection

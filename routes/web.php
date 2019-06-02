@@ -26,3 +26,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('usuario/create', ['as' => 'usuario.create', 'uses' => 'UsuariosController@create']);
+Route::post('usuario/changeStatus', array('as' => 'changeStatus', 'uses' => 'UsuariosController@changeStatus'));

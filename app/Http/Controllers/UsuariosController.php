@@ -34,14 +34,13 @@ class UsuariosController extends Controller
 
     public function index()
     {
-        
 
-        $ids = DB::table('users')->select('id')->get();
-        $total_ids = $ids->sum('id');
+
+
 
         $usuario = $this->usuario->all();
         $list_estado = $this->estado->listEstado();
-        return view('admin.index', compact('usuario', 'total_ids','list_estado'));
+        return view('admin.index', compact('usuario', 'total_ids','list_estado', 'paginate'));
 
        
     }
@@ -65,18 +64,16 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-
-        /* $inputs = $request->all();
+        $inputs = $request->all();
 
           $validator = $this->validator($inputs);
 
-                if ($validator->fails()) {
-                    return redirect('usuario/create')
-                                ->withErrors($validator)
-                                ->withInput();
-                }
 
           $inputs['password'] = bcrypt($inputs['password']);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
 
            $this->usuario->create($inputs);
                 
@@ -89,31 +86,12 @@ class UsuariosController extends Controller
 
                       return redirect()->intended('api/home');
                 }
-              } */
-
-              $input = $request->all();
-
-              $validator = $this->validator($input);
-              if ($validator->fails()) {
-                  return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
-              } else {
-                  echo "Passei";
-                  $input = $request->all();
-                  $input->name = $request->name;
-                  $input->email = $request->email;
-                  $input->cep = $request->cep;
-                  $input->endereco = $request->endereco;
-                  $input->telefone = $request->telefone;
-                  $input->tipousuario = $request->tipousuario;
-                  $input->estadoid = $request->estadoid;
-                  $input->cidade = $request->cidade;
-                  $input['password'] = bcrypt($input['password']);
-                  $input->save();
-                  return response()->json($input);
-              }
-
-
+              } 
+ 
     }
+
+
+    
 
     /**
      * Display the specified resource.
@@ -179,6 +157,7 @@ class UsuariosController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'email' => 'required|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -194,14 +173,5 @@ class UsuariosController extends Controller
 
 
 
-    public function changeStatus() 
-    {
-        $id = Input::get('id');
-
-        $usuario = User::findOrFail($id);
-        $usuario->is_published = !$usuario->is_published;
-        $usuario->save();
-
-        return response()->json($usuario);
-    }
+    
 }
