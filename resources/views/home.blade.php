@@ -2,45 +2,56 @@
 @section('content')
     <div class="content">
         <div class="row">
-            @foreach ($number_blocks as $block)
+                <h2>Usuarios</h2>
+            @foreach ($blocosnumericos as $numericos)
             <div class="col-md-4 ">
-                <div class="info-box">
-                        <span class=" bg-red"
-                              style="display:flex; flex-direction: column; justify-content: center;">
-                            
-                        </span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{ $block['title'] }}</span>
-                        <span class="info-box-number">{{ $block['number'] }}</span>
-                    </div>
-                </div>
+                    <div class="info-box">
+                            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+                
+                            <div class="info-box-content">
+                                    <span class="info-box-text">{{ $numericos['title'] }}</span>
+                                    <span class="info-box-number">{{ $numericos['number'] }}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                     </div>
             </div>
             @endforeach
+            <div class="row">
+                    <div class="col-md-4 ">
+                            <div class="info-box">
+                                    <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+                                    <div class="info-box-content">
+                                            <span class="info-box-text">Total de Usuarios</span>
+                                            <span class="info-box-number">{{ $users }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                             </div>
+                    </div>
+            </div> 
         </div>
-
+        </div>
         <div class="row">
-            @foreach ($list_blocks as $block)
+            @foreach ($blocoslista as $lista)
                 <div class="col-md-6">
-                    <h3>{{ $block['title'] }}</h3>
+                    <h3>{{ $lista['title'] }}</h3>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Nome</th>
                             <th>Email</th>
-                            <th>Last login at</th>
+                            <th>Último login em</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($block['entries'] as $entry)
+                        @forelse($lista['registro'] as $registro)
                             <tr>
-                                <td>{{ $entry->name }}</td>
-                                <td>{{ $entry->email }}</td>
-                                <td>{{ $entry->last_login_at }}</td>
+                                <td>{{ $registro->nome }}</td>
+                                <td>{{ $registro->email }}</td>
+                                <td>{{ $registro->last_login_at }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">{{ __('No entries found') }}</td>
+                                <td colspan="3">{{ __('Nenhuma registro encontrada') }}</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -48,11 +59,9 @@
                 </div>
             @endforeach
         </div>
-
         
-    </div>
 @endsection
 @section('scripts')
-   
+
    
 @endsection

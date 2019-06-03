@@ -6,6 +6,8 @@ use App\User;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+
 
 class HomeController extends Controller
 {
@@ -26,16 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
 
+        $users = DB::table('users')->count();
+        
 
-        $number_blocks = [
+        $blocosnumericos = [
             [
                 'title' => 'Usuários conectados hoje',
                 'number' => User::whereDate('last_login_at', today())->count()
-            ],
-            [
-                'title' => 'Conectados nos últimos 7 dias',
-                'number' => User::whereDate('last_login_at', '>', today()->subDays(7))->count()
             ],
             [
                 'title' => 'Conectados nos últimos 30 dias',
@@ -43,23 +44,15 @@ class HomeController extends Controller
             ],
         ];
 
-        $list_blocks = [
+        $blocoslista = [
             [
                 'title' => 'Últimos usuários conectados',
-                'entries' => User::orderBy('last_login_at', 'desc')
+                'registro' => User::orderBy('last_login_at', 'desc')
                     ->take(5)
                     ->get(),
             ],
-            [
-                'title' => 'Usuários não conectados por 30 dias',
-                'entries' => User::where('last_login_at', '<', today()->subDays(30))
-                    ->orwhere('last_login_at', null)
-                    ->orderBy('last_login_at', 'desc')
-                    ->take(5)
-                    ->get()
-            ],
         ];        
-     return view('home', compact('number_blocks', 'list_blocks', 'chart'));
+     return view('home', compact('blocosnumericos', 'blocoslista', 'users'));
 
     }
 }

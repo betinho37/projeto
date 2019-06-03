@@ -8,7 +8,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'      => 'Admin',
+            'nome'      => 'Admin',
             'email'     => 'beto@gmail.com',
             'cep'     => '00000',
             'endereco'     => 'gama',
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'deleted_at'     => null,
         ]);
         User::create([
-            'name'      => 'Admin',
+            'nome'      => 'Admin',
             'email'     => 'beto1@gmail.com',
             'cep'     => '00000',
             'endereco'     => 'gama',

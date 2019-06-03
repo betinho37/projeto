@@ -40,7 +40,7 @@ class UsuariosController extends Controller
 
         $usuario = $this->usuario->all();
         $list_estado = $this->estado->listEstado();
-        return view('admin.index', compact('usuario', 'total_ids','list_estado', 'paginate'));
+        return view('admin.index', compact('usuario', 'total_ids','list_estado'));
 
        
     }
@@ -64,35 +64,30 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        $inputs = $request->all();
-
+          $inputs = $request->all();
+          $inputs['password'] = bcrypt($inputs['password']);
+          
           $validator = $this->validator($inputs);
 
-
-          $inputs['password'] = bcrypt($inputs['password']);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
-        }
-
-           $this->usuario->create($inputs);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all()]);
+            }
+          
+            $this->usuario->create($inputs);
                 
-          $credentials = $request->only('email', 'password');
-          if (Auth::check()) {
-                return redirect()->action('UsuariosController@index');
+            $credentials = $request->only('email', 'password');
+          
+              if (Auth::check()) {
+                    return redirect()->action('UsuariosController@index');
 
-              } else {
-                      if (Auth::attempt($credentials)) {
+                } else {
+                        if (Auth::attempt($credentials)) {
 
-                      return redirect()->intended('api/home');
-                }
-              } 
+                        return redirect()->intended('api/home');
+                    }
+                } 
  
     }
-
-
-    
-
     /**
      * Display the specified resource.
      *
@@ -147,11 +142,11 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $usuario, $id)
+    public function destroy($id)
     {
-        $usuario = User::find($id);
+        $usuario = User::findOrFail($id);
         $usuario->delete();
-        return redirect()->back();
+        return response()->json($usuario);
     }
 
     protected function validator(array $data)

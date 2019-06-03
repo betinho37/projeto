@@ -20,7 +20,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     protected $dates = [
         'updated_at',
         'created_at',
@@ -28,9 +27,8 @@ class User extends Authenticatable
         'email_verified_at',
         'last_login_at',
     ];
-
     protected $fillable = [
-        'name',
+        'nome',
         'email',
         'password',
         'cep',
@@ -61,7 +59,7 @@ class User extends Authenticatable
 
     public static function listUser() {
         
-        return static::orderBy('name')->pluck('name', 'id');
+        return static::orderBy('nome')->pluck('nome', 'id');
     }
 
     public function estado(){

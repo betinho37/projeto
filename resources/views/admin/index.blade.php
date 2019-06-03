@@ -1,41 +1,33 @@
 @extends('adminlte::page')
 
 @section('title', 'Museu Virtual')
-    <meta name="_token" content="{{csrf_token()}}" />
 
 @section('content')
-<div class="col-md-8 col-md-offset-2">
-    <h2 class="text-center">Usuarios</h2>
-    <br />
-    <div class="cold-md-8">
-    <button type="button" class="btn btn-success"" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
-    </div><br />
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <table class="table table-striped table-hover ">
+    <h1 align="center" >Usuarios</h1>
+    
+    <div class="div1" style="padding:30px">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
+
+    <table align="center" class="table"><p></p>
+            <tr>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Opcões</th>
+            </tr>
             @foreach($usuario as $usuarios)
                 <tr>
-                    <td>{{$usuarios -> name }}</td>
+                    <td>{{$usuarios -> nome }}</td>
                     <td>{{$usuarios -> email }}</td>
                     <td><a href="{{@url('usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
-                        <a  href="{{@url('/api/usuario').'/destroy/'.$usuarios->id.''}}" class="btn btn-danger"  onclick="return confirm('Tem certeza de que deseja excluir este item ?');" >Excluir</a></td>
-                </tr>
+                        <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
+                        <span class="glyphicon glyphicon-trash"></span> Delete</button>                
+                    </tr>
             @endforeach
-          </table>
-
-        </div><!-- /.panel-body -->
-    </div><!-- /.panel panel-default -->
-</div><!-- /.col-md-8 -->
- 
-
-
+    </table>
 
 <!-- Modal form to add a post -->
     <form method="post" action="{{url('usuario/store')}}" id="form">
-  
+        @csrf
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -48,7 +40,7 @@
                     <div class="row my-9">
                         <div class="col-md-6">
                             <label >Nome</label>
-                            <input type="name" class="form-control" id="name" name="name" required>
+                            <input type="name" class="form-control" id="nome" name="nome" required>
                             
                         </div>
                         <div class="col-md-6">
@@ -92,11 +84,11 @@
                     
                 </form>
                 <div class="modal-footer">
-                    <button  class="btn btn-success" id="ajaxSubmit">Save changes
+                    <button  class="btn btn-success" id="ajaxSubmit">Salvar
                     </button>
 
                     <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        <span class='glyphicon glyphicon-remove'></span> Close
+                        <span class='glyphicon glyphicon-remove'></span> Cancelar
                     </button>
                 </div>
             </div>
@@ -104,66 +96,122 @@
     </div>
 </div>
 
+<div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">Tem certeza de que deseja excluir este usuario?</h3>
+                    <br />
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="id">ID:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="nome">Nome:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nome" value="{{$usuarios -> nome }}" disabled>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger delete" data-dismiss="modal">
+                            <span id="" class='glyphicon glyphicon-trash'></span> Deletar
+                        </button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">
+                            <span class='glyphicon glyphicon-remove'></span> Caneclar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+        </script>
+        <!-- Latest compiled and minified JavaScript -->
 
-<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-      </script>
-      <!-- Latest compiled and minified JavaScript -->
+    <!-- Bootstrap JavaScript -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap JavaScript -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <!-- toastr notifications -->
+    {{-- <script type="text/javascript" src="{{ asset('toastr/toastr.min.js') }}"></script> --}}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-<!-- toastr notifications -->
-{{-- <script type="text/javascript" src="{{ asset('toastr/toastr.min.js') }}"></script> --}}
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-<!-- icheck checkboxes -->
-<script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
+    <!-- icheck checkboxes -->
+    <script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
 
 
-
-<!-- AJAX CRUD operations -->
- <script>
-         jQuery(document).ready(function(){
-            jQuery('#ajaxSubmit').click(function(e){
-               e.preventDefault();
-               $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                  }
-              });
-               jQuery.ajax({
-                  url: "{{ url('usuario/store') }}",
-                  method: 'post',
-                  data: {
-                        'name': $('#name').val(''),
-                        'email': $('#email').val(''),
-                        'password': $('#password').val(''),
-                        'cep': $('#cep').val(''),
-                        'endereco': $('#endereco').val(''),
-                        'telefone': $('#telefone').val(''),
-                        'tipousuario': $('#tipousuario').val(''),
-                        'cidade': $('#cidade').val(''),
-                        'estadoid': $('#estadoid').val(''),
-                  },
-                  success: function(result){
-                  	if(result.errors)
-                  	{
-                  		jQuery('.alert-danger').html('');
-
-                  		jQuery.each(result.errors, function(key, value){
-                  			jQuery('.alert-danger').show();
-                  			jQuery('.alert-danger').append('<li>'+value+'</li>');
-                  		});
-                  	}
-                  	else
-                  	{
-                  		jQuery('.alert-danger').hide();
-                  		$('#open').hide();
-                  		$('#myModal').modal('hide');
-                  	}
-                  }});
-               });
+ <script type="text/javascript">
+        // Adicionar novo usuario
+        $(document).on('click', '.add-modal', function() {
+            // Campos de entrada
+            $('#nome').val('');
+            $('#email').val('');
+            $('#new_password').val('');
+            $('#cep').val('');
+            $('#endereco').val('');
+            $('#telefone').val('');
+            $('#cidade').val('');
+            $('#estadoid').val('');
+            $('.modal-title').text('Add');
+            $('#addModal').modal('show');
+        });
+        $('.modal-footer').on('click', '.add', function() {
+            $.ajax({
+                type: 'POST',
+                url: 'usuario/store',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                'nome': $('#nome').val(''),
+                    'email':$('#email').val(''),
+                    'password':$('#password').val(''),
+                    'cep':$('#cep').val(''),
+                    'endereco':$('#endereco').val(''),
+                    'telefone':$('#telefone').val(''),
+                    'tipousuario':$('#tipousuario').val(''),
+                    'cidade':$('#cidade').val(''),
+                    'estadoid':$('#estadoid').val(''),
+                },
+                success: function(data) {
+                    if ((data.errors)) {
+                        $('.error').removeClass('hidden');
+                        $('.error').text(data.errors.name);
+                    } else {
+                        $('.error').remove();
+                        $('#table').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.name + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                    }
+                },
             });
-      </script>
+        });
+
+
+        // Deletar usuario
+        $(document).on('click', '.delete-modal', function() {
+            $('.modal-title').text('Delete');
+            $('#id').val($(this).data('id'));
+            $('#nome').val($(this).data('nome'));
+            $('#deleteModal').modal('show');
+            id = $('#id').val();
+        });
+        $('.modal-footer').on('click', '.delete', function() {
+            $.ajax({
+                type: 'DELETE',
+                url: 'api/usuario/' + id,
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                },
+                success: function(data) {
+                    window.location.reload();
+                }
+                
+            });
+        });  
+</script>
 
 @endsection

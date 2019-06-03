@@ -30,13 +30,13 @@
             <form class="form-horizontal" method="post" action="/api/usuario" data-toggle="validator">
                 {!! csrf_field() !!}
 
-                <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
+                <div class="form-group has-feedback {{ $errors->has('nome') ? 'has-error' : '' }}">
+                    <input type="text" name="nome" class="form-control" value="{{ old('nome') }}"
                            placeholder="{{ trans('adminlte::adminlte.full_name') }}">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    @if ($errors->has('name'))
+                    @if ($errors->has('nome'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
+                            <strong>{{ $errors->first('nome') }}</strong>
                         </span>
                     @endif
                 </div>
