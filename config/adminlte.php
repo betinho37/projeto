@@ -115,7 +115,6 @@ return [
             'text'        => 'Museu',
             'url'         => '/api/publicacao',
             'icon'        => 'file',
-            'label'       => 4,
             'label_color' => 'success',
         ],
         'Opções',

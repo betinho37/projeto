@@ -3,6 +3,7 @@
     <div class="content">
         <div class="row">
                 <h2>Usuarios</h2>
+                
             @foreach ($blocosnumericos as $numericos)
             <div class="col-md-4 ">
                     <div class="info-box">

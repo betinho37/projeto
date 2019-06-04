@@ -95,9 +95,12 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(User $usuario)
+    public function show($id)
     {
-        //
+        $list_estado = $this->estado->listEstado();
+        $usuario = User::find($id);
+
+        return view('admin/show', compact('usuario', 'list_estado'));
     }
 
     /**
@@ -168,6 +171,17 @@ class UsuariosController extends Controller
     }
 
 
+    public function search(Request $request){
+        $pesquisa = $request->pesquisar;
 
-    
+        $usuario = User::pesquisa($request->pesquisar);
+
+        if(count($usuario) > 0){
+            return view('admin/search', compact('usuario', 'pesquisa'));            
+        } else {
+             return redirect()->action('UsuariosController@index')
+                                ->with("mensagem", "Resource not found");
+        }
+    }
+
 }

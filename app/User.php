@@ -71,5 +71,10 @@ class User extends Authenticatable
 
         return $this->hasMany(Publicacao::class, 'userid');
     }
+    
+    public static function pesquisa($pesquisar){
+        return static::where('email', 'LIKE', '%' . $pesquisar . '%')
+                        ->orWhere('email','LIKE','%'.$pesquisar.'%')->paginate(10);
+    }
 
 }

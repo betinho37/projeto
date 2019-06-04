@@ -1,12 +1,29 @@
 @extends('adminlte::page')
 
 @section('title', 'Museu Virtual')
+<link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css" >
 
 @section('content')
     <h1 align="center" >Usuarios</h1>
-    
-    <div class="div1" style="padding:30px">
+
+    <div class="box-tools col-md-6" id="header">
+        <form role="form" action="{{  route('usuario.pesquisar') }}" method="POST" >
+            {{ csrf_field() }}
+            <div class="form input-group input-group-sm" >
+            <input type="text" name="pesquisar" class="form-control pull-right" placeholder="Pesquisar...">
+
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="div1" style="margin-right: 784px;">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
+    </div>
+    
+    
 
     <table align="center" class="table"><p></p>
             <tr>
@@ -19,8 +36,9 @@
                     <td>{{$usuarios -> nome }}</td>
                     <td>{{$usuarios -> email }}</td>
                     <td><a href="{{@url('usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
+                        <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success" btn-sm>Visualizar</a>
                         <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</button>          
+                        <span class="glyphicon glyphicon-trash"></span> Delete</button>                
                     </tr>
             @endforeach
     </table>
@@ -96,6 +114,7 @@
     </div>
 </div>
 
+
 <div id="deleteModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -116,7 +135,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="nome">Nome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome" value="{{$usuarios -> nome }}" disabled>
+                                <input type="text" class="form-control" value="{{$usuarios -> nome }}" disabled>
                             </div>
                         </div>
                     </form>
@@ -204,7 +223,7 @@
         $('.modal-footer').on('click', '.delete', function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'api/usuario/' + id,
+                url: '/api/usuario/' + id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                 },
