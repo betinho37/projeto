@@ -83,7 +83,7 @@ class UsuariosController extends Controller
                 } else {
                         if (Auth::attempt($credentials)) {
 
-                        return redirect()->intended('api/home');
+                        return redirect()->intended( '/api/home');
                     }
                 } 
  
