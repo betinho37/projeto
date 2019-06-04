@@ -14,8 +14,10 @@ class AddLastLoginAtToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->rememberToken()->nullable();
             $table->timestamp('last_login_at')->nullable()->after('remember_token');
             $table->string('last_login_ip')->nullable()->after('last_login_at');
+
 
         });
     }

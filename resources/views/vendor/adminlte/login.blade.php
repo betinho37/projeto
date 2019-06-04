@@ -38,8 +38,8 @@
 			  </div>
 
 			  <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                <label class="custom-control-label" for="remember">Lembrar senha</label>
+                <input type="checkbox" class="custom-control-input" id="remember_token" {{ old('remember_token') ? 'checked' : '' }}>
+                <label class="custom-control-label" for="remember_token">Lembrar senha</label>
               </div>
 			  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
 			  @if (Route::has('password.request'))

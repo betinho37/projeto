@@ -20,13 +20,13 @@
                     <td>{{$usuarios -> email }}</td>
                     <td><a href="{{@url('usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
                         <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</button>                
+                        <span class="glyphicon glyphicon-trash"></span> Delete</button>          
                     </tr>
             @endforeach
     </table>
 
 <!-- Modal form to add a post -->
-    <form method="post" action="{{url('usuario/store')}}" id="form">
+    <form method="post" action="{{url('api/usuario')}}" id="form">
         @csrf
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -153,7 +153,8 @@
             // Campos de entrada
             $('#nome').val('');
             $('#email').val('');
-            $('#new_password').val('');
+            $('#password').val('');
+            $('#password_confirmation').val('');
             $('#cep').val('');
             $('#endereco').val('');
             $('#telefone').val('');
@@ -165,12 +166,13 @@
         $('.modal-footer').on('click', '.add', function() {
             $.ajax({
                 type: 'POST',
-                url: 'usuario/store',
+                url: 'api/usuario',
                 data: {
                     '_token': $('input[name=_token]').val(),
                 'nome': $('#nome').val(''),
                     'email':$('#email').val(''),
                     'password':$('#password').val(''),
+                    'password_confirmation':$('#password_confirmation').val(''),
                     'cep':$('#cep').val(''),
                     'endereco':$('#endereco').val(''),
                     'telefone':$('#telefone').val(''),

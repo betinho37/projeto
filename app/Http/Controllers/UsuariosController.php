@@ -65,14 +65,15 @@ class UsuariosController extends Controller
     public function store(Request $request)
     {
           $inputs = $request->all();
-          $inputs['password'] = bcrypt($inputs['password']);
           
           $validator = $this->validator($inputs);
 
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()->all()]);
             }
-          
+        
+            
+            $inputs['password'] = bcrypt($inputs['password']);  
             $this->usuario->create($inputs);
                 
             $credentials = $request->only('email', 'password');

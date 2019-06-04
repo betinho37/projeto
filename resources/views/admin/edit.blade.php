@@ -18,7 +18,7 @@ $(document).ready(function(){
     select.form-control:not([size]):not([multiple]) { height:calc(2.25rem + 9px); }
   </style>
 </head>
-<h4 align="Center" >Editar Usuário: {{$usuario->name}} </h4>
+<h4 align="Center" >Editar Usuário: {{$usuario->nome}} </h4>
 <div class="div1" style="padding:30px">
 
 {!!Form::open(['route'=>['usuario.update', $usuario->id ], 'method'=>'put'])!!}
@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 <div class="form-group" >
 	<strong>Nome:</strong>
-	{!!Form::text('name', $usuario->name, ['class'=>'form-control'])!!}
+	{!!Form::text('name', $usuario->nome, ['class'=>'form-control'])!!}
 </div>
 <div class="form-group" >
 	<strong>Email:</strong>

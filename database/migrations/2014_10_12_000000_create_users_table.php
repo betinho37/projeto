@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->integer('tipousuario')->default(1);
             $table->integer('estadoid')->unsigned();
             $table->foreign('estadoid')->references('id')->on('estados')->onDelete('cascade');
-            $table->rememberToken()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
