@@ -38,7 +38,7 @@
                     <td><a href="{{@url('usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
                         <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success" btn-sm>Visualizar</a>
                         <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</button>                
+                        <span class="glyphicon glyphicon-trash"></span> Deletar</button>                
                     </tr>
             @endforeach
     </table>
@@ -188,7 +188,7 @@
                 url: 'api/usuario',
                 data: {
                     '_token': $('input[name=_token]').val(),
-                'nome': $('#nome').val(''),
+                    'nome': $('#nome').val(''),
                     'email':$('#email').val(''),
                     'password':$('#password').val(''),
                     'password_confirmation':$('#password_confirmation').val(''),
@@ -224,15 +224,24 @@
             $.ajax({
                 type: 'DELETE',
                 url: '/api/usuario/' + id,
+                
                 data: {
                     '_token': $('input[name=_token]').val(),
+                    'id': $('id').val(),
+
                 },
                 success: function(data) {
                     window.location.reload();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
                 }
                 
             });
         });  
+
+        $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+
 </script>
 
 @endsection

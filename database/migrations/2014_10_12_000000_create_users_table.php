@@ -25,10 +25,10 @@ class CreateUsersTable extends Migration
             $table->string('cidade', 45);
             $table->integer('tipousuario')->default(1);
             $table->integer('estadoid')->unsigned();
-            $table->foreign('estadoid')->references('id')->on('estados')->onDelete('cascade');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreign('estadoid')->references('id')->on('estados')->onDelete('cascade');            $table->foreign('estadoid')->references('id')->on('estados')->onDelete('cascade');
+            $table->integer('deleted_at')->nullable();
 
+            $table->timestamps();
         });
     }
 

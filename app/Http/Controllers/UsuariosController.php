@@ -146,9 +146,9 @@ class UsuariosController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {
-        $usuario = User::findOrFail($id);
+        $usuario = User::find($id);
         $usuario->delete();
         return response()->json($usuario);
     }

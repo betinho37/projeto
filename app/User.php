@@ -7,14 +7,13 @@ use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable;
+    use Notifiable;
 
     protected $hidden = [
         'password',
@@ -23,7 +22,6 @@ class User extends Authenticatable
     protected $dates = [
         'updated_at',
         'created_at',
-        'deleted_at',
         'email_verified_at',
         'last_login_at',
     ];
@@ -39,7 +37,6 @@ class User extends Authenticatable
         'cidade',
         'created_at',
         'updated_at',
-        'deleted_at',
         'remember_token',
         'email_verified_at',
         'last_login_at',
@@ -73,7 +70,7 @@ class User extends Authenticatable
     }
     
     public static function pesquisa($pesquisar){
-        return static::where('email', 'LIKE', '%' . $pesquisar . '%')
+        return static::where('nome', 'LIKE', '%' . $pesquisar . '%')
                         ->orWhere('email','LIKE','%'.$pesquisar.'%')->paginate(10);
     }
 
