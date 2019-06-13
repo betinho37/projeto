@@ -25,3 +25,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('usuario/create', ['as' => 'usuario.create', 'uses' => 'UsuariosController@create']);
+
+Route::get('/{any}', function () {
+    return view('post');
+  })->where('any', '.*');

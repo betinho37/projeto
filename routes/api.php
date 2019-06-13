@@ -23,9 +23,8 @@ Route::apiResource('/usuario', 'UsuariosController');
 Route::apiResource('publicacao', 'PublicacoesController');
 Route::post('/pesquisar', 'UsuariosController@search')->name('usuario.pesquisar');
 
-Route::get('/', function () {
-    return view('api/login');
+Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
+    Route::resource('companies', 'CompaniesController', ['except' => ['create', 'edit']]);
 });
-
 
 
