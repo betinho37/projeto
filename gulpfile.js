@@ -1,8 +1,7 @@
 var
-gulp         = require('gulp'),
-watch        = require('./resources/assets/semantic/tasks/watch'),
-build        = require('./resources/assets/semantic/tasks/build')
-;
+    gulp = require('gulp'),
+    watch = require('./resources/assets/semantic/tasks/watch'),
+    build = require('./resources/assets/semantic/tasks/build');
 
 
 /*******************************

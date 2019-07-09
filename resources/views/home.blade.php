@@ -17,7 +17,6 @@
                      </div>
             </div>
             @endforeach
-            <div class="row">
                     <div class="col-md-4 ">
                             <div class="info-box">
                                     <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
@@ -28,7 +27,6 @@
                                     <!-- /.info-box-content -->
                              </div>
                     </div>
-            </div> 
         </div>
         </div>
         <div class="row">

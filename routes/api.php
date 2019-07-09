@@ -13,18 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 Auth::routes();
+Route::post('register/store', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@create']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+Route::middleware(['auth'])->group(function () {
 Route::apiResource('/home', 'HomeController');
 Route::apiResource('/usuario', 'UsuariosController');
-Route::apiResource('publicacao', 'PublicacoesController');
 Route::post('/pesquisar', 'UsuariosController@search')->name('usuario.pesquisar');
+Route::get('usuario/{id}/edit/', ['as' => 'usuario.edit', 'uses' => 'UsuariosController@edit']);
 
-Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
-    Route::resource('companies', 'CompaniesController', ['except' => ['create', 'edit']]);
+/////////////////
+Route::apiResource('publicacao', 'PublicacoesController');
+Route::get('publicacoes/controle', ['as' => 'publicacoes.controle', 'uses' => 'PublicacoesController@controle']);
+Route::get('/publicacoes/create', ['as' => 'publicacoes.create', 'uses' => 'PublicacoesController@create']);
+Route::get('publicacao/{id}/edit/', ['as' => 'publicacao.edit', 'uses' => 'PublicacoesController@edit']);
+Route::get('excluir/arquivo/{nome}', 'PublicacoesController@deletfile')->name('excluir.arquivo');
+
 });
-
-

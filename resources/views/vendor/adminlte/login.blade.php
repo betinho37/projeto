@@ -40,11 +40,14 @@
 			  <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="remember_token" {{ old('remember_token') ? 'checked' : '' }}>
                 <label class="custom-control-label" for="remember_token">Lembrar senha</label>
+
               </div>
+
+
 			  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
 			  @if (Route::has('password.request'))
 			  	<hr class="my-4">
-			  	<a class="text-light" href="{{ route('password.request') }}"><button class="btn btn-lg btn-secondary btn-block text-uppercase" type="button">{{ __('Esqueceu sua senha?') }}</button></a>
+			  	<a class="text-light" href="{{ route('register') }}"><button class="btn btn-lg btn-secondary btn-block text-uppercase" type="button">{{ __('Cadastro') }}</button></a>
 			  @endif
 			</form>
 		  </div>

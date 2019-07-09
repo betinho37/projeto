@@ -111,7 +111,6 @@
                     @endif
                 </div>
                 @if (Auth::check())
-
                                   <div  align="center">
                                     {!!Form::label('tipousuario', 'Tipo de Usuário:')!!}
                                           <label>
@@ -126,7 +125,7 @@
                                           </label><br>
                                   </div><br>
                                 @else
-                                @endif
+                @endif
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </form>
             <div class="auth-links">

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Estado;
+use View;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+
 
 class RegisterController extends Controller
 {
@@ -28,6 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    private  $estado;
     protected $redirectTo = '/api/home';
 
     /**
@@ -35,11 +40,18 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Estado $estado)
     {
         $this->middleware('guest');
+        $this->estado = $estado;
+
+        $list_estado = $this->estado->listEstado();
+        
+        View::share('list_estado', $list_estado);
+
     }
 
+    
     /**
      * Get a validator for an incoming registration request.
      *
@@ -61,12 +73,24 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $inputs = $request->all();
+        $inputs['password'] = bcrypt($inputs['password']);  
+        User::create($inputs);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::check()) {
+            return redirect()->action('UsuariosController@index');
+
+        } else {
+            if (Auth::attempt($credentials)) {
+
+                return redirect()->intended( '/api/home');
+            }
+        }
+
+
     }
 }

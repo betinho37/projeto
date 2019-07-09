@@ -1,6 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
 
 @section('content_header')
     <h1>Usuarios</h1>
@@ -58,7 +57,7 @@
             </div>
 
             <div class="box-footer">
-                <a type="button" href="{{@url('usuario').'/' . $usuario->id .'/'. 'edit' }}" class="btn btn-warning" btn-sm>Editar</a>
+                <a type="button" href="{{@url('api/usuario').'/' . $usuario->id .'/'. 'edit' }}" class="btn btn-warning" btn-sm>Editar</a>
                 <a href="{{ route('usuario.index') }}" class="btn btn-primary">Voltar</a>
             </div>
         </div>

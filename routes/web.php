@@ -20,12 +20,5 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     //Route::get('usuario', 'UsuariosController@index')->name('usuario');
     Route::get('/api/usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
-    Route::get('publicacoes/controle', ['as' => 'publicacoes.controle', 'uses' => 'PublicacoesController@controle']);
-    Route::get('usuario/{id}/edit/', ['as' => 'usuario.edit', 'uses' => 'UsuariosController@edit']);
+
 });
-
-Route::get('usuario/create', ['as' => 'usuario.create', 'uses' => 'UsuariosController@create']);
-
-Route::get('/{any}', function () {
-    return view('post');
-  })->where('any', '.*');

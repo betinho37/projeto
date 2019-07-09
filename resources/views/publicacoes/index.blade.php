@@ -8,10 +8,6 @@
     <link rel="icon" href="favicon.ico">
 
     <title>Galeria</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
      <style>
@@ -31,9 +27,7 @@
           <h1 class="jumbotron-heading">Sobre a Galeria</h1>
           <p class="lead text-muted">Apresentação</p>
           <p>
-            <a href="/login" class="btn btn-primary my-2">Seja um Colaborador</a>
             <a href="publicacoes/categorias" class="btn btn-primary my-2">Visualizar Obras</a>
-
           </p>
         </div>
     <!-- Bootstrap core JavaScript

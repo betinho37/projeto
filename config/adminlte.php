@@ -86,7 +86,7 @@ return [
     |
     */
 
-    'dashboard_url' => '/api/home',
+    'dashboard_url' => '/api/publicacao',
 
     'logout_url' => '/api/logout',
 
@@ -112,8 +112,8 @@ return [
         '',
        
         [
-            'text'        => 'Museu',
-            'url'         => '/api/publicacao',
+            'text'        => 'Controle',
+            'url'         => '/api/home',
             'icon'        => 'file',
             'label_color' => 'success',
         ],
@@ -132,7 +132,7 @@ return [
                 ],
                 [
                     'text' => 'Publicações',
-                    'url'  => '/publicacoes/controle',
+                    'url'  => 'api/publicacoes/controle',
                     
 
 

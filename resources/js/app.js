@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./main');
 
 window.Vue = require('vue');
 
@@ -27,7 +28,6 @@ Vue.use(VueAxios, axios);
 
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 
 const router = new VueRouter({ routes })

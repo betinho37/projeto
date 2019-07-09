@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Estado;
 use Illuminate\Support\Facades\Auth;
-use DB;
 use Response;
-use Illuminate\Support\Facades\Input;
 
 
 class UsuariosController extends Controller
@@ -26,9 +23,12 @@ class UsuariosController extends Controller
 
     public function __construct(User $usuario, Estado $estado)
     {
+        $this->middleware('auth');
 
         $this->usuario = $usuario;
         $this->estado = $estado;
+
+        
 
     }
 
@@ -69,9 +69,10 @@ class UsuariosController extends Controller
           $validator = $this->validator($inputs);
 
             if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()->all()]);
+                return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+
             }
-        
+
             
             $inputs['password'] = bcrypt($inputs['password']);  
             $this->usuario->create($inputs);
@@ -150,7 +151,7 @@ class UsuariosController extends Controller
     {
         $usuario = User::find($id);
         $usuario->delete();
-        return response()->json($usuario);
+        return redirect()->action('UsuariosController@index');
     }
 
     protected function validator(array $data)

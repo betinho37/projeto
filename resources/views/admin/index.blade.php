@@ -10,112 +10,111 @@
         <form role="form" action="{{  route('usuario.pesquisar') }}" method="POST" >
             {{ csrf_field() }}
             <div class="form input-group input-group-sm" >
-            <input type="text" name="pesquisar" class="form-control pull-right" placeholder="Pesquisar...">
+                <input type="text" name="pesquisar" class="form-control pull-right" placeholder="Pesquisar...">
 
-            <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-            </div>
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
             </div>
         </form>
     </div>
 
     <div class="div1" style="margin-right: 784px;">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
-    </div>
-    
-    
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
+    </div><br>
 
-    <table align="center" class="table"><p></p>
+    <div class="card-body table-responsive p-0" >
+        <table class="table table-head-fixed">
+        <tr style="color:white;background-color:steelblue">
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Opcões</th>
+        </tr>
+        @foreach($usuario as $usuarios)
             <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Opcões</th>
+                <td>{{$usuarios -> nome }}</td>
+                <td>{{$usuarios -> email }}</td>
+                <td><a href="{{@url('api/usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
+                    <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success" btn-sm>Visualizar</a>
+                    <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
+                        <span class="glyphicon glyphicon-trash"></span> Deletar</button>
             </tr>
-            @foreach($usuario as $usuarios)
-                <tr>
-                    <td>{{$usuarios -> nome }}</td>
-                    <td>{{$usuarios -> email }}</td>
-                    <td><a href="{{@url('usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
-                        <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success" btn-sm>Visualizar</a>
-                        <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
-                        <span class="glyphicon glyphicon-trash"></span> Deletar</button>                
-                    </tr>
-            @endforeach
+        @endforeach
     </table>
-
-<!-- Modal form to add a post -->
+    </div>
+    <!-- Modal form to add a post -->
     <form method="post" action="{{url('api/usuario')}}" id="form">
         @csrf
 
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                    <div class="row my-9">
-                        <div class="col-md-6">
-                            <label >Nome</label>
-                            <input type="name" class="form-control" id="nome" name="nome" required>
-                            
-                        </div>
-                        <div class="col-md-6">
-                                <label>E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                                
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row my-9">
+                            <div class="col-md-6">
+                                <label >Nome</label>
+                                <input type="name" class="form-control" id="nome" name="nome" required>
+
                             </div>
                             <div class="col-md-6">
-                            <label>Telefone</label>
-                            <input type="telefone" class="form-control" id="telefone" name="telefone" required>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <label>Estado</label>
-                            {!!Form::select('estadoid', $list_estado, null, ['class'=>'form-control '])!!}
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <label>Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade" required>
-                            
-                        </div>
-                        <div class="col-md-6">
+                                <label>E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label>Telefone</label>
+                                <input type="telefone" class="form-control" id="telefone" name="telefone" required>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label>Estado</label>
+                                {!!Form::select('estadoid', $list_estado, null, ['class'=>'form-control '])!!}
+
+                            </div>
+                            <div class="col-md-6">
+                                <label>Cidade</label>
+                                <input type="text" class="form-control" id="cidade" name="cidade" required>
+
+                            </div>
+                            <div class="col-md-6">
                                 <label>Endereço</label>
                                 <input type="text" class="form-control" id="endereco" name="endereco" required>
-                                
+
                             </div>
-                        
-                        <div class="col-md-6">
-                            <label>Senha</label>
-                            <input type="password"  name="password" id="password" class="form-control" >
-                        </div>
-                        <div class="col-md-6">
-                            <label>Confirmar Senha</label>
-                            <input type="password"  name="password_confirmation" id="password_confirmation" class="form-control"
-                            placeholder="{{ trans('adminlte::adminlte.retype_password') }}" >
-                            
-                        </div>
-                        <input type="hidden" id="emailValidateNew" name="emailValidate" value="false">
-                    </div>
-                    
-                </form>
-                <div class="modal-footer">
-                    <button  class="btn btn-success" id="ajaxSubmit">Salvar
-                    </button>
 
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        <span class='glyphicon glyphicon-remove'></span> Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
+                            <div class="col-md-6">
+                                <label>Senha</label>
+                                <input type="password"  name="password" id="password" class="form-control" >
+                            </div>
+                            <div class="col-md-6">
+                                <label>Confirmar Senha</label>
+                                <input type="password"  name="password_confirmation" id="password_confirmation" class="form-control"
+                                       placeholder="{{ trans('adminlte::adminlte.retype_password') }}" >
+
+                            </div>
+                            <input type="hidden" id="emailValidateNew" name="emailValidate" value="false">
+                        </div>
+
+    </form>
+    <div class="modal-footer">
+        <button  class="btn btn-success" id="ajaxSubmit">Salvar
+        </button>
+
+        <button type="button" class="btn btn-warning" data-dismiss="modal">
+            <span class='glyphicon glyphicon-remove'></span> Cancelar
+        </button>
     </div>
-</div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
-<div id="deleteModal" class="modal fade" role="dialog">
+    <div id="deleteModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -152,8 +151,8 @@
         </div>
     </div>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-        </script>
-        <!-- Latest compiled and minified JavaScript -->
+    </script>
+    <!-- Latest compiled and minified JavaScript -->
 
     <!-- Bootstrap JavaScript -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
@@ -166,7 +165,7 @@
     <script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
 
 
- <script type="text/javascript">
+    <script type="text/javascript">
         // Adicionar novo usuario
         $(document).on('click', '.add-modal', function() {
             // Campos de entrada
@@ -201,6 +200,7 @@
                 },
                 success: function(data) {
                     if ((data.errors)) {
+
                         $('.error').removeClass('hidden');
                         $('.error').text(data.errors.name);
                     } else {
@@ -224,7 +224,7 @@
             $.ajax({
                 type: 'DELETE',
                 url: '/api/usuario/' + id,
-                
+
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'id': $('id').val(),
@@ -232,16 +232,17 @@
                 },
                 success: function(data) {
                     window.location.reload();
+
                 },
                 error: function (data) {
-                    console.log('Error:', data);
+                    window.location.reload();
                 }
-                
+
             });
-        });  
+        });
 
         $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
 
-</script>
+    </script>
 
 @endsection
