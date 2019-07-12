@@ -35,7 +35,6 @@
         <table class="table table-hover">
             <tbody>
             <tr>
-               <th class="col-md-1">ID</th>
                <th class="col-md-3">Nome</th>
                <th class="col-md-2">Telefone</th>
                <th class="col-md-3">E-mail</th>
@@ -44,14 +43,14 @@
 
             @foreach ($usuario as $usuarios)
             <tr>                
-                <td> {{ $usuarios->id }} </td>
                 <td> {{ $usuarios->nome }} </td>
                 <td> {{ $usuarios->telefone }} </td>
                 <td> {{ $usuarios->email }} </td>
                 <td><a href="{{@url('api/usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
                     <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success" btn-sm>Visualizar</a>
-                    <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
-                        <span class="glyphicon glyphicon-trash"></span> Deletar</button>
+                    <a href="{{@url('api/usuario').'/destroy/'.$usuarios->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >
+                        <span class="glyphicon glyphicon-trash"></span>Excluir</a>
+
             </tr>
             </tr>
             @endforeach

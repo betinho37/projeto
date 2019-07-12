@@ -18,9 +18,9 @@
             </div>
         </form>
     </div>
-
-    <div class="div1" style="margin-right: 784px;">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="open">Novo Usuario</button>
+    <br>
+    <div class="div1"  >
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="open" style="margin-left: -280px;"  >Novo Usuario</button>
     </div><br>
 
     <div class="card-body table-responsive p-0" >
@@ -34,10 +34,11 @@
             <tr>
                 <td>{{$usuarios -> nome }}</td>
                 <td>{{$usuarios -> email }}</td>
-                <td><a href="{{@url('api/usuario').'/' . $usuarios->id .'/'. 'edit' }}" class="btn btn-primary">Editar</a>
-                    <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success" btn-sm>Visualizar</a>
-                    <button class="delete-modal btn btn-danger" data-id="{{$usuarios->id}}" data-name="{{ $usuarios->nome}}">
-                        <span class="glyphicon glyphicon-trash"></span> Deletar</button>
+                <td>
+                    <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success"><span class="glyphicon glyphicon-search"></span>Visualizar</a>
+                    <a href="{{@url('api/usuario').'/destroy/'.$usuarios->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >
+                        <span class="glyphicon glyphicon-trash"></span>Excluir</a>
+
             </tr>
         @endforeach
     </table>
@@ -114,52 +115,17 @@
     </div>
 
 
-    <div id="deleteModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <h3 class="text-center">Tem certeza de que deseja excluir este usuario?</h3>
-                    <br />
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="id">ID:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="id" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="nome">Nome:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" value="{{$usuarios -> nome }}" disabled>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger delete" data-dismiss="modal">
-                            <span id="" class='glyphicon glyphicon-trash'></span> Deletar
-                        </button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">
-                            <span class='glyphicon glyphicon-remove'></span> Caneclar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
     </script>
     <!-- Latest compiled and minified JavaScript -->
 
     <!-- Bootstrap JavaScript -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
 
     <!-- toastr notifications -->
     {{-- <script type="text/javascript" src="{{ asset('toastr/toastr.min.js') }}"></script> --}}
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- icheck checkboxes -->
     <script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
@@ -212,36 +178,7 @@
         });
 
 
-        // Deletar usuario
-        $(document).on('click', '.delete-modal', function() {
-            $('.modal-title').text('Delete');
-            $('#id').val($(this).data('id'));
-            $('#nome').val($(this).data('nome'));
-            $('#deleteModal').modal('show');
-            id = $('#id').val();
-        });
-        $('.modal-footer').on('click', '.delete', function() {
-            $.ajax({
-                type: 'DELETE',
-                url: '/api/usuario/' + id,
 
-                data: {
-                    '_token': $('input[name=_token]').val(),
-                    'id': $('id').val(),
-
-                },
-                success: function(data) {
-                    window.location.reload();
-
-                },
-                error: function (data) {
-                    window.location.reload();
-                }
-
-            });
-        });
-
-        $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
 
     </script>
 

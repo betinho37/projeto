@@ -183,6 +183,7 @@ class PublicacoesController extends Controller
     public function destroy($id)
     {
         $publicacao = Publicacao::find($id);
+
         if ($publicacao->arquivo) {
             unlink(public_path('uploads/' . $publicacao->arquivo));
             $publicacao->delete();
@@ -191,9 +192,10 @@ class PublicacoesController extends Controller
             unlink(public_path('uploads/' . $publicacao->pdf));
             $publicacao->delete();
         }
-        dd($publicacao);
+
+
         $publicacao->delete();
-        return redirect()->action('PublicacaoController@controle');
+        return redirect()->action('PublicacoesController@controle');
     }
 
 

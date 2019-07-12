@@ -2,20 +2,21 @@
 
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/auth.css') }}">
+
     @yield('css')
 @stop
 
 <head>
-        <script src="{{ asset('js/jquery.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery.maskedinput.js') }}" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-        <script src="js/validator.min.js"></script>
-        <script type="text/javascript">
+    <script src="{{ asset('js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.maskedinput.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="js/validator.min.js"></script>
+    <script type="text/javascript">
         $(document).ready(function(){
             $("#cep").mask("99999-999");
             $("#telefone").mask("(99).99999-9999");
         });
-        </script>
+    </script>
 </head>
 @section('body_class', 'register-page')
 
@@ -51,45 +52,45 @@
                     @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('telefone') ? 'has-error' : '' }}">
-                        <input type="telefone" name="telefone" class="form-control" value="{{ old('telefone') }}"
-                               placeholder="Telefone">
-                        <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
-                        @if ($errors->has('telefone'))
-                            <span class="help-block">
+                    <input type="telefone" name="telefone" class="form-control" value="{{ old('telefone') }}"
+                           placeholder="Telefone">
+                    <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
+                    @if ($errors->has('telefone'))
+                        <span class="help-block">
                                 <strong>{{ $errors->first('telefone') }}</strong>
                             </span>
-                        @endif
+                    @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('endereco') ? 'has-error' : '' }}">
-                        <input type="endereco" name="endereco" class="form-control" value="{{ old('endereco') }}"
-                               placeholder="Endereço">
-                        <span class="glyphicon glyphicon-globe form-control-feedback"></span>
-                        @if ($errors->has('endereco'))
-                            <span class="help-block">
+                    <input type="endereco" name="endereco" class="form-control" value="{{ old('endereco') }}"
+                           placeholder="Endereço">
+                    <span class="glyphicon glyphicon-globe form-control-feedback"></span>
+                    @if ($errors->has('endereco'))
+                        <span class="help-block">
                                 <strong>{{ $errors->first('endereco') }}</strong>
                             </span>
-                        @endif
+                    @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('estado') ? 'has-error' : '' }}">
-                                {!!Form::select('estadoid', $list_estado, null, ['class'=>'form-control '])!!}
-                        <span class="glyphicon glyphicon-globe form-control-feedback"></span>
-                        @if ($errors->has('estado'))
-                            <span class="help-block">
+                    {!!Form::select('estadoid', $list_estado, null, ['class'=>'form-control '])!!}
+                    <span class="glyphicon glyphicon-globe form-control-feedback"></span>
+                    @if ($errors->has('estado'))
+                        <span class="help-block">
                                 <strong>{{ $errors->first('estado') }}</strong>
                             </span>
-                        @endif
+                    @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('cidade') ? 'has-error' : '' }}">
-                        <input type="cidade" name="cidade" class="form-control" value="{{ old('cidade') }}"
-                               placeholder="Cidade">
-                        <span class="glyphicon glyphicon-globe form-control-feedback"></span>
-                        @if ($errors->has('cidade'))
-                            <span class="help-block">
+                    <input type="cidade" name="cidade" class="form-control" value="{{ old('cidade') }}"
+                           placeholder="Cidade">
+                    <span class="glyphicon glyphicon-globe form-control-feedback"></span>
+                    @if ($errors->has('cidade'))
+                        <span class="help-block">
                                 <strong>{{ $errors->first('cidade') }}</strong>
                             </span>
-                        @endif
+                    @endif
                 </div>
-                
+
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
                            placeholder="{{ trans('adminlte::adminlte.password') }}">
@@ -111,20 +112,20 @@
                     @endif
                 </div>
                 @if (Auth::check())
-                                  <div  align="center">
-                                    {!!Form::label('tipousuario', 'Tipo de Usuário:')!!}
-                                          <label>
-                                          	<input type="radio" name="tipousuario" value="0"
-                                          	{{isset($usuario->tipousuario) && $usuario->tipousuario == 0 ? 'checked' : '' }}
-                                          	required>Administrador
-                                          </label>
-                                          <label>
-                                          	<input type="radio" name="tipousuario" value="1"
-                                          	{{isset($usuario->tipousuario) && $usuario->tipousuario == 1 ? 'checked' : '' }}
-                                          	required>Usuário
-                                          </label><br>
-                                  </div><br>
-                                @else
+                    <div  align="center">
+                        {!!Form::label('tipousuario', 'Tipo de Usuário:')!!}
+                        <label>
+                            <input type="radio" name="tipousuario" value="0"
+                                   {{isset($usuario->tipousuario) && $usuario->tipousuario == 0 ? 'checked' : '' }}
+                                   required>Administrador
+                        </label>
+                        <label>
+                            <input type="radio" name="tipousuario" value="1"
+                                   {{isset($usuario->tipousuario) && $usuario->tipousuario == 1 ? 'checked' : '' }}
+                                   required>Usuário
+                        </label><br>
+                    </div><br>
+                @else
                 @endif
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </form>

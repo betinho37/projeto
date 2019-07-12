@@ -28,4 +28,7 @@ Route::get('/publicacoes/create', ['as' => 'publicacoes.create', 'uses' => 'Publ
 Route::get('publicacao/{id}/edit/', ['as' => 'publicacao.edit', 'uses' => 'PublicacoesController@edit']);
 Route::get('excluir/arquivo/{nome}', 'PublicacoesController@deletfile')->name('excluir.arquivo');
 
+
 });
+
+
