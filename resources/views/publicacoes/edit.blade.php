@@ -92,7 +92,8 @@
 
             <div align="Center" class="form-group" >
                 {!!Form::submit('Salvar', ['class="btn btn-primary"'])!!}
-                <td><a type="button" href="{{@url('/api/publicacao/').'/'.$publicacao->id}}" class="btn btn-danger"   onclick="return confirm('Tem certeza de que deseja excluir este item ?');" >Excluir</a></td>
+                <td> <a href="{{@url('api/usuario').'/destroy/'.$publicacao->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >
+                        <span class="glyphicon glyphicon-trash"></span>Excluir</a></td>
                 <a href="/api/publicacoes/controle" class="btn btn-primary">Voltar</a>
             </div>
     </div>

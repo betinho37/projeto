@@ -19,6 +19,5 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     //Route::get('usuario', 'UsuariosController@index')->name('usuario');
-    Route::get('/api/usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
 
 });
