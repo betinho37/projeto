@@ -1,12 +1,6 @@
 @extends('adminlte::page')
-
-
-
-
 @section('title', 'Museu Virtual')
-
 @section('content')
-
     <style type="text/css">
         select.form-control:not([size]):not([multiple]) { height:calc(2.25rem + 9px); }
     </style>
@@ -92,13 +86,11 @@
 
             <div align="Center" class="form-group" >
                 {!!Form::submit('Salvar', ['class="btn btn-primary"'])!!}
-                <td> <a href="{{@url('api/usuario').'/destroy/'.$publicacao->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >
+                <td> <a href="{{@url('api/publicacao').'/destroy/'.$publicacao->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >
                         <span class="glyphicon glyphicon-trash"></span>Excluir</a></td>
                 <a href="/api/publicacoes/controle" class="btn btn-primary">Voltar</a>
             </div>
     </div>
-
-
 
     @else
         <div class="form-group" >

@@ -6,6 +6,7 @@ use App\Publicacao;
 use App\Categoria;
 use App\User;
 use Illuminate\Http\Request;
+use Response;
 
 class PublicacoesController extends Controller
 {
@@ -79,6 +80,12 @@ class PublicacoesController extends Controller
             $publicacao->pdf = $path;
             $publicacao->save();
         }
+
+
+        if (empty($request->arquivo && $request->hasFile('arquivo'))) {
+            return Response::json(array('errors' => abort(400, 'Nenhum arquivo foi enviado.')));
+        }
+
 
         return redirect()->action('PublicacoesController@controle');
 

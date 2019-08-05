@@ -3,6 +3,19 @@
 @section('title', 'Museu Virtual')
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css" >
 
+
+<script type="javascript">
+    $(document).ready(function() {
+        jQuery(function($){
+        $("#date").mask("99/99/9999");
+        $("#telefone").mask("(999) 999-9999");
+        $("#tin").mask("99-9999999");
+        $("#ssn").mask("999-99-9999");
+    })};
+</script>
+
+
+
 @section('content')
     <h1 align="center" >Usuarios</h1>
 
@@ -109,12 +122,6 @@
             <span class='glyphicon glyphicon-remove'></span> Cancelar
         </button>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-
 
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
     </script>
@@ -147,6 +154,7 @@
             $('.modal-title').text('Add');
             $('#addModal').modal('show');
         });
+
         $('.modal-footer').on('click', '.add', function() {
             $.ajax({
                 type: 'POST',
@@ -166,7 +174,6 @@
                 },
                 success: function(data) {
                     if ((data.errors)) {
-
                         $('.error').removeClass('hidden');
                         $('.error').text(data.errors.name);
                     } else {

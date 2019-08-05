@@ -65,7 +65,7 @@ class UsuariosController extends Controller
     public function store(Request $request)
     {
           $inputs = $request->all();
-          
+
           $validator = $this->validator($inputs);
 
             if ($validator->fails()) {
@@ -73,7 +73,11 @@ class UsuariosController extends Controller
 
             }
 
-            
+
+
+
+
+
             $inputs['password'] = bcrypt($inputs['password']);  
             $this->usuario->create($inputs);
                 

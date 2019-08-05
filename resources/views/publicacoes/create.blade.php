@@ -5,7 +5,6 @@
         <div class="box-header with-border">
             <h3 class="box-title">Nova publicação</h3>
         </div>
-
         <div style="padding:25px" >
 
             {!! Form::open(array('url' => 'api/publicacao','files'=>'true', 'enctype'=>'multipart/form-data' ,'multiple'=>true,)); !!}
@@ -25,13 +24,13 @@
                 <strong>Titulo:</strong><p></p>
                 {!!Form::text('titulo', null, ['class'=>'form-control'])!!}
             </div>
-            @if (Auth::user()->tipousuario == 0  )
-                <div class="form-group">
-                    <strong id="cat">Categoria:</strong>
-                    {!!Form::select('categoriaid', $list_categoria, null, ['class'=>'form-control'])!!}
-                </div>
-            @else
-            @endif
+                @if (Auth::user()->tipousuario == 0  )
+                        <div class="form-group">
+                            <strong id="cat">Categoria:</strong>
+                            {!!Form::select('categoriaid', $list_categoria, null, ['class'=>'form-control'])!!}
+                        </div>
+                    @else
+                @endif
             <div class="form-group" >
                 <strong>Descrição</strong><p></p>
                 <textarea id="descricao" name="descricao" value="{{ old('descricao') }}" class="form-control" rows="3"></textarea>
@@ -50,7 +49,7 @@
             </div>
             {!! Form::close() !!}
         </div>
-
+    </div>
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#btn-salvar").click( function(event) {
