@@ -1,8 +1,6 @@
 <?php
 
 namespace App;
-use App\Categoria;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Publicacao extends Model
@@ -13,7 +11,7 @@ class Publicacao extends Model
         'nome',
         'titulo',
         'descricao',
-        'arquivo',
+        'arquivoid',
         'pdf',
         'tipousuario',
         'userid',
@@ -24,9 +22,6 @@ class Publicacao extends Model
     {
             return $this->belongsTo(User::class, 'userid');
     }
-        public function getUrlPath()
-    {
-            return Storage::url($this->path);
-    }
+ 
 
 }

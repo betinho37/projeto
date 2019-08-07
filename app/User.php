@@ -1,8 +1,6 @@
 <?php
 
 namespace App;
-
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -58,12 +56,7 @@ class User extends Authenticatable
         
         return $this->belongsTo('App\Estado', 'estadoid');
     }
-    
-    public function publicacoes(){
 
-        return $this->hasMany(Publicacao::class, 'userid');
-    }
-    
     public static function pesquisa($pesquisar){
         return static::where('nome', 'LIKE', '%' . $pesquisar . '%')
                         ->orWhere('email','LIKE','%'.$pesquisar.'%')->paginate(10);

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Estado;
 use Illuminate\Support\Facades\Auth;
-use Response;
+use Illuminate\Support\Facades\Redirect;
 
 
 class UsuariosController extends Controller
@@ -35,13 +35,9 @@ class UsuariosController extends Controller
     public function index()
     {
 
-
-
-
         $usuario = $this->usuario->all();
         $list_estado = $this->estado->listEstado();
         return view('admin.index', compact('usuario', 'total_ids','list_estado'));
-
        
     }
 
@@ -60,7 +56,7 @@ class UsuariosController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -69,14 +65,11 @@ class UsuariosController extends Controller
           $validator = $this->validator($inputs);
 
             if ($validator->fails()) {
-                return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
+                return Redirect::back()->withErrors($validator)->withInput();
+
 
             }
-
-
-
-
-
 
             $inputs['password'] = bcrypt($inputs['password']);  
             $this->usuario->create($inputs);
@@ -165,16 +158,6 @@ class UsuariosController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
-
-    public function perfil($id)
-    {
-
-        $list_estado = $this->estado->listEstado();
-        $usuario = User::find($id);
-        return view('admin.create', compact('usuario', 'list_estado'));
-
-    }
-
 
     public function search(Request $request){
         $pesquisa = $request->pesquisar;

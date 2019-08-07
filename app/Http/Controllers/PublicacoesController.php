@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Publicacao;
 use App\Categoria;
+use App\Arquivo;
 use App\User;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Response;
+
 
 class PublicacoesController extends Controller
 {
@@ -15,15 +18,16 @@ class PublicacoesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $publicacao, $user, $categoria;
+    private $publicacao, $user, $categoria, $arquivo;
 
 
-    public function __construct(Publicacao $publicacao, User $user, Categoria $categoria)
+    public function __construct(Publicacao $publicacao, User $user, Categoria $categoria, Arquivo $arquivo)
     {
         //obriga esta logado
         $this->middleware('auth');
 
         $this->publicacao = $publicacao;
+        $this->arquivo = $arquivo;
         $this->user = $user;
         $this->categoria = $categoria;
     }
@@ -47,7 +51,7 @@ class PublicacoesController extends Controller
         $publicacao = Publicacao::get();
         $list_user = $this->user->listUser();
         $list_categoria = $this->categoria->listCategoria();
-        return view('publicacoes.create', compact('publicacao', 'list_user', 'list_categoria'));
+        return view('publicacoes.create', compact('publicacao', 'list_user', 'list_categoria', 'userarquivo'));
     }
 
     /**
@@ -59,35 +63,30 @@ class PublicacoesController extends Controller
     public function store(Request $request)
     {
 
-        $publicacao = new Publicacao;
+        if (blank($request->arquivo) && blank($request->pdf)) {
+            return redirect()->action('PublicacoesController@controle')->with('error', 'Nenhum arquivo foi enviado.');
 
-        $publicacao->nome = $request->nome;
-        $publicacao->titulo = $request->titulo;
-        $publicacao->descricao = $request->descricao;
-        $publicacao->userid = $request->userid;
-        $publicacao->categoriaid = $request->categoriaid;
+        }
+
+        $publicacao = Publicacao::create($request->all());
 
         if ($request->hasFile('arquivo')) {
 
-            $path = $request->arquivo->store('/');
-            $publicacao->arquivo = $path;
-
-            $publicacao->save();
+            $arquivo = new Arquivo();
+            $path = $request->arquivo->store('/uploads');
+            $arquivo->nome = $path;
         }
 
         if ($request->hasFile('pdf')) {
             $path = $request->pdf->store('/');
             $publicacao->pdf = $path;
-            $publicacao->save();
         }
 
+        if ($publicacao &&  $arquivo ){
+            return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Salva!');
+    }
 
-        if (empty($request->arquivo && $request->hasFile('arquivo'))) {
-            return Response::json(array('errors' => abort(400, 'Nenhum arquivo foi enviado.')));
-        }
 
-
-        return redirect()->action('PublicacoesController@controle');
 
     }
 
@@ -100,20 +99,14 @@ class PublicacoesController extends Controller
     public function home()
     {
         $tipousuario = auth()->user()->tipousuario;
-
         $publicacao = $this->publicacao;
-
         if ($tipousuario != 0) {
-
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
                                         ->orderBy('situacao', 'asc')
                                             ->simplePaginate(100);
-
             return view('publicacoes.controle', compact('publicacao'));
         }
-
         $publicacao = $publicacao->orderBy('situacao', 'asc')->get();
-
         return view('admin.home', compact('publicacao'));
     }
 
@@ -133,9 +126,8 @@ class PublicacoesController extends Controller
     {
         $list_user = $this->user->listUser();
         $list_categoria = $this->categoria->listCategoria();
-
         $publicacao = Publicacao::find($id);
-        return view('publicacoes.edit', compact('publicacao', 'list_user', 'list_categoria'));
+        return view('publicacoes.edit', compact('publicacao', 'list_user', 'list_categoria', 'userarquivo'));
     }
 
     /**
@@ -148,6 +140,7 @@ class PublicacoesController extends Controller
     public function update(Request $request, $id)
     {
         $publicacao = Publicacao::find($id);
+
         if ($request->hasFile('arquivo')) {
             $extension = $request->arquivo->getClientOriginalExtension();
             $path = $request->arquivo->store('/');
@@ -155,6 +148,8 @@ class PublicacoesController extends Controller
             $publicacao->arquivo = $path;
             $publicacao->save();
         }
+
+
         if ($request->hasFile('pdf')) {
             $extension = $request->arquivo->getClientOriginalExtension();
             $path = $request->pdf->store('/');
@@ -162,6 +157,8 @@ class PublicacoesController extends Controller
             $publicacao->pdf = $path;
             $publicacao->save();
         }
+
+
         $publicacao->situacao = $request->situacao;
         $publicacao->categoriaid = $request->categoriaid;
         $publicacao->posicaoimagem = $request->posicaoimagem;
@@ -169,8 +166,10 @@ class PublicacoesController extends Controller
         $publicacao->titulo = $request->titulo;
         $publicacao->nome = $request->nome;
         $publicacao->save();
-        return redirect()->action('PublicacoesController@controle');
-    }
+
+        if ($publicacao ){
+            return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Atualizada!!');
+        }    }
 
     /**
      * Remove the specified resource from storage.
@@ -200,9 +199,11 @@ class PublicacoesController extends Controller
             $publicacao->delete();
         }
 
-
         $publicacao->delete();
-        return redirect()->action('PublicacoesController@controle');
+
+        if ($publicacao ){
+            return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Excluida!');
+        }
     }
 
 
@@ -213,13 +214,13 @@ class PublicacoesController extends Controller
 
         if ($tipousuario != 0) {
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
-                ->orderBy('situacao', 'asc')
-                ->orderBy('created_at', 'desc');
+                                        ->orderBy('situacao', 'asc')
+                                            ->orderBy('created_at', 'desc');
         }
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')
-            ->orderBy('created_at', 'desc')
-            ->simplePaginate(10);
+                                     ->orderBy('created_at', 'desc')
+                                        ->simplePaginate(10);
         return view('publicacoes.controle', compact('publicacao'));
     }
 
