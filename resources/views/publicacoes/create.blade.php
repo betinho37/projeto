@@ -5,6 +5,8 @@
         <div class="box-header with-border">
             <h3 class="box-title">Nova publicação</h3>
         </div>
+
+
         <div style="padding:25px" >
 
             {!! Form::open(array('url' => 'api/publicacao','files'=>'true', 'enctype'=>'multipart/form-data' ,'multiple'=>true,)); !!}

@@ -17,6 +17,33 @@
 
 
 @section('content')
+    <div class="row"> <!-- MODAL -->
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            @if ($message = Session::get('sucesso'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i>{{ $message }}</h4>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-close"></i>{{ $message }}</h4>
+                </div>
+            @endif
+        </div> <!-- MODAL -->
+    </div>
+
+
     <h1 align="center" >Usuarios</h1>
 
     <div class="box-tools col-md-6" id="header">
@@ -75,9 +102,12 @@
 
                             </div>
                             <div class="col-md-6">
-                                <label>E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div class=form-group {{{ $errors->has('email') ? 'has-error' : '' }}}>
+                                    <label>E-mail</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    {{ $errors->first('email', '<span class=help-inline>:message</span>')}}
 
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label>Telefone</label>
@@ -107,13 +137,15 @@
                             <div class="col-md-6">
                                 <label>Confirmar Senha</label>
                                 <input type="password"  name="password_confirmation" id="password_confirmation" class="form-control"
-                                       placeholder="{{ trans('adminlte::adminlte.retype_password') }}" >
+                                       placeholder="{{ trans('') }}" >
 
                             </div>
                             <input type="hidden" id="emailValidateNew" name="emailValidate" value="false">
                         </div>
 
     </form>
+
+
     <div class="modal-footer">
         <button  class="btn btn-success" id="ajaxSubmit">Salvar
         </button>
@@ -159,6 +191,7 @@
             $.ajax({
                 type: 'POST',
                 url: 'api/usuario',
+                message:$('#addModal').reload() ,
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'nome': $('#nome').val(''),
@@ -172,21 +205,9 @@
                     'cidade':$('#cidade').val(''),
                     'estadoid':$('#estadoid').val(''),
                 },
-                success: function(data) {
-                    if ((data.errors)) {
-                        $('.error').removeClass('hidden');
-                        $('.error').text(data.errors.name);
-                    } else {
-                        $('.error').remove();
-                        $('#table').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.name + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
-                    }
-                },
+
             });
         });
-
-
-
-
     </script>
 
 @endsection

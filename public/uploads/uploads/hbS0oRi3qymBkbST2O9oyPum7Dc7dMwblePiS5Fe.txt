@@ -1,0 +1,31 @@
+primeiro exemploprimeiro exemplo
+
+<?php
+
+ = 'beto';
+
+echo ;
+
+
+?>
+
+
+
+
+
+Acrescentar isso ao arquivo
+Acrescentar isso ao arquivo
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
