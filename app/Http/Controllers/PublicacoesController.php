@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Publicacao;
 use App\Categoria;
-use App\Arquivo;
 use App\User;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use Response;
 
 
 class PublicacoesController extends Controller
@@ -18,16 +15,14 @@ class PublicacoesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $publicacao, $user, $categoria, $arquivo;
+    private $publicacao, $user, $categoria;
 
 
-    public function __construct(Publicacao $publicacao, User $user, Categoria $categoria, Arquivo $arquivo)
+    public function __construct(Publicacao $publicacao, User $user, Categoria $categoria)
     {
         //obriga esta logado
         $this->middleware('auth');
-
         $this->publicacao = $publicacao;
-        $this->arquivo = $arquivo;
         $this->user = $user;
         $this->categoria = $categoria;
     }
@@ -70,19 +65,13 @@ class PublicacoesController extends Controller
 
         $publicacao = Publicacao::create($request->all());
 
+        //verifica se o input arquivo esta preechido
         if ($request->hasFile('arquivo')) {
-
-            $arquivo = new Arquivo();
-            $path = $request->arquivo->store('/uploads');
-            $arquivo->nome = $path;
+            $path = $request->arquivo->store('/');
+            $publicacao->arquivo = $path;
+            $publicacao->save();
         }
-
-        if ($request->hasFile('pdf')) {
-            $path = $request->pdf->store('/');
-            $publicacao->pdf = $path;
-        }
-
-        if ($publicacao &&  $arquivo ){
+        if ($publicacao ){
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Salva!');
     }
 
@@ -99,6 +88,7 @@ class PublicacoesController extends Controller
     public function home()
     {
         $tipousuario = auth()->user()->tipousuario;
+
         $publicacao = $this->publicacao;
         if ($tipousuario != 0) {
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
@@ -140,31 +130,13 @@ class PublicacoesController extends Controller
     public function update(Request $request, $id)
     {
         $publicacao = Publicacao::find($id);
-
-        if ($request->hasFile('arquivo')) {
-            $extension = $request->arquivo->getClientOriginalExtension();
+        $file = $request->hasFile('arquivo');
+        if ($file != "") {
+            unlink(public_path('uploads/' . $publicacao->arquivo));
             $path = $request->arquivo->store('/');
-            $publicacao->arquivo = $extension;
             $publicacao->arquivo = $path;
-            $publicacao->save();
         }
-
-
-        if ($request->hasFile('pdf')) {
-            $extension = $request->arquivo->getClientOriginalExtension();
-            $path = $request->pdf->store('/');
-            $publicacao->arquivo = $extension;
-            $publicacao->pdf = $path;
-            $publicacao->save();
-        }
-
-
-        $publicacao->situacao = $request->situacao;
-        $publicacao->categoriaid = $request->categoriaid;
-        $publicacao->posicaoimagem = $request->posicaoimagem;
-        $publicacao->descricao = $request->descricao;
-        $publicacao->titulo = $request->titulo;
-        $publicacao->nome = $request->nome;
+        $publicacao->update($request->all());
         $publicacao->save();
 
         if ($publicacao ){
@@ -177,14 +149,14 @@ class PublicacoesController extends Controller
      * @param  \App\Publicacao  $publicacao
      * @return \Illuminate\Http\Response
      */
-    public function deletfile($nome)
+   /* public function deletfile($nome)
     {
         $publicacao = Publicacao::where('arquivo', $nome)->first();
         $publicacao->arquivo = null;
         unlink(public_path('uploads/' . $nome));
         $publicacao->save();
         return redirect()->back();
-    }
+    }*/
 
     public function destroy($id)
     {
@@ -192,10 +164,6 @@ class PublicacoesController extends Controller
 
         if ($publicacao->arquivo) {
             unlink(public_path('uploads/' . $publicacao->arquivo));
-            $publicacao->delete();
-        }
-        if ($publicacao->pdf) {
-            unlink(public_path('uploads/' . $publicacao->pdf));
             $publicacao->delete();
         }
 

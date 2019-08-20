@@ -43,13 +43,7 @@
                 </div><br/>
             @else
             @endif
-            @if($publicacao->arquivo != null )
-                <div>
-                    <label ><font color="black">Imagem: {{$publicacao->arquivo}}</label></font>
-                    <a href="{{ route('excluir.arquivo',$publicacao->arquivo) }}" class="btn btn-primary btn-xs">Excluir Arquivo</a>
-                </div><p></p>
-            @else
-            @endif
+
             <strong>Alterar Imagem:</strong><p></p>
             <div>
                 <input id="arquivo" name="arquivo" type="file" class="file" multiple

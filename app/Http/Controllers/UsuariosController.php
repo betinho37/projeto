@@ -123,7 +123,7 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = User::find($id);
+         $usuario = User::find($id);
          $usuario->fill($request->all());
 
          if ($usuario['password'] != null){
