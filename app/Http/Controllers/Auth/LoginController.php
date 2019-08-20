@@ -30,25 +30,19 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $remember_me = $request->has('remember') ? true : false;
+        $credentials = $request->only('email', 'password');
 
 
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('/api/home');
+        } else {
 
-        if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember_me))
-
-        {
-
-            $user = auth()->user();
-
-            Auth::login($user,true);
-            return  redirect('/api/home');
-
-
-        }else{
-
-            return back()->with('error','your username and password are wrong.');
+            return redirect()->back()->withInput()->with('errors', 'Verifique as informações de login');
 
         };
+
+
 
     }
 

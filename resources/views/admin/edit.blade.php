@@ -31,11 +31,6 @@
 			</div>
 
 			<div class="form-group" >
-				<strong>CEP:</strong>
-				{!!Form::text('cep', $usuario->cep, ['class'=>'form-control'])!!}
-			</div>
-
-			<div class="form-group" >
 				<strong>Nova Senha:</strong><br>
 				{!!Form::text('password', null, ['class'=>'form-control'])!!}
 			</div>

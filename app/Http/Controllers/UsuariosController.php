@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Estado;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\MassDestroyUserRequest;
+
 
 
 class UsuariosController extends Controller
@@ -172,4 +174,10 @@ class UsuariosController extends Controller
         }
     }
 
+    public function massDestroy(MassDestroyUserRequest $request)
+    {
+        User::whereIn('id', request('ids'))->delete();
+
+        return response(null, 204);
+    }
 }

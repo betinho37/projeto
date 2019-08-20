@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 
 class PublicacoesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     private $publicacao, $user, $categoria;
 
 
@@ -22,6 +18,7 @@ class PublicacoesController extends Controller
     {
         //obriga esta logado
         $this->middleware('auth');
+
         $this->publicacao = $publicacao;
         $this->user = $user;
         $this->categoria = $categoria;
@@ -31,16 +28,12 @@ class PublicacoesController extends Controller
     public function index()
     {
 
-
         $publicacao = Publicacao::where('situacao', '=', 1)->get();
         return view('publicacoes.index', ['publicacao' => $publicacao]);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $publicacao = Publicacao::get();
@@ -49,12 +42,7 @@ class PublicacoesController extends Controller
         return view('publicacoes.create', compact('publicacao', 'list_user', 'list_categoria', 'userarquivo'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 
@@ -79,12 +67,7 @@ class PublicacoesController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Publicacao  $publicacao
-     * @return \Illuminate\Http\Response
-     */
+
     public function home()
     {
         $tipousuario = auth()->user()->tipousuario;
@@ -106,12 +89,7 @@ class PublicacoesController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Publicacao  $publicacao
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Publicacao $publicacao, $id)
     {
         $list_user = $this->user->listUser();
@@ -120,13 +98,6 @@ class PublicacoesController extends Controller
         return view('publicacoes.edit', compact('publicacao', 'list_user', 'list_categoria', 'userarquivo'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Publicacao  $publicacao
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $publicacao = Publicacao::find($id);
@@ -143,12 +114,7 @@ class PublicacoesController extends Controller
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Atualizada!!');
         }    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Publicacao  $publicacao
-     * @return \Illuminate\Http\Response
-     */
+
    /* public function deletfile($nome)
     {
         $publicacao = Publicacao::where('arquivo', $nome)->first();
