@@ -23,6 +23,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravelcollective/html" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laraveldaily/laravel-charts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravellegends/pt-br-validator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/lucascudo/laravel-pt-br-localization" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mariuzzo/laravel-js-localization" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
@@ -60,5 +61,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery.mask" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

@@ -77,7 +77,7 @@
                         </span>
                     @endif
             </div>
-            
+
             <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                 <input type="password" name="password" class="form-control"
                        placeholder="{{ trans('adminlte::adminlte.password') }}">

@@ -21,13 +21,14 @@ Route::apiResource('/usuario', 'UsuariosController');
 Route::post('/pesquisar', 'UsuariosController@search')->name('usuario.pesquisar');
 Route::get('usuario/{id}/edit/', ['as' => 'usuario.edit', 'uses' => 'UsuariosController@edit']);
 Route::get('usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
+Route::get('usuarios/create', ['as' => 'usuarios.create', 'uses' => 'UsuariosController@create']);
+
 
 /////////////////
 Route::apiResource('publicacao', 'PublicacoesController');
 Route::get('publicacoes/controle', ['as' => 'publicacoes.controle', 'uses' => 'PublicacoesController@controle']);
 Route::get('/publicacoes/create', ['as' => 'publicacoes.create', 'uses' => 'PublicacoesController@create']);
 Route::get('publicacao/{id}/edit/', ['as' => 'publicacao.edit', 'uses' => 'PublicacoesController@edit']);
-Route::get('excluir/arquivo/{nome}', 'PublicacoesController@deletfile')->name('excluir.arquivo');
 Route::get('publicacao/destroy/{id}', ['as' => 'publicacao.destroy', 'uses'=> 'PublicacoesController@destroy']);
 
 });

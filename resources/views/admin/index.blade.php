@@ -60,7 +60,7 @@
     </div>
     <br>
     <div class="div1"  >
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="open" style="margin-left: -280px;"  >Novo Usuario</button>
+        <a href="/api/usuarios/create" class="btn btn-primary" style="margin-left: -280px;"  >Novo Usuário</a>
     </div><br>
 
     <div class="card-body table-responsive p-0" >
@@ -84,76 +84,6 @@
     </table>
     </div>
     <!-- Modal form to add a post -->
-    <form method="post" action="{{url('api/usuario')}}" id="form">
-        @csrf
-
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row my-9">
-                            <div class="col-md-6">
-                                <label >Nome</label>
-                                <input type="name" class="form-control" id="nome" name="nome" required>
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class=form-group {{{ $errors->has('email') ? 'has-error' : '' }}}>
-                                    <label>E-mail</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                    {{ $errors->first('email', '<span class=help-inline>:message</span>')}}
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Telefone</label>
-                                <input type="telefone" class="form-control" id="telefone" name="telefone" required>
-
-                            </div>
-                            <div class="col-md-6">
-                                <label>Estado</label>
-                                {!!Form::select('estadoid', $list_estado, null, ['class'=>'form-control '])!!}
-
-                            </div>
-                            <div class="col-md-6">
-                                <label>Cidade</label>
-                                <input type="text" class="form-control" id="cidade" name="cidade" required>
-
-                            </div>
-                            <div class="col-md-6">
-                                <label>Endereço</label>
-                                <input type="text" class="form-control" id="endereco" name="endereco" required>
-
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Senha</label>
-                                <input type="password"  name="password" id="password" class="form-control" >
-                            </div>
-                            <div class="col-md-6">
-                                <label>Confirmar Senha</label>
-                                <input type="password"  name="password_confirmation" id="password_confirmation" class="form-control"
-                                       placeholder="{{ trans('') }}" >
-
-                            </div>
-                            <input type="hidden" id="emailValidateNew" name="emailValidate" value="false">
-                        </div>
-
-    </form>
-
-
-    <div class="modal-footer">
-        <button  class="btn btn-success" id="ajaxSubmit">Salvar
-        </button>
-
-        <button type="button" class="btn btn-warning" data-dismiss="modal">
-            <span class='glyphicon glyphicon-remove'></span> Cancelar
-        </button>
-    </div>
 
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
     </script>
@@ -168,46 +98,4 @@
 
     <!-- icheck checkboxes -->
     <script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
-
-
-    <script type="text/javascript">
-        // Adicionar novo usuario
-        $(document).on('click', '.add-modal', function() {
-            // Campos de entrada
-            $('#nome').val('');
-            $('#email').val('');
-            $('#password').val('');
-            $('#password_confirmation').val('');
-            $('#cep').val('');
-            $('#endereco').val('');
-            $('#telefone').val('');
-            $('#cidade').val('');
-            $('#estadoid').val('');
-            $('.modal-title').text('Add');
-            $('#addModal').modal('show');
-        });
-
-        $('.modal-footer').on('click', '.add', function() {
-            $.ajax({
-                type: 'POST',
-                url: 'api/usuario',
-                message:$('#addModal').reload() ,
-                data: {
-                    '_token': $('input[name=_token]').val(),
-                    'nome': $('#nome').val(''),
-                    'email':$('#email').val(''),
-                    'password':$('#password').val(''),
-                    'password_confirmation':$('#password_confirmation').val(''),
-                    'cep':$('#cep').val(''),
-                    'endereco':$('#endereco').val(''),
-                    'telefone':$('#telefone').val(''),
-                    'tipousuario':$('#tipousuario').val(''),
-                    'cidade':$('#cidade').val(''),
-                    'estadoid':$('#estadoid').val(''),
-                },
-
-            });
-        });
-    </script>
-
 @endsection

@@ -51,6 +51,8 @@ class UsuariosController extends Controller
     public function create()
     {
         $list_estado = $this->estado->listEstado();
+
+
         return view('admin.create', compact('list_estado'));
     }
 
@@ -100,7 +102,7 @@ class UsuariosController extends Controller
         $list_estado = $this->estado->listEstado();
         $usuario = User::find($id);
 
-        return view('admin/show', compact('usuario', 'list_estado'));
+        return view('admin.show', compact('usuario', 'list_estado'));
     }
 
     /**
