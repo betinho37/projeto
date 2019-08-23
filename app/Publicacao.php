@@ -11,12 +11,13 @@ class Publicacao extends Model
         'nome',
         'titulo',
         'descricao',
-        'arquivoid',
+        'arquivo',
         'pdf',
         'tipousuario',
         'userid',
         'situacao',
-        'categoriaid'
+        'categoriaid',
+        'posicaoimagem'
     ];
         public function user()
     {

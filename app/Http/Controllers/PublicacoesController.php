@@ -55,7 +55,7 @@ class PublicacoesController extends Controller
 
         //verifica se o input arquivo esta preechido
         if ($request->hasFile('arquivo')) {
-            $path = $request->arquivo->store('/');
+            $path = $request->arquivo->store('/arquivos');
             $publicacao->arquivo = $path;
             $publicacao->save();
         }
@@ -104,7 +104,8 @@ class PublicacoesController extends Controller
         $file = $request->hasFile('arquivo');
         if ($file != "") {
             unlink(public_path('uploads/' . $publicacao->arquivo));
-            $path = $request->arquivo->store('/');
+            $publicacao->delete();
+            $path = $request->arquivo->store('/arquivos');
             $publicacao->arquivo = $path;
         }
         $publicacao->update($request->all());

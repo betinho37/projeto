@@ -34,17 +34,24 @@
             @if($publicacao->arquivo != null )
                 <div class="form-group row">
                     <div class="col-md-5">
-                        <a href="{{asset('uploads/' . $publicacao->arquivo)}}"  >
-                            <img id="preview"
-                                 src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                 height="200px" width="200px"/>
-                        </a>
+                        @if($publicacao->categoriaid == 4 )
+                            <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                   height="278px" width="381px" controls>
+                            </video>
+                        @else
+                            {{-- <img src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                         height="200px" width="200px"/>--}}
+
+                            <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                    height="200" width="300"></iframe>
+
+                        @endif
                     </div>
                 </div><br/>
             @else
             @endif
 
-            <strong>Alterar Imagem:</strong><p></p>
+            <strong>Alterar Arquivo:</strong><p></p>
             <div>
                 <input id="arquivo" name="arquivo" type="file" class="file" multiple
                        data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
