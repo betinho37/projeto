@@ -4,18 +4,6 @@
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css" >
 
 
-<script type="javascript">
-    $(document).ready(function() {
-        jQuery(function($){
-        $("#date").mask("99/99/9999");
-        $("#telefone").mask("(999) 999-9999");
-        $("#tin").mask("99-9999999");
-        $("#ssn").mask("999-99-9999");
-    })};
-</script>
-
-
-
 @section('content')
     <div class="row"> <!-- MODAL -->
         <div class="col-md-4"></div>
@@ -82,6 +70,7 @@
             </tr>
         @endforeach
     </table>
+
     </div>
     <!-- Modal form to add a post -->
 

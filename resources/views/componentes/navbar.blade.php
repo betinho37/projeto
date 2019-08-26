@@ -1,5 +1,4 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="navbar-top.css" rel="stylesheet">
 
 <nav class="navbar navbar-expand-md navbar navbar navbar-light "   style="background-color: #337ab7;">
         <a style="color: white" class="navbar-brand" href="/api/home">Portal</a>
@@ -31,7 +30,7 @@
                 <form id="logout-form" action="{{ url('/api/logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-            </li>
+            </ul>
           @endif
 </nav>
 

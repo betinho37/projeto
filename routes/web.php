@@ -21,3 +21,5 @@ Route::middleware(['auth'])->group(function () {
     //Route::get('usuario', 'UsuariosController@index')->name('usuario');
 
 });
+
+Route::delete('users/destroy', 'UsuariosController@massDestroy')->name('users.massDestroy');

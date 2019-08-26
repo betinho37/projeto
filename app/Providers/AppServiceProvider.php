@@ -29,4 +29,5 @@ class AppServiceProvider extends ServiceProvider
             return $user->tipousuario == '0';
     });
 
-}}
+
+    }}

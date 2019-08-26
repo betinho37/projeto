@@ -176,10 +176,7 @@ class UsuariosController extends Controller
         }
     }
 
-    public function massDestroy(MassDestroyUserRequest $request)
-    {
-        User::whereIn('id', request('ids'))->delete();
 
-        return response(null, 204);
-    }
+
+
 }

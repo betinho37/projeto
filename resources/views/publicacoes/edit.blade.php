@@ -39,12 +39,9 @@
                                    height="278px" width="381px" controls>
                             </video>
                         @else
-                            {{-- <img src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                         height="200px" width="200px"/>--}}
-
                             <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                    height="200" width="300"></iframe>
-
+                                    width="300px" height="300px">
+                            </iframe>
                         @endif
                     </div>
                 </div><br/>

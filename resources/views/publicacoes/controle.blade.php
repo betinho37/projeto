@@ -61,8 +61,7 @@
                         <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $publicacoes->created_at)->diffForHumans() }}</td>
 
                         <td>
-                            <a href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>Editar</a>
-                            <a type="button" href="{{ url('api/publicacao', $publicacoes->id) }}" class="btn btn-success"><span class="glyphicon glyphicon-search"></span>Visualizar</a>
+                            <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success"><span class="glyphicon glyphicon-search"></span>Visualizar</a>
                         </td>
 
                     </tr>

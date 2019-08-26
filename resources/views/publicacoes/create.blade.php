@@ -40,8 +40,8 @@
 
             <div>
                 {!! Form::label('imagem', 'Imagem', ['class' => 'control-label']) !!}
-                <input id="arquivo" name="arquivo" type="file" class="file" multiple
-                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+                <input id="arquivo" name="arquivo" type="file" class="file"
+                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="" required>
                 <br />
             </div><br />
 
