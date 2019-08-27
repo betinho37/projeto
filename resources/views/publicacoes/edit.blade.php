@@ -48,7 +48,7 @@
             @else
             @endif
 
-            <strong>Alterar Arquivo:</strong><p></p>
+            <strong>Alterar</strong><p></p>
             <div>
                 <input id="arquivo" name="arquivo" type="file" class="file" multiple
                        data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
