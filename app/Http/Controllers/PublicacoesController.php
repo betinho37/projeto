@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Publicacao;
 use App\Categoria;
 use App\User;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 
@@ -29,6 +30,7 @@ class PublicacoesController extends Controller
     {
 
         $publicacao = Publicacao::where('situacao', '=', 1)->get();
+
         return view('publicacoes.index', ['publicacao' => $publicacao]);
 
     }
@@ -37,8 +39,11 @@ class PublicacoesController extends Controller
     public function create()
     {
         $publicacao = Publicacao::get();
+
         $list_user = $this->user->listUser();
+
         $list_categoria = $this->categoria->listCategoria();
+
         return view('publicacoes.create', compact('publicacao', 'list_user', 'list_categoria', 'userarquivo'));
     }
 
@@ -46,26 +51,25 @@ class PublicacoesController extends Controller
     public function store(Request $request)
     {
 
-        if (blank($request->arquivo) && blank($request->pdf)) {
+        if (blank($request->arquivo)) {
             return redirect()->action('PublicacoesController@controle')->with('error', 'Nenhum arquivo foi enviado.');
 
         }
 
+
         $publicacao = Publicacao::create($request->all());
 
         //verifica se o input arquivo esta preechido
+
         if ($request->hasFile('arquivo')) {
             $path = $request->arquivo->store('/arquivos');
             $publicacao->arquivo = $path;
-            dd($path);
             $publicacao->save();
         }
 
-        if ($publicacao ){
+        if ($publicacao) {
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Salva!');
-    }
-
-
+        }
 
     }
 
@@ -77,8 +81,8 @@ class PublicacoesController extends Controller
         $publicacao = $this->publicacao;
         if ($tipousuario != 0) {
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
-                                        ->orderBy('situacao', 'asc')
-                                            ->simplePaginate(100);
+                ->orderBy('situacao', 'asc')
+                ->simplePaginate(100);
             return view('publicacoes.controle', compact('publicacao'));
         }
         $publicacao = $publicacao->orderBy('situacao', 'asc')->get();
@@ -113,19 +117,11 @@ class PublicacoesController extends Controller
         $publicacao->update($request->all());
         $publicacao->save();
 
-        if ($publicacao ){
+        if ($publicacao) {
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Atualizada!!');
-        }    }
+        }
+    }
 
-
-   /* public function deletfile($nome)
-    {
-        $publicacao = Publicacao::where('arquivo', $nome)->first();
-        $publicacao->arquivo = null;
-        unlink(public_path('uploads/' . $nome));
-        $publicacao->save();
-        return redirect()->back();
-    }*/
 
     public function destroy($id)
     {
@@ -138,7 +134,7 @@ class PublicacoesController extends Controller
 
         $publicacao->delete();
 
-        if ($publicacao ){
+        if ($publicacao) {
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Excluida!');
         }
     }
@@ -151,19 +147,15 @@ class PublicacoesController extends Controller
 
         if ($tipousuario != 0) {
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
-                                        ->orderBy('situacao', 'asc')
-                                            ->orderBy('created_at', 'desc');
+                ->orderBy('situacao', 'asc')
+                ->orderBy('created_at', 'desc');
         }
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')
-                                     ->orderBy('created_at', 'desc')
-                                        ->simplePaginate(10);
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(10);
         return view('publicacoes.controle', compact('publicacao'));
     }
-
-
-
-
 
 
 }

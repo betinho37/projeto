@@ -34,13 +34,42 @@ class CategoriasController extends Controller
 
     }
 
+
+
+    /*
+        public function documentos()
+        {
+            $publicacao = Publicacao::where('categoriaid', '=', 1)->Simplepaginate(6);
+
+            return view('publicacoes.categorias.imagem', compact('publicacao'));
+
+        }
+    */
+
     public function imagens()
     {
-       $publicacao = Publicacao::where('categoriaid', '=', 2)->Simplepaginate(6);
+
+
+        $publicacao = Publicacao::where('categoriaid', '=', 2)->Simplepaginate(6);
 
         return view('publicacoes.categorias.imagem', compact('publicacao'));
 
     }
+    /*
+    public function musicas()
+    {
+        $publicacao = Publicacao::where('categoriaid', '=', 3)->Simplepaginate(6);
+
+        return view('publicacoes.categorias.imagem', compact('publicacao'));
+
+    }
+    public function videos()
+    {
+        $publicacao = Publicacao::where('categoriaid', '=', 4)->Simplepaginate(6);
+
+        return view('publicacoes.categorias.video', compact('publicacao'));
+
+    }*/
 
     /**
      * Show the form for creating a new resource.

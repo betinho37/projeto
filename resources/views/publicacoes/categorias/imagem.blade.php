@@ -47,7 +47,7 @@
         @endforeach
     </div>
 
-{{ $publicacao->links() }}
+{{--{{ $publicacao->links() }}--}}
 </body>
 <script type="text/javascript">
     $(".abrirModal").click(function() {
