@@ -57,8 +57,10 @@ class PublicacoesController extends Controller
         if ($request->hasFile('arquivo')) {
             $path = $request->arquivo->store('/arquivos');
             $publicacao->arquivo = $path;
+            dd($path);
             $publicacao->save();
         }
+
         if ($publicacao ){
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Salva!');
     }

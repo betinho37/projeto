@@ -34,14 +34,19 @@
             @if($publicacao->arquivo != null )
                 <div class="form-group row">
                     <div class="col-md-5">
-                        @if($publicacao->categoriaid == 4 )
-                            <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                   height="278px" width="381px" controls>
-                            </video>
-                        @else
+                        @if($publicacao->categoriaid == 1 )
                             <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
                                     width="300px" height="300px">
                             </iframe>
+                        @elseif( $publicacao->categoriaid == 2 )
+                            <img id="grande" src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                 width="300px" height="300px" alt="foto indisponível" title="legenda">
+                        @elseif( $publicacao->categoriaid == 3 )
+                            <h1>musica</h1>
+                        @else
+                            <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                   height="278px" width="381px" controls>
+                            </video>
                         @endif
                     </div>
                 </div><br/>
