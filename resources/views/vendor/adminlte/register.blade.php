@@ -114,7 +114,7 @@
                               </div><br>
                             @else
             @endif
-            <button  type="submit" class="btn btn-primary">Salvar</button>
+            <button  type="submit" class="btn btn-primary">Cadastre-se</button>
         </form>
         <div class="auth-links">
             <a href="/api/home"

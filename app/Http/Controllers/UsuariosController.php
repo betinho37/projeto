@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Estado;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\MassDestroyUserRequest;
 
 
 

@@ -50,9 +50,11 @@ class CategoriasController extends Controller
     {
 
 
-        $publicacao = Publicacao::where('categoriaid', '=', 2)->Simplepaginate(6);
+        $publicacao = Publicacao::get('categoriaid');
 
-        return view('publicacoes.categorias.imagem', compact('publicacao'));
+        $this->categoriaid = $publicacao;
+
+        return view('publicacoes.categorias.imagem', compact( 'publicacao'));
 
     }
     /*

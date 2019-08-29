@@ -38,7 +38,7 @@ class LoginController extends Controller
             return redirect()->intended('/api/home');
         } else {
 
-            return redirect()->back()->withInput()->with('errors', 'Verifique as informações de login');
+            return redirect()->back()->withInput()->with('errors', 'Dados não encontrados.');
 
         };
 

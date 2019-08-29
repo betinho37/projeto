@@ -38,7 +38,7 @@
         <form role="form" action="{{  route('usuario.pesquisar') }}" method="POST" >
             {{ csrf_field() }}
             <div class="form input-group input-group-sm" >
-                <input type="text" name="pesquisar" class="form-control pull-right" placeholder="Pesquisar...">
+                <input type="text" name="pesquisar" class="form-control pull-right" placeholder="Consultar...">
 
                 <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
