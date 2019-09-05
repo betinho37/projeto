@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('email')->unique();
-            $table->datetime('email_verified_at')->nullable();
             $table->string('password');
             $table->string('cep', 10)->nullable();
             $table->string('endereco', 150)->default('sem endereço');

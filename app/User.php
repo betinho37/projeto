@@ -12,12 +12,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
     protected $dates = [
         'updated_at',
         'created_at',
-        'email_verified_at',
         'last_login_at',
     ];
+
+    //campos que devem ser salvos no banco
     protected $fillable = [
         'nome',
         'email',
@@ -28,10 +30,7 @@ class User extends Authenticatable
         'tipousuario',
         'estadoid',
         'cidade',
-        'created_at',
-        'updated_at',
         'remember_token',
-        'email_verified_at',
         'last_login_at',
     ];
 
@@ -48,12 +47,13 @@ class User extends Authenticatable
      */
 
     public static function listUser() {
-        
+
+        //Ordena o droplist pelo nome
         return static::orderBy('nome')->pluck('nome', 'id');
     }
 
     public function estado(){
-        
+        //Relaciona o model Estado ao User com o campo estado id
         return $this->belongsTo('App\Estado', 'estadoid');
     }
 

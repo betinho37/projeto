@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Providers;
+use App\Publicacao;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Events\Dispatcher;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,13 +25,40 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+
+    public function boot(Dispatcher $events,User $user)
     {
-        $this->register();
 
-        \Gate::define('admin', function (User $user) {
-            return $user->tipousuario == '0';
-    });
+        $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
+
+            $event->menu->add('AVISOS');
+
+            $items = Publicacao::all()->map(function (Publicacao $aviso) {
+                //Busca a sessao do usuario logado e verifica o campo tipo usuario
+                $user = Auth::user()->tipousuario;
+
+                //se o usuario logado for admin e tiver alguma publicacao pendente
+                if ($user == 0 && $aviso->situacao == 1) {
+
+                    return [
+                        'icon_color' => 'red',
+                        'text' => 'Novas Publicações Pendentes',
+                        'url'  => 'api/publicacoes/controle',
+                    ];
+
+                }
+                return [
+                    'text' => '',
+                    'icon_color' => 'black',
 
 
-    }}
+                ];
+
+            });
+            $event->menu->add(...$items);
+        });
+    }
+
+
+
+}

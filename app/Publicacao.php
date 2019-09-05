@@ -23,6 +23,5 @@ class Publicacao extends Model
     {
             return $this->belongsTo(User::class, 'userid');
     }
- 
 
 }

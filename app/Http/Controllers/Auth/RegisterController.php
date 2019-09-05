@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Estado;
+use Illuminate\Support\Facades\Redirect;
 use View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,8 +64,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'password' => 'required|string|min:6|confirmed',
+            ]);
     }
 
     /**
@@ -76,7 +77,18 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $inputs = $request->all();
-        $inputs['password'] = bcrypt($inputs['password']);  
+
+        $validator = $this->validator($inputs);
+
+        if ($validator->fails()) {
+//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
+            return Redirect::back()->withErrors($validator)->withInput();
+
+
+        }
+
+
+        $inputs['password'] = bcrypt($inputs['password']);
         User::create($inputs);
 
         $credentials = $request->only('email', 'password');

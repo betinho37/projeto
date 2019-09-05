@@ -123,9 +123,7 @@ return [
             'text'    => 'Opções',
             'icon'    => 'share',
             'submenu' => [
-                [   
-                    
-                    
+                [
                     'text' => 'Usuários',
                     'url'  => '/api/usuario',
                     'can'         => 'admin'
@@ -133,12 +131,10 @@ return [
                 [
                     'text' => 'Publicações',
                     'url'  => 'api/publicacoes/controle',
-                    
-
-
                 ],
             ],
         ],
+
         'LABELS',
         [
             'text'       => 'Important',
