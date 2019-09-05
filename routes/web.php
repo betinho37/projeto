@@ -13,9 +13,10 @@
 
 
 
-Route::get('/', function () {
-    return view('/auth/login');
-});
+
+
+Route::get('/','Auth\LoginController@showLoginForm');
+
 
 Route::middleware(['auth'])->group(function () {
     //Route::get('usuario', 'UsuariosController@index')->name('usuario');

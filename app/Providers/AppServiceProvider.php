@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 $user = Auth::user()->tipousuario;
 
                 //se o usuario logado for admin e tiver alguma publicacao pendente
-                if ($user == 0 && $aviso->situacao == 1) {
+                if ($user == 0 && $aviso->situacao == 0) {
 
                     return [
                         'icon_color' => 'red',
