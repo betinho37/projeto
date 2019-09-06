@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Publicacao;
 use DB;
 use App\User;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
-use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 
 class HomeController extends Controller
@@ -31,7 +31,6 @@ class HomeController extends Controller
         
 
         $users = DB::table('users')->count();
-        
 
         $blocosnumericos = [
             [
@@ -51,8 +50,27 @@ class HomeController extends Controller
                     ->take(5)
                     ->get(),
             ],
-        ];        
-     return view('home', compact('blocosnumericos', 'blocoslista', 'users'));
+        ];
+
+
+        $publicacoes = DB::table('publicacoes')->count();
+
+
+        $blocosnumericos1 = [
+            [
+                'title' => 'Publicações Feitas Hoje',
+                'number' => Publicacao::whereDate('created_at', today())->count()
+            ],
+            [
+                'title' => 'Conectados nos últimos 30 dias',
+                'number' => User::whereDate('last_login_at', '>', today()->subDays(30))->count()
+            ],
+        ];
+
+        dd($blocosnumericos1);
+
+
+        return view('home', compact('blocosnumericos', 'blocoslista', 'users', "publicacoes", 'blocosnumericos1'));
 
     }
 }

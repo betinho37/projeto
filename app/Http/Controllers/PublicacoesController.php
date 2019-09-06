@@ -92,7 +92,9 @@ class PublicacoesController extends Controller
 
     public function show(Publicacao $publicacao)
     {
-        //
+        $limite = $this->publicacao->limite();
+        return (compact('limite'));
+
     }
 
 
@@ -156,6 +158,8 @@ class PublicacoesController extends Controller
             ->simplePaginate(10);
         return view('publicacoes.controle', compact('publicacao'));
     }
+
+
 
 
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -31,6 +32,18 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+
+        $email = [
+            "email" => "required|exists:users",
+        ];
+
+        $validator = Validator::make($request->all(), $email);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->with('errors', 'Email nao cadastrado.');
+        }
+
 
 
         if (Auth::attempt($credentials)) {

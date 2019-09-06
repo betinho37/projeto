@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Estado;
-use Illuminate\Support\Facades\Redirect;
 use View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -72,22 +71,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \Illuminate\Http\RedirectResponse
      */
     protected function create(Request $request)
     {
         $inputs = $request->all();
-
-        $validator = $this->validator($inputs);
-
-        if ($validator->fails()) {
-//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
-            return Redirect::back()->withErrors($validator)->withInput();
-
-
-        }
-
-
         $inputs['password'] = bcrypt($inputs['password']);
         User::create($inputs);
 
