@@ -36,7 +36,7 @@ class UsuariosController extends Controller
     public function index()
     {
 
-        $usuario = $this->usuario->all();
+        $usuario = User::paginate(10);
         $list_estado = $this->estado->listEstado();
         return view('admin.index', compact('usuario', 'total_ids','list_estado'));
        
@@ -179,3 +179,5 @@ class UsuariosController extends Controller
 
 
 }
+
+

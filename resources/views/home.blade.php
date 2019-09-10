@@ -20,7 +20,7 @@
                     <div class="col-md-4 ">
                             <div class="info-box">
                                     <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-                                    <div class="info-box-content">
+                                    <div class="info-box-content" >
                                             <span class="info-box-text">Total de Usuarios</span>
                                             <span class="info-box-number">{{ $users }}</span>
                                     </div>
@@ -29,6 +29,22 @@
                     </div>
         </div>
         </div>
+    <div class="row">
+        @foreach ($publicacao->slice(0, 1) as $publicacoes)
+            @if($publicacoes->situacao == 0)
+                <div class="col-md-6" style="left: 2px; padding-right: 301px;">
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5> Alert!</h5>
+                            Publicacoes
+                        </div>
+                    </div>
+                </div>
+            @else
+            @endif
+        @endforeach
+    </div>
         <div class="row">
             @foreach ($blocoslista as $lista)
                 <div class="col-md-6">

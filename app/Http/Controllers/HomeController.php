@@ -16,9 +16,15 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    private $publicacao;
+
+
+    public function __construct(Publicacao $publicacao)
     {
+        //obriga esta logado
         $this->middleware('auth');
+        $this->publicacao = $publicacao;
+
     }
 
     /**
@@ -53,24 +59,11 @@ class HomeController extends Controller
         ];
 
 
-        $publicacoes = DB::table('publicacoes')->count();
+        $publicacao = $this->publicacao->all();
 
 
-        $blocosnumericos1 = [
-            [
-                'title' => 'Publicações Feitas Hoje',
-                'number' => Publicacao::whereDate('created_at', today())->count()
-            ],
-            [
-                'title' => 'Conectados nos últimos 30 dias',
-                'number' => User::whereDate('last_login_at', '>', today()->subDays(30))->count()
-            ],
-        ];
 
-        dd($blocosnumericos1);
-
-
-        return view('home', compact('blocosnumericos', 'blocoslista', 'users', "publicacoes", 'blocosnumericos1'));
+        return view('home', compact('blocosnumericos', 'blocoslista', 'users', "publicacao"));
 
     }
 }

@@ -22,6 +22,7 @@ Route::post('/pesquisar', 'UsuariosController@search')->name('usuario.pesquisar'
 Route::get('usuario/{id}/edit/', ['as' => 'usuario.edit', 'uses' => 'UsuariosController@edit']);
 Route::get('usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
 Route::get('usuarios/create', ['as' => 'usuarios.create', 'uses' => 'UsuariosController@create']);
+Route::delete('usuario/destroy', 'UsuariosController@massDestroy')->name('usuario.massDestroy');
 
 
 /////////////////

@@ -40,7 +40,7 @@
                             </iframe>
                         @elseif( $publicacao->categoriaid == 2 )
                             <img id="grande" src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                 width="300px" height="300px" alt="foto indisponível" title="legenda">
+                                 style="width: 556px; height: 300px;" alt="foto indisponível" title="legenda">
                         @elseif( $publicacao->categoriaid == 3 )
                             <h1>musica</h1>
                         @else

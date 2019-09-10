@@ -25,11 +25,12 @@
                     @foreach( $publicacao as $publicacoes )
                         @if($publicacoes->posicaoimagem == 0)
                               <div class="item {{ $loop->first ? ' active' : '' }}" >
-                                <a href="{{asset('uploads/' . $publicacoes->arquivo)}}">  <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" alt="{{asset('uploads/' . $publicacoes->arquivo)}}"  width="300" height="225"> </a>
+                                <a href="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}">
+                                    <img  src="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}"  width="300" height="225"> </a>
                               </div>
                             @else
                               <div class="item {{ $loop->first ? 'active ' : '' }}" >
-                                  <a href="{{asset('uploads/' . $publicacoes->arquivo)}}">   <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" alt="{{asset('uploads/' . $publicacoes->arquivo)}}"  width="852" height="1136"></a>
+                                  <a href="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}">   <img src="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}"  width="852" height="1136"></a>
                               </div>
                           @endif
 

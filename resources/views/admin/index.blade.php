@@ -54,12 +54,14 @@
     <div class="card-body table-responsive p-0" >
         <table class="table table-head-fixed">
         <tr style="color:white;background-color:steelblue">
+            
             <th>Nome</th>
             <th>Email</th>
             <th>Opcões</th>
         </tr>
         @foreach($usuario as $usuarios)
             <tr>
+
                 <td>{{$usuarios -> nome }}</td>
                 <td>{{$usuarios -> email }}</td>
                 <td>
@@ -69,7 +71,11 @@
 
             </tr>
         @endforeach
-    </table>
+
+        </table>
+
+        {{ $usuario->links() }}
+
 
     </div>
     <!-- Modal form to add a post -->

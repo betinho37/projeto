@@ -24,11 +24,5 @@ class Publicacao extends Model
             return $this->belongsTo(User::class, 'userid');
     }
 
-    public function limite(Publicacao $publicacao)
-    {
-        return Task::where('publicacoes', $publicacao->situacao)
-            ->get()
-            ->slice(2);
-    }
 
 }
