@@ -17,11 +17,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/css/AdminLTE.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <style>
-
-
-
-    </style>
 </head>
 <body>
 @include('componentes.navbar')
@@ -36,20 +31,18 @@
                 </div>
                 <div class="float-right">
                     <select class="custom-select" style="width: auto;" data-sortorder="">
-                        <option value="index">Classificar por posição</option>
+                        <option value="index">Classificar por data</option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
-
-
     <div class="filter-container p-0 row " style="padding: 3px; position: relative; width: 100%; display: flex; flex-wrap: wrap; height: 331px;">
         @foreach($publicacao as $key => $publicacoes)
             <div>
                 <div class="filtr-item col-sm-2" data-category="1"  style="opacity: 1; transform: scale(1) translate3d(684px, 164px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; width: 168.4px; transition: all 0.5s ease-out 0ms, width 1ms ease 0s;">
                     <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" >
-                        <img src="{{asset('uploads/' . $publicacoes->arquivo)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}" class="img-fluid mb-2" alt="white sample">
+                        <img src="{{asset('uploads/' . $publicacoes->arquivo)}}"  {{--alt="{{'uploads/' . $publicacoes->arquivo}}"--}} class="img-fluid mb-2" alt="white sample">
                     </a>
                     <p>{{$publicacoes->descricao}}</p>
                 </div>
@@ -57,6 +50,7 @@
         @endforeach
 
     </div>
+</div>
 {{ $publicacao->links() }}
 </body>
 
