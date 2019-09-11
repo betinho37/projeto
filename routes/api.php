@@ -32,7 +32,14 @@ Route::get('/publicacoes/create', ['as' => 'publicacoes.create', 'uses' => 'Publ
 Route::get('publicacao/{id}/edit/', ['as' => 'publicacao.edit', 'uses' => 'PublicacoesController@edit']);
 Route::get('publicacao/destroy/{id}', ['as' => 'publicacao.destroy', 'uses'=> 'PublicacoesController@destroy']);
 Route::apiResource('/publicacoes/categorias', 'CategoriasController');
+
+
 Route::get('publicacoes/imagens', ['as' => 'publicacoes.imagens', 'uses' => 'CategoriasController@imagens']);
+Route::get('publicacoes/videos', ['as' => 'publicacoes.videos', 'uses' => 'CategoriasController@videos']);
+
+
+
+
 
 });
 

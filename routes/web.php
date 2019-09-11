@@ -23,4 +23,3 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::delete('users/destroy', 'UsuariosController@massDestroy')->name('users.massDestroy');

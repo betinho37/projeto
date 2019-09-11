@@ -23,7 +23,6 @@
 <div class="card-body">
     <div>
         <div class="mb-2">
-            <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle=""> Misturar </a>
             <div class="float-right">
                 <div class="btn-group">
                     <a class="btn btn-default" href="javascript:void(0)" data-sortasc=""> Crescente </a>
