@@ -28,7 +28,7 @@
 
             <div class="form-group" >
                 <strong>Descrição:</strong>
-                {!!Form::text('descricao', $publicacao->descricao, ['class'=>'form-control'])!!}
+                {!!Form::textarea('descricao', $publicacao->descricao, ['class'=>'form-control'])!!}
             </div>
 
             @if($publicacao->arquivo != null )
@@ -58,8 +58,8 @@
                 <input id="arquivo" name="arquivo" type="file" class="file" multiple
                        data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
             </div>
-            <div align="left" ><p></p>
 
+            <div align="left" ><p></p>
                 <label>Situação:
                     <input type="radio" name="situacao" value="0"
                            {{isset($publicacao->situacao) && $publicacao->situacao == 0 ? 'checked' : '' }}

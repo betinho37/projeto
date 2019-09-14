@@ -39,7 +39,8 @@
 
 						</div>
 						<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
-						<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
+
+						<a href="/api/register" class="btn btn-lg btn-primary btn-block text-uppercase" role="button" aria-pressed="true">Registrar</a>
 
 					</form>
 				</div>

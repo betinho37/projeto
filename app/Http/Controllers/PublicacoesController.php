@@ -155,7 +155,7 @@ class PublicacoesController extends Controller
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(10);
+            ->simplePaginate(6);
         return view('publicacoes.controle', compact('publicacao'));
     }
 

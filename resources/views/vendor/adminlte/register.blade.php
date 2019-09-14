@@ -114,11 +114,11 @@
                               </div><br>
                             @else
             @endif
-            <button  type="submit" class="btn btn-primary">Cadastre-se</button>
+            <button  type="submit" class="btn btn-primary">Registrar</button>
         </form>
         <div class="auth-links">
             <a href="/api/home"
-               class="text-center">{{ trans('adminlte::adminlte.i_already_have_a_membership') }}</a>
+               class="text-center">Já tenho registro</a>
         </div>
     </div>
     <!-- /.form-box -->

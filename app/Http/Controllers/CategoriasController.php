@@ -45,11 +45,14 @@ class CategoriasController extends Controller
         }
     */
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function imagens()
     {
 
 
-        $publicacao = Publicacao::where('categoriaid', '=', 2)->simplePaginate(10);
+        $publicacao = Publicacao::where('categoriaid', '=', 2)->simplePaginate(6);
 
         return view('publicacoes.categorias.imagem', ['publicacao' => $publicacao]);
 
@@ -59,6 +62,8 @@ class CategoriasController extends Controller
 
     public function videos()
     {
+        /** @var TYPE_NAME $publicacao */
+
         $publicacao = Publicacao::where('categoriaid', '=', 4)->Simplepaginate(10);
 
         return view('publicacoes.categorias.video', compact('publicacao'));

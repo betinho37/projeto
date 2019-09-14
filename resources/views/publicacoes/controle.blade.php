@@ -68,6 +68,8 @@
 
                 @endforeach
             </table>
+            {{ $publicacao->links() }}
+
         </div>
 
 @endsection

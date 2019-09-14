@@ -24,7 +24,7 @@
     <div>
         <div class="mb-2">
             <div class="float-right">
-                <div class="btn-group">
+               {{-- <div class="btn-group">
                     <a class="btn btn-default" href="javascript:void(0)" data-sortasc=""> Crescente </a>
                     <a class="btn btn-default" href="javascript:void(0)" data-sortdesc=""> Decrescente </a>
                 </div>
@@ -32,22 +32,31 @@
                     <select class="custom-select" style="width: auto;" data-sortorder="">
                         <option value="index">Classificar por data</option>
                     </select>
-                </div>
+                </div>--}}
             </div>
         </div>
-    </div>
-    <div class="filter-container p-0 row " style="padding: 3px; position: relative; width: 100%; display: flex; flex-wrap: wrap; height: 331px;">
+    </div><br>
+  {{--  <div class="filter-container p-0 row " style="padding: 3px; position: relative; width: 100%; display: flex; flex-wrap: wrap; height: 331px;">
         @foreach($publicacao as $key => $publicacoes)
             <div>
                 <div class="filtr-item col-sm-2" data-category="1"  style="opacity: 1; transform: scale(1) translate3d(684px, 164px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; width: 168.4px; transition: all 0.5s ease-out 0ms, width 1ms ease 0s;">
-                    <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" >
-                        <img src="{{asset('uploads/' . $publicacoes->arquivo)}}"  {{--alt="{{'uploads/' . $publicacoes->arquivo}}"--}} class="img-fluid mb-2" alt="white sample">
+                    <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" data-text="{{$publicacoes->descricao}}">
+                        <img src="{{asset('uploads/' . $publicacoes->arquivo)}}"  --}}{{--alt="{{'uploads/' . $publicacoes->arquivo}}"--}}{{-- class="img-fluid mb-2"  alt="white sample" >
                     </a>
-                    <p>{{$publicacoes->descricao}}</p>
                 </div>
             </div>
         @endforeach
-
+    </div>--}}
+    <div class="col-12" >
+        <div class="row" align="center">
+            @foreach($publicacao as $key => $publicacoes)
+            <div class="col-sm-2"align="center">
+                        <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" data-gallery="gallery">
+                            <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" class="img-fluid mb-2" alt="white sample">
+                        </a><p style="width: auto;" >{{$publicacoes->descricao}}</p>
+                    </div>
+            @endforeach
+        </div>
     </div>
 </div>
 {{ $publicacao->links() }}
