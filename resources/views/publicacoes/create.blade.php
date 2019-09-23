@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+<link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
+
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -7,13 +9,13 @@
         </div>
 
 
-        <div style="padding:25px" >
+        <div class="form"  >
 
             {!! Form::open(array('url' => 'api/publicacao','files'=>'true', 'enctype'=>'multipart/form-data' ,'multiple'=>true,)); !!}
 
             {!! csrf_field() !!}
 
-            <div  class="form-group" style="display:none;">
+            <div class="form-group" style="display:none;">
                 {!!Form::text('userid', Auth::user()->id , ['class'=>'form-control'])!!}
             </div>
 
@@ -36,7 +38,7 @@
             </div>
 
             <div>
-                {!! Form::label('imagem', 'Imagem', ['class' => 'control-label']) !!}
+                {!! Form::label('arquivo', 'Arquivo', ['class' => 'control-label']) !!}
                 <input id="arquivo" name="arquivo" type="file" class="file"
                        data-show-upload="false" data-show-caption="true" data-msg-placeholder="" required>
                 <br />

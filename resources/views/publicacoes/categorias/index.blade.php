@@ -15,11 +15,6 @@
         <div class="col-lg-4">
             <a href="/api/publicacoes/videos"> <img  class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ></a>
             <h2>Videos </h2>
-        </div >
-
-        <div class="col-lg-4">
-            <a href="/publicacoes/livros">  <img class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ><a/>
-                <h2 >Documentos </h2>
         </div>
 
         <div class="col-lg-4">
@@ -27,8 +22,10 @@
                 <h2 >Documentos </h2>
         </div>
 
-
-
+        <div class="col-lg-4">
+            <a href="/publicacoes/livros">  <img class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ><a/>
+                <h2 >Documentos </h2>
+        </div>
     </div>
 </div>
 </body>

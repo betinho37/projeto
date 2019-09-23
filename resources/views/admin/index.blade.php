@@ -65,10 +65,9 @@
                 <td>{{$usuarios -> nome }}</td>
                 <td>{{$usuarios -> email }}</td>
                 <td>
-                    <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success"><span class="glyphicon glyphicon-search"></span>Visualizar</a>
-                    <a href="{{@url('api/usuario').'/destroy/'.$usuarios->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >
-                        <span class="glyphicon glyphicon-trash"></span>Excluir</a>
-
+                    <a type="button" href="{{ url('api/usuario', $usuarios->id) }}" class="btn btn-success">Visualizar</a>
+                    <a href="{{@url('api/usuario').'/destroy/'.$usuarios->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >Excluir</a>
+                </td>
             </tr>
         @endforeach
 

@@ -63,6 +63,8 @@ class PublicacoesController extends Controller
 
         if ($request->hasFile('arquivo')) {
             $path = $request->arquivo->store('/arquivos');
+            $ext = $request->arquivo->getClientOriginalExtension();
+            dd($ext);
             $publicacao->arquivo = $path;
             $publicacao->save();
         }
@@ -159,9 +161,23 @@ class PublicacoesController extends Controller
         return view('publicacoes.controle', compact('publicacao'));
     }
 
+    public function search(Request $request)
+    {
+        $pesquisa = $request->pesquisar;
 
+        $publicacao = Publicacao::pesquisa($request->pesquisar);
 
+        if ($publicacao == true) {
 
+            $publicacao = Publicacao::orderBy('created_at', 'asc')->simplePaginate(6);
+
+            return view('publicacoes/search', compact('publicacao', 'pesquisa'));
+        } else {
+            return redirect()->action('PublicacoesController@Controle')
+                ->with("mensagem", "Resource not found");
+        }
+
+    }
 
 
 }

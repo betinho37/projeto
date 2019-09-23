@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -61,5 +62,9 @@ class User extends Authenticatable
         return static::where('nome', 'LIKE', '%' . $pesquisar . '%')
                         ->orWhere('email','LIKE','%'.$pesquisar.'%')->paginate(10);
     }
-
+    public function sendPasswordResetNotification($token)
+    {
+        // Não esquece: use App\Notifications\ResetPassword;
+        $this->notify(new ResetPassword($token));
+    }
 }

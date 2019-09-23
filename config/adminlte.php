@@ -120,7 +120,7 @@ return [
         'Opções',
     
         [
-            'text'    => 'Opções',
+            'text'    => 'Menu',
             'icon'    => 'share',
             'submenu' => [
                 [

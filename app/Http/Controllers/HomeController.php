@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 use App\Publicacao;
 use DB;
 use App\User;
-use Carbon\Carbon;
 
-use Illuminate\Http\Request;
 
 
 class HomeController extends Controller
@@ -59,7 +57,7 @@ class HomeController extends Controller
         ];
 
 
-        $publicacao = $this->publicacao->all();
+        $publicacao = Publicacao::where('situacao', '=', 0)->get();
 
 
 

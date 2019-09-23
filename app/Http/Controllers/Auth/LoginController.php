@@ -41,7 +41,7 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), $email);
 
         if ($validator->fails()) {
-            return redirect()->back()->withInput()->with('errors', 'Email nao cadastrado.');
+            return redirect()->back()->withInput()->with('errors', 'Email inválido !');
         }
 
 
@@ -51,7 +51,7 @@ class LoginController extends Controller
             return redirect()->intended('/api/home');
         } else {
 
-            return redirect()->back()->withInput()->with('errors', 'Dados não encontrados.');
+            return redirect()->back()->withInput()->with('errors', 'Senha inválida !');
 
         };
 

@@ -8,6 +8,15 @@
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 </head>
+
+<style>
+	.label {
+		content:" *";
+		color: red;
+	}
+
+
+</style>
 <body>
 <div class="container">
 
@@ -25,18 +34,18 @@
 
 						{{ csrf_field() }}
 						<div class="form-group has-feedback">
-							<input type="email" id="inputEmail" name="email" id="email" class="form-control" placeholder="E-Mai" required autofocus value="">
+							<label for="nome">Email <abbr title="campo obrigatório">*</abbr></label>
+							<input type="email" id="inputEmail" name="email" id="email" class="form-control" required >
 
 						</div>
 
 						<div class="form-group has-feedback">
-							<input type="password" id="inputPassword" name="password" id="password" class="form-control" placeholder="Senha" required value="">
+							<label for="nome">Senha <abbr title="campo obrigatório">*</abbr></label>
+							<input type="password" id="inputPassword" name="password" id="password" class="form-control" required >
 
 						</div>
 						<div class="custom-control custom-checkbox mb-3">
-							<input type="checkbox" class="custom-control-input" id="remember_token" {{ old('remember_token') ? 'checked' : '' }}>
-							<label class="custom-control-label" for="remember_token">Lembrar senha</label>
-
+								<a href="/api/password/reset" >Esqueci minha senha</a>
 						</div>
 						<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
 

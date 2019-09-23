@@ -1,7 +1,9 @@
 <?php
 
 namespace App;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Publicacao extends Model
 {
@@ -12,7 +14,6 @@ class Publicacao extends Model
         'titulo',
         'descricao',
         'arquivo',
-        'pdf',
         'tipousuario',
         'userid',
         'situacao',
@@ -23,6 +24,13 @@ class Publicacao extends Model
     {
             return $this->belongsTo(User::class, 'userid');
     }
+
+    public static function pesquisa($pesquisar){
+
+        return static::where('nome', 'LIKE', '%' . $pesquisar . '%')
+            ->orWhere('created_at','LIKE','%'.$pesquisar.'%');
+    }
+
 
 
 }
