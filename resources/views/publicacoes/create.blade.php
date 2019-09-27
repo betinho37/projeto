@@ -2,6 +2,9 @@
 
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
 
+
+
+
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -28,6 +31,9 @@
                 <strong>Titulo:</strong><p></p>
                 {!!Form::text('titulo', null, ['class'=>'form-control'])!!}
             </div>
+
+
+
             <div class="form-group">
                 <strong id="cat">Categoria:</strong>
                 {!!Form::select('categoriaid', $list_categoria, null, ['class'=>'form-control'])!!}
