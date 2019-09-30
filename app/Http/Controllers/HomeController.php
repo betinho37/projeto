@@ -6,7 +6,10 @@ use DB;
 use App\User;
 
 
-
+/**
+ * Class HomeController
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**
@@ -17,6 +20,10 @@ class HomeController extends Controller
     private $publicacao;
 
 
+    /**
+     * HomeController constructor.
+     * @param Publicacao $publicacao
+     */
     public function __construct(Publicacao $publicacao)
     {
         //obriga esta logado

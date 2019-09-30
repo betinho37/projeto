@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 
-
+/**
+ * Class UsuariosController
+ * @package App\Http\Controllers
+ */
 class UsuariosController extends Controller
 {
     /**
@@ -22,6 +25,11 @@ class UsuariosController extends Controller
     private $usuario, $estado;
 
 
+    /**
+     * UsuariosController constructor.
+     * @param User $usuario
+     * @param Estado $estado
+     */
     public function __construct(User $usuario, Estado $estado)
     {
         $this->middleware('auth');
@@ -29,17 +37,20 @@ class UsuariosController extends Controller
         $this->usuario = $usuario;
         $this->estado = $estado;
 
-        
+
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
 
         $usuario = User::paginate(10);
         $list_estado = $this->estado->listEstado();
         return view('admin.index', compact('usuario', 'total_ids','list_estado'));
-       
+
     }
 
     /**
@@ -63,32 +74,32 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-          $inputs = $request->all();
+        $inputs = $request->all();
 
-          $validator = $this->validator($inputs);
+        $validator = $this->validator($inputs);
 
-            if ($validator->fails()) {
+        if ($validator->fails()) {
 //                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
-                return Redirect::back()->withErrors($validator)->withInput();
+            return Redirect::back()->withErrors($validator)->withInput();
 
 
+        }
+
+        $inputs['password'] = bcrypt($inputs['password']);
+        $this->usuario->create($inputs);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::check()) {
+            return redirect()->action('UsuariosController@index');
+
+        } else {
+            if (Auth::attempt($credentials)) {
+
+                return redirect()->intended( '/api/home');
             }
+        }
 
-            $inputs['password'] = bcrypt($inputs['password']);  
-            $this->usuario->create($inputs);
-                
-            $credentials = $request->only('email', 'password');
-          
-              if (Auth::check()) {
-                    return redirect()->action('UsuariosController@index');
-
-                } else {
-                        if (Auth::attempt($credentials)) {
-
-                        return redirect()->intended( '/api/home');
-                    }
-                } 
- 
     }
     /**
      * Display the specified resource.
@@ -126,13 +137,13 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $usuario = User::find($id);
-         $usuario->fill($request->all());
+        $usuario = User::find($id);
+        $usuario->fill($request->all());
 
-         $usuario->cidade= $request->cidade;
+        $usuario->cidade= $request->cidade;
 
-         $usuario->save();
-         return redirect()->action('UsuariosController@index');
+        $usuario->save();
+        return redirect()->action('UsuariosController@index');
     }
 
     /**
@@ -148,6 +159,10 @@ class UsuariosController extends Controller
         return redirect()->action('UsuariosController@index');
     }
 
+    /**
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -156,35 +171,39 @@ class UsuariosController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function search(Request $request){
         $pesquisa = $request->pesquisar;
 
         $usuario = User::pesquisa($request->pesquisar);
 
         if(count($usuario) > 0){
-            return view('admin/search', compact('usuario', 'pesquisa'));            
+            return view('admin/search', compact('usuario', 'pesquisa'));
         } else {
-             return redirect()->action('UsuariosController@index')
-                                ->with("mensagem", "Resource not found");
+            return redirect()->action('UsuariosController@index')
+                ->with("mensagem", "Resource not found");
         }
     }
-/*    public function update(UpdateAccount $request)
-    {
-        $usuario = Auth::user(); // resgata o usuario
-
-        $usuario->username = Request::input('username'); // pega o valor do input username
-        $usuario->email = Request::input('email'); // pega o valor do input email
-
-        if ( ! Request::input('password') == '') // verifica se a senha foi alterada
+    /*    public function update(UpdateAccount $request)
         {
-            $user->password = bcrypt(Request::input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
-        }
+            $usuario = Auth::user(); // resgata o usuario
 
-        $user->save(); // salva o usuario alterado =)
+            $usuario->username = Request::input('username'); // pega o valor do input username
+            $usuario->email = Request::input('email'); // pega o valor do input email
 
-        Flash::message('Atualizado com sucesso!');
-        return Redirect::to(...); // redireciona pra rota que você achar melhor =)
-    }*/
+            if ( ! Request::input('password') == '') // verifica se a senha foi alterada
+            {
+                $user->password = bcrypt(Request::input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
+            }
+
+            $user->save(); // salva o usuario alterado =)
+
+            Flash::message('Atualizado com sucesso!');
+            return Redirect::to(...); // redireciona pra rota que você achar melhor =)
+        }*/
 
 
 

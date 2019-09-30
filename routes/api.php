@@ -37,13 +37,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('publicacoes/imagens', ['as' => 'publicacoes.imagens', 'uses' => 'CategoriasController@imagens']);
     Route::get('publicacoes/videos', ['as' => 'publicacoes.videos', 'uses' => 'CategoriasController@videos']);
 
-    Route::get("password/reset", "AuthForgotPasswordController@showLinkRequestForm");
-    Route::post("password/email", "AuthForgotPasswordController@sendResetLinkEmail");
-    Route::get("password/reset/{token}", "AuthResetPasswordController@showResetForm");
-    Route::post("password/reset", "AuthResetPasswordController@reset");
-
-
-
 });
 
 

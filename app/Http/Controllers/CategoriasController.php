@@ -6,6 +6,10 @@ use App\Publicacao;
 use Illuminate\Http\Request;
 use App\Categoria;
 
+/**
+ * Class CategoriasController
+ * @package App\Http\Controllers
+ */
 class CategoriasController extends Controller
 {
     /**
@@ -17,7 +21,12 @@ class CategoriasController extends Controller
     private $categoria,  $publicacao;
 
 
-    public function __construct( Categoria $categoria, Publicacao $publicacao )
+    /**
+     * CategoriasController constructor.
+     * @param Categoria $categoria
+     * @param Publicacao $publicacao
+     */
+    public function __construct(Categoria $categoria, Publicacao $publicacao )
     {
         //obriga esta logado
         $this->middleware('auth');
@@ -25,6 +34,9 @@ class CategoriasController extends Controller
         $this->categoria = $categoria;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
 
@@ -60,6 +72,9 @@ class CategoriasController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function videos()
     {
         /** @var TYPE_NAME $publicacao */

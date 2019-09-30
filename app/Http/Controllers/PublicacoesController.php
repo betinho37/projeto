@@ -5,15 +5,33 @@ namespace App\Http\Controllers;
 use App\Publicacao;
 use App\Categoria;
 use App\User;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 
+/**
+ * Class PublicacoesController
+ * @package App\Http\Controllers
+ */
 class PublicacoesController extends Controller
 {
 
+    /**
+     * @var Publicacao
+     */
+    /**
+     * @var Publicacao|User
+     */
+    /**
+     * @var Categoria|Publicacao|User
+     */
     private $publicacao, $user, $categoria;
 
+    /**
+     * PublicacoesController constructor.
+     * @param Publicacao $publicacao
+     * @param User $user
+     * @param Categoria $categoria ]
+     */
 
     public function __construct(Publicacao $publicacao, User $user, Categoria $categoria)
     {
@@ -25,7 +43,9 @@ class PublicacoesController extends Controller
         $this->categoria = $categoria;
     }
 
-
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
 
@@ -36,6 +56,9 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $publicacao = Publicacao::get();
@@ -48,6 +71,10 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
 
@@ -76,6 +103,9 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function home()
     {
         $tipousuario = auth()->user()->tipousuario;
@@ -92,6 +122,10 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @param Publicacao $publicacao
+     * @return array
+     */
     public function show(Publicacao $publicacao)
     {
         $limite = $this->publicacao->limite();
@@ -100,6 +134,11 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @param Publicacao $publicacao
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Publicacao $publicacao, $id)
     {
         $list_user = $this->user->listUser();
@@ -108,6 +147,11 @@ class PublicacoesController extends Controller
         return view('publicacoes.edit', compact('publicacao', 'list_user', 'list_categoria', 'userarquivo'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $publicacao = Publicacao::find($id);
@@ -127,6 +171,10 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $publicacao = Publicacao::find($id);
@@ -144,6 +192,9 @@ class PublicacoesController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function controle()
     {
         $tipousuario = auth()->user()->tipousuario;
@@ -161,6 +212,10 @@ class PublicacoesController extends Controller
         return view('publicacoes.controle', compact('publicacao'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function search(Request $request)
     {
         $pesquisa = $request->pesquisar;

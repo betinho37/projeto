@@ -1,61 +1,76 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="/css/login.css">
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AdminLTE 3 | Log in</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
+	<!-- Ionicons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css" rel="stylesheet" type="text/css">
+	<!-- icheck bootstrap -->
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+	<!-- Theme style -->
+	<link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css">
+	<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<body class="hold-transition login-page">
+<div class="login-box">
+	<div class="login-logo">
+		<b>Museu Virtual</b>
+	</div>
+	<!-- /.login-logo -->
+	<div class="card">
+		<div class="card-body login-card-body">
 
-<style>
-	.label {
-		content:" *";
-		color: red;
-	}
+			@if(session('errors'))
+				{{session('errors')}}
+			@endif
 
-
-</style>
-<body>
-<div class="container">
-
-	<div class="row">
-		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-			<div class="card card-login my-5">
-				<div class="card-body">
-					<h5 class="card-title text-center">{{ __('Museu Virtual') }}</h5>
-					@if(session('errors'))
-						{{session('errors')}}
-					@endif
-
-					<form class="form-login" role="form" method="POST" action="{{ route('login') }}">
-
-
-						{{ csrf_field() }}
-						<div class="form-group has-feedback">
-							<label for="nome">Email <abbr title="campo obrigatório">*</abbr></label>
-							<input type="email" id="inputEmail" name="email" id="email" class="form-control" required >
-
+			<form class="form-login" role="form" method="POST" action="{{ route('login') }}">
+				<label for="nome">Email <abbr title="campo obrigatório">*</abbr></label>
+				<div class="input-group mb-3">
+					<input type="email" id="inputEmail" name="email" id="email" class="form-control" required >
+					<div class="input-group-append">
+						<div class="input-group-text">
+							<span class="fas fa-envelope"></span>
 						</div>
-
-						<div class="form-group has-feedback">
-							<label for="nome">Senha <abbr title="campo obrigatório">*</abbr></label>
-							<input type="password" id="inputPassword" name="password" id="password" class="form-control" required >
-
-						</div>
-						<div class="custom-control custom-checkbox mb-3">
-								<a href="/api/password/reset" >Esqueci minha senha</a>
-						</div>
-						<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
-
-						<a href="/api/register" class="btn btn-lg btn-primary btn-block text-uppercase" role="button" aria-pressed="true">Registrar</a>
-
-					</form>
+					</div>
 				</div>
+				<label for="nome">Senha <abbr title="campo obrigatório">*</abbr></label>
+				<div class="input-group mb-3">
+					<input type="password" id="inputPassword" name="password" id="password" class="form-control" required >
+					<div class="input-group-append">
+						<div class="input-group-text">
+							<span class="fas fa-lock"></span>
+						</div>
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
+					<!-- /.col -->
+				</div>
+			</form>
+			<div class="input-group mb-3">
+
+				<p class="">
+					<a href="/api/password/reset" >Esqueci minha senha</a><br>
+					<a  href="/api/register" class="text-center">Registrar</a>
+				</p>
 			</div>
 		</div>
+		<!-- /.login-card-body -->
 	</div>
 </div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<link href="{{ asset('js/jquery.min.js') }}" rel="stylesheet" type="text/css">
+<!-- Bootstrap 4 -->
+<link href="{{ asset('js/bootstrap.bundle.min.js') }}" rel="stylesheet" type="text/css">
 </body>
 </html>
