@@ -18,7 +18,8 @@ class CreatePublicacoesTable extends Migration
             $table->string('nome');
             $table->string('titulo');
             $table->string('descricao',500);
-            $table->string('arquivo')->nullable();
+            $table->string('arquivo');
+            $table->string('capa');
             $table->integer('posicaoimagem')->nullable();
             $table->integer('situacao')->default(0);
             $table->integer('userid')->unsigned()->nullable();

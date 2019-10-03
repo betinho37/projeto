@@ -18,12 +18,12 @@
         </div>
 
         <div class="col-lg-4">
-            <a href="/publicacoes/livros">  <img class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ><a/>
+            <a href="/api/publicacoes/documentos">  <img class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ><a/>
                 <h2 >Documentos </h2>
         </div>
 
         <div class="col-lg-4">
-            <a href="/publicacoes/livros">  <img class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ><a/>
+            <a href="/publicacoes/documentos">  <img class="img-thumbnail" src="http://www.montatudo.com/i/montatudo/9931161998_266231.jpg" alt="" ><a/>
                 <h2 >Documentos </h2>
         </div>
     </div>

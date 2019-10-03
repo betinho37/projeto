@@ -47,15 +47,15 @@ class CategoriasController extends Controller
 
 
 
-    /*
+
         public function documentos()
         {
             $publicacao = Publicacao::where('categoriaid', '=', 1)->Simplepaginate(6);
 
-            return view('publicacoes.categorias.imagem', compact('publicacao'));
+            return view('publicacoes.categorias.documento', compact('publicacao'));
 
         }
-    */
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

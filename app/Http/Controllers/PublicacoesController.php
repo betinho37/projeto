@@ -6,6 +6,8 @@ use App\Publicacao;
 use App\Categoria;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 
 /**
@@ -83,15 +85,40 @@ class PublicacoesController extends Controller
 
         }
 
-
         $publicacao = Publicacao::create($request->all());
+
+
+        $validator = $this->validator($request->all());
+        dd($validator);
+        if ($validator->fails()) {
+//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
+            return Redirect::back()->withErrors($validator)->withInput();
+
+
+        }
+
+
+
 
         //verifica se o input arquivo esta preechido
 
+        if ($request->hasFile('capa')) {
+            $path = $request->arquivo->store('/capas');
+            $ext = $request->arquivo->getMimeType();
+            //Validar extensao do arquivo
+            if ($ext == 'image/jpeg' && 'image/jpg'){
+                dd($path);
+            }else{
+                dd($ext);
+
+            }
+            $publicacao->arquivo = $path;
+            $publicacao->save();
+
+        }
         if ($request->hasFile('arquivo')) {
             $path = $request->arquivo->store('/arquivos');
             $ext = $request->arquivo->getClientOriginalExtension();
-            dd($ext);
             $publicacao->arquivo = $path;
             $publicacao->save();
         }
@@ -234,5 +261,13 @@ class PublicacoesController extends Controller
 
     }
 
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => 'required|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    }
 
 }

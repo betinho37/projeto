@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('publicacoes/imagens', ['as' => 'publicacoes.imagens', 'uses' => 'CategoriasController@imagens']);
     Route::get('publicacoes/videos', ['as' => 'publicacoes.videos', 'uses' => 'CategoriasController@videos']);
+    Route::get('publicacoes/documentos', ['as' => 'publicacoes.documentos', 'uses' => 'CategoriasController@documentos']);
+
 
 });
 
