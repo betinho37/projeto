@@ -88,16 +88,6 @@ class PublicacoesController extends Controller
         $publicacao = Publicacao::create($request->all());
 
 
-        $validator = $this->validator($request->all());
-        dd($validator);
-        if ($validator->fails()) {
-//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
-            return Redirect::back()->withErrors($validator)->withInput();
-
-
-        }
-
-
 
 
         //verifica se o input arquivo esta preechido
