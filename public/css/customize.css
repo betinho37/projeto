@@ -5,6 +5,19 @@
     height: auto;
 }
 
+.thumbnail{
+    max-width:auto;
+    max-height:auto;
+    width: 325px;
+    height: auto;
+    display: inline-block;
+    background-size: cover;
+    border-radius: 8px;
+    box-shadow: 0 0 90px rgba(0,0,0,0.3);
+    position: auto;
+
+
+}
 #primary {
     padding: 30px;
 }

@@ -93,16 +93,16 @@ class PublicacoesController extends Controller
         //verifica se o input arquivo esta preechido
 
         if ($request->hasFile('capa')) {
-            $path = $request->arquivo->store('/capas');
-            $ext = $request->arquivo->getMimeType();
+            $path = $request->capa->store('/capas');
+            $ext = $request->capa->getMimeType();
             //Validar extensao do arquivo
-            if ($ext == 'image/jpeg' && 'image/jpg'){
+          /*  if ($ext == 'image/jpeg' && 'image/jpg'){
                 dd($path);
             }else{
                 dd($ext);
 
-            }
-            $publicacao->arquivo = $path;
+            }*/
+            $publicacao->capa = $path;
             $publicacao->save();
 
         }

@@ -50,7 +50,7 @@ class CategoriasController extends Controller
 
         public function documentos()
         {
-            $publicacao = Publicacao::where('categoriaid', '=', 1)->Simplepaginate(6);
+            $publicacao = Publicacao::where('categoriaid', '=', 1)->where('situacao', '=', 1)->Simplepaginate(6);
 
             return view('publicacoes.categorias.documento', compact('publicacao'));
 
@@ -64,7 +64,7 @@ class CategoriasController extends Controller
     {
 
 
-        $publicacao = Publicacao::where('categoriaid', '=', 2)->simplePaginate(6);
+        $publicacao = Publicacao::where('categoriaid', '=', 2)->where('situacao', '=', 1)->simplePaginate(6);
 
         return view('publicacoes.categorias.imagem', ['publicacao' => $publicacao]);
 
@@ -79,7 +79,7 @@ class CategoriasController extends Controller
     {
         /** @var TYPE_NAME $publicacao */
 
-        $publicacao = Publicacao::where('categoriaid', '=', 4)->Simplepaginate(10);
+        $publicacao = Publicacao::where('categoriaid', '=', 4)->where('situacao', '=', 1)->Simplepaginate(10);
 
         return view('publicacoes.categorias.video', compact('publicacao'));
 
