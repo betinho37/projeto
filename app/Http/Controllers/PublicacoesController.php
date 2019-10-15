@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublicacoesRequest;
 use App\Publicacao;
 use App\Categoria;
 use App\User;
@@ -74,10 +75,10 @@ class PublicacoesController extends Controller
 
 
     /**
-     * @param Request $request
+     * @param PublicacoesRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(PublicacoesRequest $request)
     {
 
         if (blank($request->arquivo)) {
@@ -87,28 +88,18 @@ class PublicacoesController extends Controller
 
         $publicacao = Publicacao::create($request->all());
 
-
-
-
-        //verifica se o input arquivo esta preechido
-
         if ($request->hasFile('capa')) {
             $path = $request->capa->store('/capas');
-            $ext = $request->capa->getMimeType();
-            //Validar extensao do arquivo
-          /*  if ($ext == 'image/jpeg' && 'image/jpg'){
-                dd($path);
-            }else{
-                dd($ext);
-
-            }*/
+            $ext = $request->capa->getClientOriginalExtension();
+            $request->capa->extension();
+            $mime = $request->capa->getMimeType();
+            dd($mime);
             $publicacao->capa = $path;
             $publicacao->save();
 
         }
         if ($request->hasFile('arquivo')) {
             $path = $request->arquivo->store('/arquivos');
-            $ext = $request->arquivo->getClientOriginalExtension();
             $publicacao->arquivo = $path;
             $publicacao->save();
         }
@@ -252,12 +243,5 @@ class PublicacoesController extends Controller
     }
 
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'email' => 'required|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
 
 }

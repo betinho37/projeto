@@ -8,6 +8,13 @@
             <h3 class="box-title">Nova publicação</h3>
         </div>
 
+        @if($errors->any())
+            @foreach($errors->all() as $error)      {{ $error }} @endforeach
+        @elseif(session()->has('success'))
+            {{ session('success') }}
+        @endif
+
+
         <div class="form"  >
 
             {!! Form::open(array('url' => 'api/publicacao','files'=>'true', 'enctype'=>'multipart/form-data' ,'multiple'=>true,)); !!}

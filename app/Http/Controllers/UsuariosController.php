@@ -187,6 +187,10 @@ class UsuariosController extends Controller
                 ->with("mensagem", "Resource not found");
         }
     }
+
+
+
+
     /*    public function update(UpdateAccount $request)
         {
             $usuario = Auth::user(); // resgata o usuario
