@@ -69,8 +69,17 @@
             @else
             @endif
 
-            <strong>Alterar</strong><p></p>
+            @if ($publicacao->categoriaid == 1)
+
+                <div>
+                    <strong>Capa</strong>
+                    <input id="capa" name="capa" type="file" class="file" multiple
+                           data-show-upload="false" data-show-caption="true"
+                           data-msg-placeholder="Select {files} for upload...">
+                </div>
+            @endif
             <div>
+                <strong>Arquivo</strong>
                 <input id="arquivo" name="arquivo" type="file" class="file" multiple
                        data-show-upload="false" data-show-caption="true"
                        data-msg-placeholder="Select {files} for upload...">

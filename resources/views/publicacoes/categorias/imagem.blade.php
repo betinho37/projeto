@@ -23,11 +23,11 @@
     <div class="col-12" >
         <div class="row" align="center">
             @foreach($publicacao as $key => $publicacoes)
-            <div class="col-sm-2"align="center">
-                        <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" data-gallery="gallery">
-                            <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" class="img-fluid mb-2" alt="white sample">
-                        </a><p style="width: auto;" >{{$publicacoes->descricao}}</p>
-            </div>
+                <div class="col-sm-2"align="center">
+                    <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" data-gallery="gallery">
+                        <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" class="img-fluid mb-2" alt="white sample">
+                    </a><p style="width: auto;" >{{$publicacoes->descricao}}</p>
+                </div>
             @endforeach
         </div>
     </div>
