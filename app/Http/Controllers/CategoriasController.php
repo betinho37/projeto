@@ -52,6 +52,7 @@ class CategoriasController extends Controller
         {
             $publicacao = Publicacao::where('categoriaid', '=', 1)->where('situacao', '=', 1)->Simplepaginate(6);
 
+
             return view('publicacoes.categorias.documento', compact('publicacao'));
 
         }
@@ -75,7 +76,7 @@ class CategoriasController extends Controller
 
     public function musicas()
     {
-        $publicacao = Publicacao::where('categoriaid', '=', 3)->Simplepaginate(7);
+        $publicacao = Publicacao::where('categoriaid', '=', 3)->Simplepaginate(6);
 
         return view('publicacoes.categorias.musica', compact('publicacao'));
 

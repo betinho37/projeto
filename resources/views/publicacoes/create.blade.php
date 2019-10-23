@@ -57,7 +57,7 @@
             <div  class="form-group">
                 {!! Form::label('arquivo', 'Arquivo', ['class' => 'control-label']) !!}
                 <input id="arquivo" name="arquivo" type="file" class="file"
-                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="" required>
+                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="" required />
                 <br />
             </div><br />
 

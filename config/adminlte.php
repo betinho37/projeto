@@ -153,6 +153,10 @@ return [
                     'text' => 'Videos',
                     'url'  => '/api/publicacoes/videos',
                 ],
+                [
+                    'text' => 'Musicas',
+                    'url'  => '/api/publicacoes/musicas',
+                ],
             ],
         ],
     ],

@@ -18,26 +18,24 @@
 </head>
 
 <body>
-
 <div class="container marketing" style="padding:30px">
 
     <div class="row">
         @foreach($publicacao as $publicacoes)
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <a  href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="modal" data-target="#modal-default">
-                            <img src="{{asset('uploads/' . $publicacoes->capa)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}"
-                                 class="img-responsive"/></a>
+            @if($publicacoes->situacao == 1  )
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <a   data-toggle="modal" data-target="#modal-default">
+                                <img src="{{asset('uploads/' . $publicacoes->capa)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}"
+                                     class="img-responsive"/></a>
+                        </div>
                     </div>
                 </div>
-                <div class="text-item" >
-                    <p>
-            </div>
+            @else
+            @endif
+        @endforeach
     </div>
-</div>
-
-</div>
 <div class="modal fade" id="modal-default" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -54,10 +52,14 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" download="{{asset('uploads/' . $publicacoes->arquivo)}}" class="btn btn-primary" role="button">Download</a>
+                @if (Auth::user()->tipousuario == 0  )
+                    <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
+
+                @endif
+
 
                 <a href="{{asset('uploads/' . $publicacoes->arquivo)}}"   class="btn btn-primary" role="button">Visualizar arquivo</a>
             </div>
-@endforeach
 
 {{ $publicacao->links() }}
 </body>
@@ -65,6 +67,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://adminlte.io/themes/dev/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+{{--<div class="container marketing" style="padding:30px">
+
+    <div class="row">
+        @foreach($publicacao as $publicacoes)
+            @if($publicacoes->situacao == 1  )
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <a  href="{{asset('uploads/' . $publicacoes->arquivo)}}"  data-toggle="modal" data-target="#modal-default">
+                                <img src="{{asset('uploads/' . $publicacoes->arquivo)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}"
+                                     class="img-responsive"/></a>
+                        </div>
+                    </div>
+                    <div class="text-item" >
+                        <p>Titulo: {{$publicacoes->titulo}}</p>
+                        <p>Descrição: {{$publicacoes->descricao}}</p>
+                        <p>Colaborador: {{$publicacoes->nome}}</p>
+                        <p>
+                            <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" download="{{asset('uploads/' . $publicacoes->arquivo)}}" class="btn btn-primary" role="button">Download</a>
+                    </div>
+                </div>
+            @else
+            @endif
+        @endforeach
+    </div>--}}
 
 
 </html>
