@@ -33,8 +33,10 @@ class PublicacoesRequest extends FormRequest
 
 
         return [
-            'capa' => 'mimetypes:image/jpg,image/png,image/jpeg|mimes:jpeg,jpg,png',
-            ];
+           /* 'capa' => 'mimetypes:image/jpg,image/png,image/jpeg|mimes:jpeg,jpg,png',
+            'arquivo' => 'mimetypes:image/jpg,image/png,image/jpeg|mimes:jpeg,jpg,png,pdf',*/
+
+        ];
 
 
 

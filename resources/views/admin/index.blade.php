@@ -28,7 +28,7 @@
                     <h4><i class="icon fa fa-close"></i>{{ $message }}</h4>
                 </div>
             @endif
-        </div> <!-- MODAL -->
+        </div>
     </div>
 
 
@@ -50,6 +50,7 @@
     <div class="div1"  >
         <a href="/api/usuarios/create" class="btn btn-primary" style="margin-left: -280px;"  >Novo Usuário</a>
     </div><br>
+
 
     <div class="card-body table-responsive p-0" >
         <table class="table table-head-fixed">

@@ -72,6 +72,15 @@ class CategoriasController extends Controller
 
     }
 
+
+    public function musicas()
+    {
+        $publicacao = Publicacao::where('categoriaid', '=', 3)->Simplepaginate(7);
+
+        return view('publicacoes.categorias.musica', compact('publicacao'));
+
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -86,14 +95,8 @@ class CategoriasController extends Controller
     }
 
 
-    /*
-     * public function videos()
-    {
-        $publicacao = Publicacao::where('categoriaid', '=', 4)->Simplepaginate(6);
 
-        return view('publicacoes.categorias.video', compact('publicacao'));
 
-    }*/
 
 
     }

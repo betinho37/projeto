@@ -130,6 +130,17 @@
             <strong>Descrição:</strong>
             {!!( $publicacao->descricao)!!}
         </div>
+
+
+        <div class="categoriid" style="display:none;">
+            <div  class="form-group">
+                {!! Form::label('capa', 'Capa Para Documento', ['class' => 'control-label']) !!}
+                <input id="capa" name="capa" type="file" class="file"
+                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="" >
+                <br />
+            </div>
+        </div><br />
+
         @if($publicacao->arquivo != null )
             <div class="form-group row">
                 <div class="col-md-5">
@@ -150,4 +161,15 @@
     @endif
     {!! Form::close() !!}
 
+    <script type="text/javascript">
+        function selected(value){
+            var categoriid = document.getElementsByClassName('categoriid');
+            if(value == 1 ){
+                categoriid[0].style.display = 'block';
+            }else{
+                categoriid[0].style.display = 'none';
+            }
+        }
+
+    </script>
 @endsection

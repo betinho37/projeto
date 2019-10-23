@@ -140,8 +140,6 @@ class UsuariosController extends Controller
         $usuario = User::find($id);
         $usuario->fill($request->all());
 
-        $usuario->cidade= $request->cidade;
-
         $usuario->save();
         return redirect()->action('UsuariosController@index');
     }
@@ -191,23 +189,23 @@ class UsuariosController extends Controller
 
 
 
-    /*    public function update(UpdateAccount $request)
+       public function updateprofile(Request $request)
         {
             $usuario = Auth::user(); // resgata o usuario
+            $list_estado = $this->estado->listEstado();
 
-            $usuario->username = Request::input('username'); // pega o valor do input username
-            $usuario->email = Request::input('email'); // pega o valor do input email
 
-            if ( ! Request::input('password') == '') // verifica se a senha foi alterada
+            if ( ! (new \Illuminate\Http\Request)->input('password') == '') // verifica se a senha foi alterada
             {
-                $user->password = bcrypt(Request::input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
+                $usuario->password = bcrypt((new \Illuminate\Http\Request)->input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
             }
 
-            $user->save(); // salva o usuario alterado =)
+            $usuario->save(); // salva o usuario alterado =)
+            return view('admin.updateprof', compact('usuario', 'list_estado'));
 
-            Flash::message('Atualizado com sucesso!');
-            return Redirect::to(...); // redireciona pra rota que você achar melhor =)
-        }*/
+            /*Flash::message('Atualizado com sucesso!');
+            return Redirect::to('UsuariosController@index'); // redireciona pra rota que você achar melhor =)*/
+        }
 
 
 

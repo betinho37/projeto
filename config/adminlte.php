@@ -135,11 +135,26 @@ return [
             ],
         ],
 
-        'LABELS',
+        'Categorias',
+
         [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ]
+            'text'    => 'Categorias',
+            'icon'    => 'share',
+            'submenu' => [
+                [
+                    'text' => 'Documentos',
+                    'url'  => '/api/publicacoes/documentos',
+                ],
+                [
+                    'text' => 'Imagens',
+                    'url'  => 'api/publicacoes/imagens',
+                ],
+                [
+                    'text' => 'Videos',
+                    'url'  => '/api/publicacoes/videos',
+                ],
+            ],
+        ],
     ],
 
     /*

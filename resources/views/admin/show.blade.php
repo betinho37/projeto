@@ -36,16 +36,6 @@
                     <p>{{ $usuario->endereco }}</p>
                 </div>
 
-                <div class="form-group">
-                    <label for="cidade">Cidade</label>
-                    <p>{{ $usuario->cidade }}</p>
-                </div>
-
-                <div class="form-group">
-                    <label for="estado">Estado</label>
-                    {!!Form::select('estadoid', $list_estado, $usuario->estadoid, ['class'=>'form-control'])!!}
-                </div>
-
                 <div class="box-footer">
                     <a type="button" href="{{@url('api/usuario').'/' . $usuario->id .'/'. 'edit' }}" class="btn btn-warning" btn-sm>Editar</a>
                     <a href="{{ route('usuario.index') }}" class="btn btn-primary">Voltar</a>

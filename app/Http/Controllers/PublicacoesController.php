@@ -7,7 +7,8 @@ use App\Publicacao;
 use App\Categoria;
 use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 
 /**
@@ -89,10 +90,9 @@ class PublicacoesController extends Controller
 
         if ($request->hasFile('capa')) {
             $path = $request->capa->store('/capas');
-            $ext = $request->capa->getClientOriginalExtension();
+           /* $ext = $request->capa->getClientOriginalExtension();
             $request->capa->extension();
-            $mime = $request->capa->getMimeType();
-
+            $mime = $request->capa->getMimeType();*/
             $publicacao->capa = $path;
             $publicacao->save();
 
@@ -162,15 +162,6 @@ class PublicacoesController extends Controller
     public function update(Request $request, $id)
     {
         $publicacao = Publicacao::find($id);
-
-        $file = $request->hasFile('capa');
-        if ($file != "") {
-            unlink(public_path('uploads/' . $publicacao->capa));
-            $publicacao->delete();
-            $path = $request->capa->store('/capas');
-            $publicacao->capa = $path;
-        }
-
         $file = $request->hasFile('arquivo');
         if ($file != "") {
             unlink(public_path('uploads/' . $publicacao->arquivo));
@@ -194,11 +185,6 @@ class PublicacoesController extends Controller
     public function destroy($id)
     {
         $publicacao = Publicacao::find($id);
-
-        if ($publicacao->capa) {
-            unlink(public_path('uploads/' . $publicacao->capa));
-            $publicacao->delete();
-        }
 
         if ($publicacao->arquivo) {
             unlink(public_path('uploads/' . $publicacao->arquivo));

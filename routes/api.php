@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('usuario/{id}/edit/', ['as' => 'usuario.edit', 'uses' => 'UsuariosController@edit']);
     Route::get('usuario/destroy/{id}', ['as' => 'usuario.destroy', 'uses'=> 'UsuariosController@destroy']);
     Route::get('usuarios/create', ['as' => 'usuarios.create', 'uses' => 'UsuariosController@create']);
+    Route::get('/updateprofile', 'UsuariosController@updateprofile')->name('usuario.updateprofile');
+
 
 
 /////////////////
@@ -37,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('publicacoes/imagens', ['as' => 'publicacoes.imagens', 'uses' => 'CategoriasController@imagens']);
     Route::get('publicacoes/videos', ['as' => 'publicacoes.videos', 'uses' => 'CategoriasController@videos']);
     Route::get('publicacoes/documentos', ['as' => 'publicacoes.documentos', 'uses' => 'CategoriasController@documentos']);
+    Route::get('publicacoes/musicas', ['as' => 'publicacoes.musicas', 'uses' => 'CategoriasController@musicas']);
+
 
 
 });

@@ -3,14 +3,6 @@
 
 @section('content')
     <head>
-
-
-        <script type="text/javascript">
-
-            $(document).ready(function(){
-                $('.telefone').mask('11/11/1111');
-            });
-        </script>
     </head>
     <div class="container">
 

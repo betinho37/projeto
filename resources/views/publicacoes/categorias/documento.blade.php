@@ -2,58 +2,69 @@
 <html lang="pt-br">
 <head>
     <link href="{{ asset('css/customize.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     @include('componentes.navbar')
 </head>
+
 <body>
+
 <div class="container marketing" style="padding:30px">
+
     <div class="row">
         @foreach($publicacao as $publicacoes)
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
                     <div class="caption">
-                        <a  href="{{asset('uploads/' . $publicacoes->arquivo)}}"   data-toggle="modal" data-target="#modalExemplo">
+                        <a  href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="modal" data-target="#modal-default">
                             <img src="{{asset('uploads/' . $publicacoes->capa)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}"
                                  class="img-responsive"/></a>
                     </div>
                 </div>
                 <div class="text-item" >
-                    <p>Titulo: {{$publicacoes->titulo}}</p>
-
-                </div>
+                    <p>
             </div>
-
-        @endforeach
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Titulo: {{$publicacoes->titulo}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" align="center">
-                    <img src="{{asset('uploads/' . $publicacoes->capa)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}"
-                         class="img-responsive"/></a>
-                </div>
-                <div class="text-item">
-                    <p>Descrição: {{$publicacoes->descricao}}</p>
-                    <p>Enviado por: {{$publicacoes->nome}}</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" download="{{asset('uploads/' . $publicacoes->arquivo)}}" class="btn btn-primary" role="button">Download</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{ $publicacao->links() }}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </div>
+
+</div>
+<div class="modal fade" id="modal-default" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img style="width: 190px" src="{{asset('uploads/' . $publicacoes->capa)}}"  alt="{{'uploads/' . $publicacoes->arquivo}}"
+                     class="img-responsive"/></a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Titulo: {{$publicacoes->titulo}}</p>
+                <p>Descrição: {{$publicacoes->descricao}}</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" download="{{asset('uploads/' . $publicacoes->arquivo)}}" class="btn btn-primary" role="button">Download</a>
+
+                <a href="{{asset('uploads/' . $publicacoes->arquivo)}}"   class="btn btn-primary" role="button">Visualizar arquivo</a>
+            </div>
+@endforeach
+
+{{ $publicacao->links() }}
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/js/adminlte.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://adminlte.io/themes/dev/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 </html>

@@ -29,6 +29,7 @@ class HomeController extends Controller
         //obriga esta logado
         $this->middleware('auth');
         $this->publicacao = $publicacao;
+        
 
     }
 

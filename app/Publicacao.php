@@ -24,6 +24,7 @@ class Publicacao extends Model
         'titulo',
         'descricao',
         'arquivo',
+        'capa',
         'tipousuario',
         'userid',
         'situacao',

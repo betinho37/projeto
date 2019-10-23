@@ -21,10 +21,7 @@
 				<strong>Telefone:</strong>
 				{!!Form::text('telefone', $usuario->telefone, ['class'=>'form-control'])!!}
 			</div>
-			<div class="form-group" >
-				<strong>Cidade:</strong>
-				{!!Form::text('cidade', $usuario->cidade, ['class'=>'form-control'])!!}
-			</div>
+
 			<div class="form-group" >
 				<strong>Estado:</strong>
 				{!!Form::select('estadoid', $list_estado, $usuario->estadoid, ['class'=>'form-control'])!!}
