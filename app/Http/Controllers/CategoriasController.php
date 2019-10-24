@@ -41,6 +41,7 @@ class CategoriasController extends Controller
     {
 
         $categoria = $this->categoria->all();
+
         return view('publicacoes.categorias.index', compact('categoria'));
 
     }
@@ -48,14 +49,14 @@ class CategoriasController extends Controller
 
 
 
-        public function documentos()
-        {
-            $publicacao = Publicacao::where('categoriaid', '=', 1)->where('situacao', '=', 1)->Simplepaginate(6);
+    public function documentos()
+    {
+        $publicacao = Publicacao::where('categoriaid', '=', 1)->where('situacao', '=', 1)->Simplepaginate(6);
 
 
-            return view('publicacoes.categorias.documento', compact('publicacao'));
+        return view('publicacoes.categorias.documento', compact('publicacao'));
 
-        }
+    }
 
 
     /**
@@ -100,4 +101,4 @@ class CategoriasController extends Controller
 
 
 
-    }
+}

@@ -29,7 +29,7 @@ class HomeController extends Controller
         //obriga esta logado
         $this->middleware('auth');
         $this->publicacao = $publicacao;
-        
+
 
     }
 
@@ -40,9 +40,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+
 
         $users = DB::table('users')->count();
+        $publicacaoes = DB::table('publicacoes')->count();
+        $publipendentes = DB::table('publicacoes')->where('situacao', '=', 0)->count();
+
 
         $blocosnumericos = [
             [
@@ -59,17 +62,38 @@ class HomeController extends Controller
             [
                 'title' => 'Últimos usuários conectados',
                 'registro' => User::orderBy('last_login_at', 'desc')
-                    ->take(5)
+                    ->take(3)
                     ->get(),
             ],
         ];
 
+        $publicacoesdia = [
+            [
+                'title' => 'Publicações hoje',
+                'number' => Publicacao::whereDate('created_at', today())->where('situacao', '=', 1)->count()
+            ],
+        ];
+
+        $publicacoesmes = [
+
+            [
+                'title' => 'Publicacoes feitas durante o mes',
+                'number' => Publicacao::whereDate('created_at', '>', today()->subDays(30))->count()
+            ],
+        ];
 
         $publicacao = Publicacao::where('situacao', '=', 0)->get();
 
 
 
-        return view('home', compact('blocosnumericos', 'blocoslista', 'users', "publicacao"));
+        return view('home', compact('blocosnumericos',
+            'blocoslista',
+            'users',
+            "publicacao",
+            "publicacoesdia",
+            "publicacaoes",
+            "publicacoesmes",
+            "publipendentes"));
 
     }
 }

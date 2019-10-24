@@ -16,9 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/css/AdminLTE.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
+
 </head>
 <body>
-@include('componentes.navbar')
+@include('componentes.navbar')<br>
+<div id="botao" >
+    <a onClick="history.go(-1)" class="btn btn-primary">Voltar</a>
+</div>
 <div class="card-body">
     <div class="col-12" >
         <div class="row" align="center">
@@ -32,6 +37,7 @@
         </div>
     </div>
 </div>
+
 {{ $publicacao->links() }}
 </body>
 

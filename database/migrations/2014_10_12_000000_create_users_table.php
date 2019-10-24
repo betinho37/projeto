@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('cep', 10)->nullable();
             $table->string('endereco', 150)->default('sem endereço');
             $table->string('telefone', 18);
-            $table->string('cidade', 45);
             $table->integer('tipousuario')->default(1);
             $table->integer('estadoid')->unsigned();
             $table->foreign('estadoid')->references('id')->on('estados')->onDelete('cascade'); 

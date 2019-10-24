@@ -43,7 +43,6 @@ class User extends Authenticatable
         'telefone',
         'tipousuario',
         'estadoid',
-        'cidade',
         'remember_token',
         'last_login_at',
     ];
