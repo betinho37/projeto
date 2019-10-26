@@ -7,8 +7,10 @@
     @include('componentes.navbar')
 
 </head>
-<body>
-
+<body><br>
+<div id="botao" >
+    <a onClick="history.go(-1)" class="btn btn-primary" style="color: white">Voltar</a>
+</div>
 <div class="container marketing" style="padding:20px">
 
     <div class="row">

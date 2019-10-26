@@ -22,7 +22,7 @@
 <body>
 @include('componentes.navbar')<br>
 <div id="botao" >
-    <a onClick="history.go(-1)" class="btn btn-primary">Voltar</a>
+    <a onClick="history.go(-1)" class="btn btn-primary" style="color: white">Voltar</a>
 </div>
 <div class="card-body">
     <div class="col-12" >
@@ -32,10 +32,17 @@
                     <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" data-toggle="lightbox" data-title="{{$publicacoes->titulo}}" data-gallery="gallery">
                         <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" class="img-fluid mb-2" alt="white sample">
                     </a><p style="width: auto;" >{{$publicacoes->descricao}}</p>
+                    @if (Auth::user()->tipousuario == 0  )
+                        <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
+                    @endif
                 </div>
+
             @endforeach
+
         </div>
+
     </div>
+
 </div>
 
 {{ $publicacao->links() }}

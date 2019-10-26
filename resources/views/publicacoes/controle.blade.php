@@ -49,7 +49,7 @@
             <table  class="table table-head-fixed">
                     <tr id="tr1">
                         <th>Nome</th>
-                        <th>Titulo da Imagem</th>
+                        <th>Titulo da publicação</th>
                         <th>Data</th>
                         <th>Situação</th>
                         <th>Publicado</th>
