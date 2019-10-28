@@ -27,6 +27,7 @@ class PublicacoesController extends Controller
      * @var Categoria|Publicacao|User
      */
     private $publicacao, $user, $categoria;
+    private $request;
 
     /**
      * PublicacoesController constructor.
@@ -35,7 +36,7 @@ class PublicacoesController extends Controller
      * @param Categoria $categoria ]
      */
 
-    public function __construct(Publicacao $publicacao, User $user, Categoria $categoria)
+    public function __construct(Request $request, Publicacao $publicacao, User $user, Categoria $categoria)
     {
         //obriga esta logado
         $this->middleware('auth');
@@ -43,6 +44,8 @@ class PublicacoesController extends Controller
         $this->publicacao = $publicacao;
         $this->user = $user;
         $this->categoria = $categoria;
+        $this->request = $request;
+
     }
 
     /**
@@ -218,7 +221,13 @@ class PublicacoesController extends Controller
      */
     public function controle()
     {
-        $tipousuario = auth()->user()->tipousuario;
+
+        $order = $this->request->get('order', 'ASC');
+        $by = $this->request->get('by', 'nome');
+
+        $publicacao = $this->publicacao->orderBy($by, $order)->paginate();
+
+      /*  $tipousuario = auth()->user()->tipousuario;
         $publicacao = $this->publicacao;
 
         if ($tipousuario != 0) {
@@ -229,7 +238,7 @@ class PublicacoesController extends Controller
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(6);
+            ->simplePaginate(6);*/
         return view('publicacoes.controle', compact('publicacao'));
     }
 

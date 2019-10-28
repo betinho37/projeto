@@ -15,13 +15,15 @@
         "igorescobar/jquery-mask-plugin": "^1.14",
         "jeroennoten/laravel-adminlte": "^1.25",
         "kartik-v/bootstrap-fileinput": "dev-master",
+        "laraerp/ordination": "^1.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8.0",
         "laraveldaily/laravel-charts": "^0.1.4",
         "laravellegends/pt-br-validator": "5.1.*",
         "lucascudo/laravel-pt-br-localization": "^1.0",
-        "mariuzzo/laravel-js-localization": "^1.4"
+        "mariuzzo/laravel-js-localization": "^1.4",
+        "plexi/sortable-grid": "^2.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

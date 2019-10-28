@@ -55,6 +55,8 @@
                         <th>Publicado</th>
                         <th>Opcões</th>
                     </tr>
+
+
                 @foreach($publicacao as $publicacoes)
                     <tr>
                         <td>{{$publicacoes -> nome }}</td>

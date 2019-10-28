@@ -1,9 +1,8 @@
 <?php
 
 namespace App;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Laraerp\Ordination\OrdinationTrait;
 
 /**
  * Class Publicacao
@@ -11,6 +10,8 @@ use Illuminate\Support\Facades\DB;
  */
 class Publicacao extends Model
 {
+    use OrdinationTrait;
+
     /**
      * @var string
      */

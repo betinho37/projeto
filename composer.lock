@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77096067ae6da2f50a7b5a4b1b8f863e",
+    "content-hash": "42c4af583e2935381ae8c6d752979507",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -687,6 +687,48 @@
                 "upload"
             ],
             "time": "2019-09-29T17:49:34+00:00"
+        },
+        {
+            "name": "laraerp/ordination",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laraerp/ordination.git",
+                "reference": "578764b19d27363feede7542377f50141afdf892"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laraerp/ordination/zipball/578764b19d27363feede7542377f50141afdf892",
+                "reference": "578764b19d27363feede7542377f50141afdf892",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laraerp\\Ordination\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jansen Felipe",
+                    "email": "jansen.felipe@gmail.com"
+                }
+            ],
+            "homepage": "http://laraerp.org",
+            "time": "2015-07-07T22:31:17+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1606,6 +1648,67 @@
                 "type"
             ],
             "time": "2015-07-25T16:39:46+00:00"
+        },
+        {
+            "name": "plexi/sortable-grid",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ricardopedias/sortable-grid.git",
+                "reference": "d78aebb2b34f5fa671b3c067a437dda95aa4abb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ricardopedias/sortable-grid/zipball/d78aebb2b34f5fa671b3c067a437dda95aa4abb0",
+                "reference": "d78aebb2b34f5fa671b3c067a437dda95aa4abb0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.5",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "illuminate/framework": "5.5.x"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "SortableGrid\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "SortableGrid": "SortableGrid\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SortableGrid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ricardo Pereira",
+                    "email": "rpdesignerfly@gmail.com"
+                }
+            ],
+            "description": "Grade de dados com recursos de pesquisa, ordenação e seletor de registros para Laravel e Blade templates",
+            "keywords": [
+                "blade",
+                "cruds",
+                "data-tables",
+                "grids",
+                "helpers",
+                "laravel"
+            ],
+            "time": "2018-07-17T23:46:36+00:00"
         },
         {
             "name": "psr/container",

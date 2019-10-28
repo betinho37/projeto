@@ -1,5 +1,8 @@
 <?php
 
+use Laraerp\Ordination\Facade;
+use Laraerp\Ordination\OrdinationServiceProvider;
+
 return [
 
     /*
