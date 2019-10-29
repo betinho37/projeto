@@ -77,7 +77,6 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $inputs = $request->all();
-
         $validator = $this->validator($inputs);
 
         if ($validator->fails()) {
@@ -91,6 +90,7 @@ class RegisterController extends Controller
         User::create($inputs);
 
         $credentials = $request->only('email', 'password');
+        dd($inputs);
 
         if (Auth::check()) {
             return redirect()->action('UsuariosController@index');

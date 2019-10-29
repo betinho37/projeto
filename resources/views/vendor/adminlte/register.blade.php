@@ -15,7 +15,7 @@
 
     <div class="register-box-body">
         <p class="login-box-msg">{{ trans('adminlte::adminlte.register_message') }}</p>
-        <form class="form-horizontal" method="post" action="/api/register/store" data-toggle="validator">
+        <form class="form-horizontal" method="post" action="/api/register" data-toggle="validator">
             {!! csrf_field() !!}
 
             <div class="form-group has-feedback {{ $errors->has('nome') ? 'has-error' : '' }}">
@@ -67,16 +67,6 @@
                         </span>
                     @endif
             </div>
-            <div class="form-group has-feedback {{ $errors->has('cidade') ? 'has-error' : '' }}">
-                    <input type="cidade" name="cidade" class="form-control" value="{{ old('cidade') }}"
-                           placeholder="Cidade">
-                    <span class="glyphicon glyphicon-globe form-control-feedback"></span>
-                    @if ($errors->has('cidade'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('cidade') }}</strong>
-                        </span>
-                    @endif
-            </div>
 
             <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                 <input type="password" name="password" class="form-control"
@@ -114,7 +104,7 @@
                               </div><br>
                             @else
             @endif
-            <button  type="submit" class="btn btn-primary">Registrar</button>
+            <button href="/api/register/store"  type="submit" class="btn btn-primary">Registrar</button>
         </form>
         <div class="auth-links">
             <a href="/api/home"

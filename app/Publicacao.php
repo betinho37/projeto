@@ -2,7 +2,6 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
-use Laraerp\Ordination\OrdinationTrait;
 
 /**
  * Class Publicacao
@@ -10,7 +9,6 @@ use Laraerp\Ordination\OrdinationTrait;
  */
 class Publicacao extends Model
 {
-    use OrdinationTrait;
 
     /**
      * @var string
@@ -49,6 +47,7 @@ class Publicacao extends Model
 
         return static::where('nome', 'LIKE', '%' . $pesquisar . '%')
             ->orWhere('created_at','LIKE','%'.$pesquisar.'%');
+/*            ->orWhere('categoriaid','LIKE','%'.$pesquisar.'%');*/
     }
 
 

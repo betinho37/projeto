@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Auth::routes();
-Route::post('register/store', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@create']);
+Route::apiResource('register/store', ['as' => 'register.store', 'uses' => 'Auth\RegisterController@create']);
 
 Route::middleware(['auth'])->group(function () {
     Route::apiResource('/home', 'HomeController');

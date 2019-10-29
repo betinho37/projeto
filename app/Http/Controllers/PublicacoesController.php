@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use SortableGrid\Traits\HasSortableGrid;
 
 use App\Http\Requests\PublicacoesRequest;
 use App\Publicacao;
@@ -16,6 +17,8 @@ use Illuminate\Http\Request;
  */
 class PublicacoesController extends Controller
 {
+
+    use HasSortableGrid;
 
     /**
      * @var Publicacao
@@ -222,12 +225,32 @@ class PublicacoesController extends Controller
     public function controle()
     {
 
-        $order = $this->request->get('order', 'ASC');
-        $by = $this->request->get('by', 'nome');
 
-        $publicacao = $this->publicacao->orderBy($by, $order)->paginate();
+        $this->setInitials('id', 'desc', 10);
 
-      /*  $tipousuario = auth()->user()->tipousuario;
+        // Seta os campos que estarão disponíveis na grade de dados
+        $this->addGridField('Nome', 'nome');
+//        $this->addGridField('Categoria', 'categoriaid');
+        $this->addGridField('Publicado', 'created_at');
+        $this->addGridField('Situação', 'situacao');
+
+        $this->addGridField('Ações');
+
+        // Seta os campos usados para consultas de busca
+        $this->addSearchField('nome');
+
+        // Seta os campos que poderão ser ordenáveis via clique do mouse
+        $this->addOrderlyField('nome');
+        $this->addOrderlyField('created_at');
+        $this->addOrderlyField('situacao');
+
+
+        // Seta o query builder para o sortable grid
+        $provider = Publicacao::query();
+        $this->setDataProvider($provider);
+
+
+        $tipousuario = auth()->user()->tipousuario;
         $publicacao = $this->publicacao;
 
         if ($tipousuario != 0) {
@@ -238,7 +261,9 @@ class PublicacoesController extends Controller
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(6);*/
+            ->simplePaginate(6);
+
+        return $this->gridView('publicacoes.controle');
         return view('publicacoes.controle', compact('publicacao'));
     }
 
