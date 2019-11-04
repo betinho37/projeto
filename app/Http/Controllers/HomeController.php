@@ -41,7 +41,7 @@ class HomeController extends Controller
     public function index()
     {
 
-
+        $tipousuario = auth()->user()->tipousuario;
         $users = DB::table('users')->count();
         $publicacaoes = DB::table('publicacoes')->count();
         $publipendentes = DB::table('publicacoes')->where('situacao', '=', 0)->count();

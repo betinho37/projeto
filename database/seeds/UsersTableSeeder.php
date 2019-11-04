@@ -10,10 +10,8 @@ class UsersTableSeeder extends Seeder
         User::create([
             'nome'      => 'Admin',
             'email'     => 'beto@gmail.com',
-            'cep'     => '00000',
             'endereco'     => 'gama',
             'telefone'     => '999999999',
-            'cidade'     => 'gama',
             'estadoid'     => 1,
             'tipousuario'     => '0',
             'password'  => bcrypt('jeremoabo'),
@@ -25,10 +23,8 @@ class UsersTableSeeder extends Seeder
         User::create([
             'nome'      => 'Admin',
             'email'     => 'beto1@gmail.com',
-            'cep'     => '00000',
             'endereco'     => 'gama',
             'telefone'     => '999999999',
-            'cidade'     => 'gama',
             'estadoid'     => 1,
             'tipousuario'     => '0',
             'password'  => bcrypt('jeremoabo'),

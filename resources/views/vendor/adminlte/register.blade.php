@@ -15,7 +15,7 @@
 
     <div class="register-box-body">
         <p class="login-box-msg">{{ trans('adminlte::adminlte.register_message') }}</p>
-        <form class="form-horizontal" method="post" action="/api/register/store" data-toggle="validator">
+        <form class="form-horizontal" method="POST" action="/api/register/store" data-toggle="validator">
             {!! csrf_field() !!}
 
             <div class="form-group has-feedback {{ $errors->has('nome') ? 'has-error' : '' }}">
@@ -67,53 +67,25 @@
                         </span>
                     @endif
             </div>
-            <div class="form-group has-feedback {{ $errors->has('cidade') ? 'has-error' : '' }}">
-                    <input type="cidade" name="cidade" class="form-control" value="{{ old('cidade') }}"
-                           placeholder="Cidade">
-                    <span class="glyphicon glyphicon-globe form-control-feedback"></span>
-                    @if ($errors->has('cidade'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('cidade') }}</strong>
-                        </span>
-                    @endif
-            </div>
 
-            <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
+
+            <div class="form-group has-feedback ">
                 <input type="password" name="password" class="form-control"
                        placeholder="{{ trans('adminlte::adminlte.password') }}" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
+                <input type="password" name="password_confirmation" class="form-control"
+                       placeholder="{{ trans('adminlte::adminlte.password') }}" required>
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
             </div>
-            <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                <input type="password" name="password_confirmation" class="form-control"
-                       placeholder="{{ trans('adminlte::adminlte.retype_password') }}" required>
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-                @if ($errors->has('password_confirmation'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                    </span>
-                @endif
-            </div>
-            @if (Auth::check())
-                              <div  align="center">
-                                {!!Form::label('tipousuario', 'Tipo de Usuário:')!!}
-                                      <label>
-                                          <input type="radio" name="tipousuario" value="0"
-                                          {{isset($usuario->tipousuario) && $usuario->tipousuario == 0 ? 'checked' : '' }}
-                                          required>Administrador
-                                      </label>
-                                      <label>
-                                          <input type="radio" name="tipousuario" value="1"
-                                          {{isset($usuario->tipousuario) && $usuario->tipousuario == 1 ? 'checked' : '' }}
-                                          required>Usuário
-                                      </label><br>
-                              </div><br>
-                            @else
-            @endif
+
             <button  type="submit" class="btn btn-primary">Registrar</button>
         </form>
         <div class="auth-links">

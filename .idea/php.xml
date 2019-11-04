@@ -100,6 +100,8 @@
       <path value="$PROJECT_DIR$/vendor/laravellegends/pt-br-validator" />
       <path value="$PROJECT_DIR$/vendor/almasaeed2010/adminlte" />
       <path value="$PROJECT_DIR$/vendor/awt/apilogger" />
+      <path value="$PROJECT_DIR$/vendor/laraerp/ordination" />
+      <path value="$PROJECT_DIR$/vendor/plexi/sortable-grid" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Auth::routes();
-Route::post('register/store', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@create']);
+Route::post('register/store', ['as' => 'register.store', 'uses' => 'Auth\RegisterController@register']);
 
 Route::middleware(['auth'])->group(function () {
     Route::apiResource('/home', 'HomeController');
@@ -25,8 +25,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/updateprofile', 'UsuariosController@updateprofile')->name('usuario.updateprofile');
 
 
-
-/////////////////
     Route::apiResource('publicacao', 'PublicacoesController');
     Route::get('publicacoes/controle', ['as' => 'publicacoes.controle', 'uses' => 'PublicacoesController@controle']);
     Route::get('/publicacoes/create', ['as' => 'publicacoes.create', 'uses' => 'PublicacoesController@create']);
@@ -34,8 +32,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('publicacao/destroy/{id}', ['as' => 'publicacao.destroy', 'uses'=> 'PublicacoesController@destroy']);
     Route::apiResource('/publicacoes/categorias', 'CategoriasController');
     Route::post('/publicacao/pesquisar', 'PublicacoesController@search')->name('publicacao.pesquisar');
-
-
     Route::get('publicacoes/imagens', ['as' => 'publicacoes.imagens', 'uses' => 'CategoriasController@imagens']);
     Route::get('publicacoes/videos', ['as' => 'publicacoes.videos', 'uses' => 'CategoriasController@videos']);
     Route::get('publicacoes/documentos', ['as' => 'publicacoes.documentos', 'uses' => 'CategoriasController@documentos']);

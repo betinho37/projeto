@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Estado;
 use Illuminate\Support\Facades\Redirect;
-use View;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -59,40 +59,34 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => 'required|string|min:6|confirmed',
-            ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function create(Request $request)
+    public function register(Request $request)
     {
         $inputs = $request->all();
 
-        $validator = $this->validator($inputs);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
 
         if ($validator->fails()) {
-//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
-            return Redirect::back()->withErrors($validator)->withInput();
-
-
+            return redirect('api/register')
+                ->withErrors($validator)
+                ->withInput();
         }
-
         $inputs['password'] = bcrypt($inputs['password']);
+
         User::create($inputs);
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::check()) {
+        if (Auth::check() ) {
             return redirect()->action('UsuariosController@index');
 
         } else {
@@ -104,4 +98,5 @@ class RegisterController extends Controller
 
 
     }
+
 }

@@ -50,21 +50,6 @@
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div class="form-group{{ $errors->has('cidade') ? ' has-error' : '' }}">
-                                        <label for="cidade" class="col-md-4 control-label">Cidade</label>
-                                        <div class="col-md-6">
-                                            <input id="cidade" type="text" class="form-control" name="cidade"
-                                                   value="{{ old('cidade') }}">
-
-                                            @if ($errors->has('cidade'))
-                                                <span class="help-block">
-                                            <strong>{{ $errors->first('cidade') }}</strong>
-                                        </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
                                     <div>
                                         <div class="form-group{{ $errors->has('estadoid') ? ' has-error' : '' }}">
                                             <label for="estadoid" class="col-md-4 control-label">Estado</label>
@@ -79,20 +64,6 @@
                                                 {!!Form::text('endereco', null, ['class'=>'form-control'])!!}
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="form-group{{ $errors->has('cep') ? ' has-error' : '' }}">
-                                                <label for="cep" class="col-md-4 control-label">CEP</label>
-                                                <div class="col-md-6">
-                                                    <input id="cep" type="text" class="form-control " name="cep"
-                                                           value="{{ old('cep') }}">
-
-                                                    @if ($errors->has('cep'))
-                                                        <span class="help-block">
-                                              <strong>{{ $errors->first('cep') }}</strong>
-                                          </span>
-                                                    @endif
-                                                </div>
-                                            </div>
                                             <div class="form-group">
                                                 <label for="password" class="col-md-4 control-label">Senha</label>
 

@@ -222,12 +222,7 @@ class PublicacoesController extends Controller
     public function controle()
     {
 
-        $order = $this->request->get('order', 'ASC');
-        $by = $this->request->get('by', 'nome');
-
-        $publicacao = $this->publicacao->orderBy($by, $order)->paginate();
-
-      /*  $tipousuario = auth()->user()->tipousuario;
+      $tipousuario = auth()->user()->tipousuario;
         $publicacao = $this->publicacao;
 
         if ($tipousuario != 0) {
@@ -238,7 +233,7 @@ class PublicacoesController extends Controller
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(6);*/
+            ->simplePaginate(6);
         return view('publicacoes.controle', compact('publicacao'));
     }
 
