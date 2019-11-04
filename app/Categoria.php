@@ -21,6 +21,6 @@ class Categoria extends Model
      */
     public static function listCategoria()
 	{
-		return static::orderBy('id')->pluck('nome', 'id');
+		return static::orderBy('id', 'desc')->pluck('nome', 'id');
 	}
 }

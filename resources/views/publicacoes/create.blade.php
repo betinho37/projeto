@@ -45,6 +45,9 @@
             </div>
 
 
+
+
+
             <div class="categoriid" style="display:none;">
                 <div  class="form-group">
                     {!! Form::label('capa', 'Capa Para Documento', ['class' => 'control-label']) !!}
