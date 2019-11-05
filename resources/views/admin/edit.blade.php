@@ -11,7 +11,7 @@
 
 			<div class="form-group" >
 				<strong>Nome:</strong>
-				{!!Form::text('name', $usuario->nome, ['class'=>'form-control'])!!}
+				{!!Form::text('nome', $usuario->nome, ['class'=>'form-control'])!!}
 			</div>
 			<div class="form-group" >
 				<strong>Email:</strong>
@@ -25,6 +25,10 @@
 			<div class="form-group" >
 				<strong>Estado:</strong>
 				{!!Form::select('estadoid', $list_estado, $usuario->estadoid, ['class'=>'form-control'])!!}
+			</div>
+			<div class="form-group" >
+				<strong>Endereço:</strong>
+				{!!Form::text('endereco', $usuario->endereco, ['class'=>'form-control'])!!}
 			</div>
 
 

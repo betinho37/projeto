@@ -58,7 +58,12 @@
                                  src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
                                  style="width: 556px; height: 300px;" alt="foto indisponível" title="legenda">
                         @elseif( $publicacao->categoriaid == 3 )
-                            <h1>musica</h1>
+                            <audio id="player" controls onpause="alertaPausa()">
+                                <source src="arquivo.ogg" type="audio/ogg">
+                                <source src="{{asset('uploads/' . $publicacao->arquivo)}}" type="audio/mp3">
+                                Seu navegador não suporta áudio em HTML5, atualize-o.
+
+                            </audio>
                         @else
                             <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
                                    height="278px" width="381px" controls>
@@ -97,18 +102,22 @@
                            required>Publicar
                 </label><br>
             </div><p></p>
+
+            @if($publicacao->categoriaid === 2)
             <div align="left"><p></p>
                 <label>Posição da Imagem:
                     <input type="radio" name="posicaoimagem" value="0"
                            {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 0 ? 'checked' : '' }}
-                           required>Vertical
+                           >Vertical
                 </label>
                 <label>
                     <input type="radio" name="posicaoimagem" value="1"
                            {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 1 ? 'checked' : '' }}
-                           required>Horizontal
+                           >Horizontal
                 </label><br>
             </div><p></p>
+            @endif
+
             <div align="Center" class="form-group">
                 {!!Form::submit('Salvar', ['class="btn btn-primary"'])!!}
                 <td><a href="{{@url('api/publicacao').'/destroy/'.$publicacao->id}}" class="btn btn-danger"
@@ -131,16 +140,6 @@
             {!!( $publicacao->descricao)!!}
         </div>
 
-
-        <div class="categoriid" style="display:none;">
-            <div  class="form-group">
-                {!! Form::label('capa', 'Capa Para Documento', ['class' => 'control-label']) !!}
-                <input id="capa" name="capa" type="file" class="file"
-                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="" >
-                <br />
-            </div>
-        </div><br />
-
         @if($publicacao->arquivo != null )
             <div class="form-group row">
                 <div class="col-md-5">
@@ -160,16 +159,4 @@
         </div>
     @endif
     {!! Form::close() !!}
-
-    <script type="text/javascript">
-        function selected(value){
-            var categoriid = document.getElementsByClassName('categoriid');
-            if(value == 1 ){
-                categoriid[0].style.display = 'block';
-            }else{
-                categoriid[0].style.display = 'none';
-            }
-        }
-
-    </script>
 @endsection

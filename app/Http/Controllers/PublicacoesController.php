@@ -228,7 +228,7 @@ class PublicacoesController extends Controller
         if ($tipousuario != 0) {
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
                 ->orderBy('situacao', 'asc')
-                ->orderBy('created_at', 'desc');
+                ->orderBy('created_at', 'desc')->simplePaginate(6);
         }
 
         $publicacao = $publicacao->orderBy('situacao', 'asc')

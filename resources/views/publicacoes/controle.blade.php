@@ -46,27 +46,26 @@
         </div>
         <br>
         <div class="card-body table-responsive p-0">
-            <table  class="table table-head-fixed">
-                @sg_table
-                @foreach($collection as $publicacao)
-
+            <table  class="table table-head-fixed text-center">
+                <tr style="color:white;background-color:steelblue" >
+                    <th>Enviado por</th>
+                    <th>Data de envio</th>
+                    <th>Situação</th>
+                    <th >Opcões</th>
+                </tr>
+                @foreach($publicacao as $publicacoes)
                     <tr class="text-center">
-                        <td class="text-center">{{ $publicacao->nome }}</td>
-                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $publicacao->created_at)->diffForHumans() }}</td>
-                        <td>{{isset($publicacao->situacao) && $publicacao->situacao == 0 ? 'Pendente' : 'Publicado' }}</td>
-
-
-                        <td class="text-center">
-                            <a type="button" href="{{@url('api/publicacao').'/' . $publicacao->id .'/'. 'edit' }}" class="btn btn-success">Visualizar</a>
-                            <a href="{{@url('api/publicacao').'/destroy/'.$publicacao->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >Excluir</a>
+                        <td >{{ $publicacoes->nome }}</td>
+                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $publicacoes->created_at)->diffForHumans() }}</td>
+                        <td>{{isset($publicacoes->situacao) && $publicacoes->situacao == 0 ? 'Pendente' : 'Publicado' }}</td>
+                        <td>
+                            <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Visualizar</a>
+                            <a href="{{@url('api/publicacao').'/destroy/'.$publicacoes->id}}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');" >Excluir</a>
                         </td>
                     </tr>
                 @endforeach
-                @end_sg_table
-
             </table>
-{{--
+
    {{ $publicacao->links() }}
---}}
         </div>
 @endsection
