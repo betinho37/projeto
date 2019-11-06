@@ -88,7 +88,7 @@
                 @endif
                 <div align="center">
                     <button type="submit" class="btn btn-primary" id='btn-salvar'> Salvar</button>
-                    <a href="controle" class="btn btn-primary">Cancelar</a>
+                    <a onClick="history.go(-1)" class="btn btn-primary" style="color: white">Cancelar</a>
                 </div>
                 {!! Form::close() !!}
             </div>

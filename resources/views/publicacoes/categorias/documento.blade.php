@@ -50,7 +50,7 @@
                         <a href="{{asset('uploads/' . $publicacoes->arquivo)}}"
                            download="{{asset('uploads/' . $publicacoes->arquivo)}}" class="btn btn-primary" role="button">Download</a>
                         @if (Auth::user()->tipousuario == 0  )
-                            <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
+                            <a  href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
                         @endif
                         <a href="{{asset('uploads/' . $publicacoes->arquivo)}}" class="btn btn-primary" role="button">Visualizar arquivo</a>
                     </div>

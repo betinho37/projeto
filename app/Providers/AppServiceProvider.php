@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 use App\User;
+use Illuminate\Support\Facades\Schema;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(Dispatcher $events,User $user)
     {
+    Schema::defaultStringLength(191);
 
         }
 

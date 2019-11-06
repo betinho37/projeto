@@ -33,7 +33,7 @@
                         <img src="{{asset('uploads/' . $publicacoes->arquivo)}}" class="img-fluid mb-2" alt="white sample">
                     </a><p style="width: auto;" >{{$publicacoes->descricao}}</p>
                     @if (Auth::user()->tipousuario == 0  )
-                        <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
+                        <a  href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
                     @endif
                 </div>
 

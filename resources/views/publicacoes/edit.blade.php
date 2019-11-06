@@ -3,9 +3,19 @@
 
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
 <style rel="stylesheet" type="text/css">
-    .row { display: table; }
-    .thumbnail { float: left; width: 60%; }
-    .conteudo {  float: left; width: 60%; }
+    .row {
+        display: table;
+    }
+
+    .thumbnail {
+        float: left;
+        width: 60%;
+    }
+
+    .conteudo {
+        float: left;
+        width: 60%;
+    }
 </style>
 @section('content')
 
@@ -35,45 +45,47 @@
                 <strong>Descrição:</strong>
                 {!!Form::textarea('descricao', $publicacao->descricao, ['class'=>'form-control'])!!}
             </div>
+            <div class="form-group">
 
-            @if($publicacao->arquivo != null )
-                <div class="form-group row">
-                    <div class="col-md-5">
-                        @if($publicacao->categoriaid == 1 )
-                            <div class="row">
-                            <div class="thumbnail">
-                                    <div class="caption">
-                                        <img src="{{asset('uploads/' . $publicacao->capa)}}"  alt="{{'uploads/' . $publicacao->arquivo}}"
-                                             class="img-responsive"/></a>
+                @if($publicacao->arquivo != null )
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            @if($publicacao->categoriaid == 1 )
+                                <div class="row">
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <img src="{{asset('uploads/' . $publicacao->capa)}}"
+                                                 alt="{{'uploads/' . $publicacao->arquivo}}"
+                                                 class="img-responsive"/></a>
+                                        </div>
                                     </div>
-                            </div>
-                                <div class="conteudo">
-                            <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                    width="300px" height="300px">
-                            </iframe>
+                                    <div class="conteudo">
+                                        <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                                width="300px" height="300px">
+                                        </iframe>
+                                    </div>
                                 </div>
-                            </div>
-                        @elseif( $publicacao->categoriaid == 2 )
-                            <img id="grande"
-                                 src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                 style="width: 556px; height: 300px;" alt="foto indisponível" title="legenda">
-                        @elseif( $publicacao->categoriaid == 3 )
-                            <audio id="player" controls onpause="alertaPausa()">
-                                <source src="arquivo.ogg" type="audio/ogg">
-                                <source src="{{asset('uploads/' . $publicacao->arquivo)}}" type="audio/mp3">
-                                Seu navegador não suporta áudio em HTML5, atualize-o.
+                            @elseif( $publicacao->categoriaid == 2 )
+                                <img id="grande"
+                                     src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                     style="width: 556px; height: 300px;" alt="foto indisponível" title="legenda">
+                            @elseif( $publicacao->categoriaid == 3 )
+                                <audio id="player" controls onpause="alertaPausa()">
+                                    <source src="arquivo.ogg" type="audio/ogg">
+                                    <source src="{{asset('uploads/' . $publicacao->arquivo)}}" type="audio/mp3">
+                                    Seu navegador não suporta áudio em HTML5, atualize-o.
 
-                            </audio>
-                        @else
-                            <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                   height="278px" width="381px" controls>
-                            </video>
-                        @endif
-                    </div>
-                </div><br/>
-            @else
-            @endif
-
+                                </audio>
+                            @else
+                                <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                       height="278px" width="381px" controls>
+                                </video>
+                            @endif
+                        </div>
+                    </div><br/>
+                @else
+                @endif
+            </div>
             @if ($publicacao->categoriaid == 1)
 
                 <div>
@@ -104,18 +116,18 @@
             </div><p></p>
 
             @if($publicacao->categoriaid === 2)
-            <div align="left"><p></p>
-                <label>Posição da Imagem:
-                    <input type="radio" name="posicaoimagem" value="0"
-                           {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 0 ? 'checked' : '' }}
-                           >Vertical
-                </label>
-                <label>
-                    <input type="radio" name="posicaoimagem" value="1"
-                           {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 1 ? 'checked' : '' }}
-                           >Horizontal
-                </label><br>
-            </div><p></p>
+                <div align="left"><p></p>
+                    <label>Posição da Imagem:
+                        <input type="radio" name="posicaoimagem" value="0"
+                                {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 0 ? 'checked' : '' }}
+                        >Vertical
+                    </label>
+                    <label>
+                        <input type="radio" name="posicaoimagem" value="1"
+                                {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 1 ? 'checked' : '' }}
+                        >Horizontal
+                    </label><br>
+                </div><p></p>
             @endif
 
             <div align="Center" class="form-group">
@@ -123,7 +135,7 @@
                 <td><a href="{{@url('api/publicacao').'/destroy/'.$publicacao->id}}" class="btn btn-danger"
                        onclick="return confirm('Tem certeza de que deseja excluir este usuario ?');">
                         <span class="glyphicon glyphicon-trash"></span>Excluir</a></td>
-                <a href="/api/publicacoes/controle" class="btn btn-primary">Voltar</a>
+                <a onClick="history.go(-1)" class="btn btn-primary" style="color: white">Voltar</a>
             </div>
     </div>
     @else
@@ -155,8 +167,7 @@
 
 
         <div align="Center" class="form-group">
-            <a href="/publicacoes/controle" class="btn btn-primary">Voltar</a>
-        </div>
+            <a onClick="history.go(-1)" class="btn btn-primary" style="color: white">Voltar</a></div>
     @endif
     {!! Form::close() !!}
 @endsection

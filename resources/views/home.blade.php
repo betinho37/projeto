@@ -4,7 +4,7 @@
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
 
 @section('content')
-
+    @if (Auth::user()->tipousuario == 0  )
     <div class="row">
         @foreach ($publicacao->slice(0, 1) as $publicacoes)
             <div class="col-md-6">
@@ -56,9 +56,11 @@
                     </div>
                     <div class="row">
                         @foreach ($blocoslista as $lista)
-                            <div class="col-md-6">
-                                <h3>{{ $lista['title'] }}</h3>
-                                <table class="table table-bordered table-striped">
+                            <h4 align="center"> {{ $lista['title'] }}</h4>
+                            <div class="table-responsive">
+
+                            <table class="table table-dark">
+
                                     <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -71,7 +73,7 @@
                                         <tr>
                                             <td>{{ $registro->nome }}</td>
                                             <td>{{ $registro->email }}</td>
-                                            <td>{{ $registro->last_login_at }}</td>
+                                            <td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',  $registro->last_login_at)->diffForHumans()}}</td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -95,7 +97,7 @@
 
     <div class="box box-success collapsed-box">
         <div class="box-header with-border">
-            <h3 class="box-title">Publicaccoes</h3>
+            <h3 class="box-title">Publicações</h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
@@ -131,26 +133,25 @@
                             <!-- /.info-box-content -->
                         </div>
                     </div>
-                    <div class="row">
                         @foreach ($publicacoesmes as $mes)
                             <div class="col-md-4 ">
                                 <div class="info-box">
                                     <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
                                     <div class="info-box-content">
                                         <span class="info-box-text">{{ $mes['title'] }}</span>
                                         <span class="info-box-number">{{ $mes['number'] }}</span>
                                     </div>
-                                    <!-- /.info-box-content -->
                                 </div>
                             </div>
                         @endforeach
-                    </div>
                 </div>
 
             </div>
         </div>
     </div>
+        @else
+        ola
+    @endif
 
 
 

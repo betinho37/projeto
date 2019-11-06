@@ -33,7 +33,9 @@
                             <p>Enviado {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $publicacoes->created_at)->diffForHumans() }}
                                 por {{$publicacoes->nome}}</p>
 
-
+                            @if (Auth::user()->tipousuario == 0  )
+                                <a  href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
+                            @endif
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                                {{-- <a href="" id="whatsapp-share-btt" rel="nofollow" target="_blank">WhatsApp</a>   
