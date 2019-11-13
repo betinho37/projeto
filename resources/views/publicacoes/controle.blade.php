@@ -56,7 +56,7 @@
                 @foreach($publicacao as $publicacoes)
                     <tr class="text-center">
                         <td >{{ $publicacoes->nome }}</td>
-                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $publicacoes->created_at) }}</td>
+                        <td>{{  date( 'd/m/Y ' , strtotime($publicacoes->created_at  ))}}</td>
                         <td>{{isset($publicacoes->situacao) && $publicacoes->situacao == 0 ? 'Pendente' : 'Publicado' }}</td>
                         <td>
                             <a type="button" href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Visualizar</a>

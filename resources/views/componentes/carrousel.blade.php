@@ -26,7 +26,7 @@
                     </div>
                 @else
                     <div class="item {{ $loop->first ? 'active ' : '' }}" >
-                        <a href="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}">   <img src="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}"  width="852" height="1136"></a>
+                        <a href="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}">   <img src="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}"  width="352" height="736" {{-- width="852" height="1136"--}}></a>
                     </div>
                 @endif
         @endforeach

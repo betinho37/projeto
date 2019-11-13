@@ -53,8 +53,8 @@ class PublicacoesController extends Controller
      */
     public function index()
     {
-
-        $publicacao = Publicacao::where('situacao', '=', 1)->get();
+        $publicacao = Publicacao::where('situacao', '=', 1)
+            ->where('categoriaid', '!=', '3')->get();
 
         return view('publicacoes.index', ['publicacao' => $publicacao]);
 

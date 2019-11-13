@@ -18,12 +18,12 @@
     <section class="p-1">
         <div class="row">
             @foreach($publicacao as $key => $publicacoes)
-                <div class="col-md-6">
-                    <h4 class="pb-4">{{$publicacoes->titulo}}</h4>
+                <div class="col-md-6"  style="padding-left: 56px;padding-right: 56px;" id="video">
+                    <h4 class="pb-4" align="center">{{$publicacoes->titulo}}</h4>
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="{{asset('uploads/' . $publicacoes->arquivo)}}" n></iframe>
                     </div>
-                    <h3>{{$publicacoes->descricao}}</h3>
+                    <h3  class="card-title" >{{$publicacoes->descricao}}</h3>
                     @if (Auth::user()->tipousuario == 0  )
                         <a  href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
                     @endif

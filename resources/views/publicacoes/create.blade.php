@@ -75,12 +75,12 @@
                         <label>Posição da Imagem:
                             <input type="radio" name="posicaoimagem" value="0"
                                    {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 0 ? 'checked' : '' }}
-                                   required>Vertical
+                                   >Vertical
                         </label>
                         <label>
                             <input type="radio" name="posicaoimagem" value="1"
                                    {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 1 ? 'checked' : '' }}
-                                   required>Horizontal
+                                   >Horizontal
                         </label>
 
                     </div>

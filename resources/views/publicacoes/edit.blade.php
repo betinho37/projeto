@@ -61,14 +61,14 @@
                                     </div>
                                     <div class="conteudo">
                                         <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                                width="300px" height="300px">
+                                                width="356px" height="200px">
                                         </iframe>
                                     </div>
                                 </div>
                             @elseif( $publicacao->categoriaid == 2 )
                                 <img id="grande"
                                      src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                     style="width: 556px; height: 300px;" alt="foto indisponível" title="legenda">
+                                     style="width: 356px; height: 200px;" alt="foto indisponível" title="legenda">
                             @elseif( $publicacao->categoriaid == 3 )
                                 <audio id="player" controls onpause="alertaPausa()">
                                     <source src="arquivo.ogg" type="audio/ogg">
