@@ -59,8 +59,7 @@
                             <h4 align="center"> {{ $lista['title'] }}</h4>
                             <div class="table-responsive">
 
-                            <table class="table table-dark">
-
+                            <table class="table table-dark text-center" >
                                     <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -73,7 +72,7 @@
                                         <tr>
                                             <td>{{ $registro->nome }}</td>
                                             <td>{{ $registro->email }}</td>
-                                            <td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',  $registro->last_login_at)->diffForHumans()}}</td>
+                                            <td>{{ date( 'd/m/Y ' , strtotime($registro->last_login_at ))}}</td>
                                         </tr>
                                     @empty
                                         <tr>

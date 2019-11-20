@@ -5,20 +5,7 @@
     <head>
 
     </head>
-
-
-
-    <script src="{{ asset('js/jquery-3.2.1.js') }}"></script>
-    <script src="{{ asset('js/jquery.maskedinput.min.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#data').mask('00/00/0000//');
-        })
-    </script>
-
-
     <div class="container">
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -36,12 +23,6 @@
                                     @endif
                                 </div>
                             </div>
-
-
-                            <input  id="data" type="text" class="data" >
-
-
-
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label"> Email </label>
                                 <div class="col-md-6">
@@ -67,9 +48,6 @@
                                         @endif
                                     </div>
                                 </div>
-
-
-
                                 <div>
                                     <div class="form-group{{ $errors->has('estadoid') ? ' has-error' : '' }}">
                                         <label for="estadoid" class="col-md-4 control-label">Estado</label>
@@ -84,36 +62,18 @@
                                             {!!Form::text('endereco', null, ['class'=>'form-control'])!!}
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="form-group{{ $errors->has('cep') ? ' has-error' : '' }}">
-                                            <label for="cep" class="col-md-4 control-label">CEP</label>
-                                            <div class="col-md-6">
-                                                <input id="cep" type="text" class="form-control " name="cep"
-                                                       value="{{ old('cep') }}">
-
-                                                @if ($errors->has('cep'))
-                                                    <span class="help-block">
-                                              <strong>{{ $errors->first('cep') }}</strong>
-                                          </span>
-                                                @endif
-                                            </div>
-                                        </div>
                                         <div class="form-group">
                                             <label for="password" class="col-md-4 control-label">Senha</label>
-
                                             <div class="col-md-6">
                                                 <input id="password" type="password" class="form-control"
                                                        name="password" required>
                                             </div>
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                            <label for="password-confirm" class="col-md-4 control-label">Confirmar
-                                                Senha </label>
-
+                                            <label for="password-confirm" class="col-md-4 control-label">Confirmar Senha </label>
                                             <div class="col-md-6">
                                                 <input id="password-confirm" type="password" class="form-control"
                                                        name="password_confirmation" required>
-
                                                 @if ($errors->has('password'))
                                                     <span class="help-block">
                                                             <strong>Senhas Não Conferem</strong>
@@ -144,9 +104,9 @@
                                                     Registrar
                                                 </button>
                                                 @if (Auth::check())
-                                                    <a href="/usuario" class="btn btn-primary">Cancelar</a>
+                                                    <a href="/api/usuario" class="btn btn-primary">Cancelar</a>
                                                 @else
-                                                    <a href="/publicacao" class="btn btn-primary">Cancelar</a>
+                                                    <a href="/api/usuario" class="btn btn-primary">Cancelar</a>
                                                 @endif
                                             </div>
                                         </div>

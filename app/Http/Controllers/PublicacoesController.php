@@ -197,19 +197,15 @@ class PublicacoesController extends Controller
     {
         $publicacao = Publicacao::find($id);
 
-
         if ($publicacao->capa) {
             unlink(public_path('uploads/' . $publicacao->capa));
             $publicacao->delete();
         }
-
         if ($publicacao->arquivo) {
             unlink(public_path('uploads/' . $publicacao->arquivo));
             $publicacao->delete();
         }
-
         $publicacao->delete();
-
         if ($publicacao) {
             return redirect()->action('PublicacoesController@controle')->with('sucesso', 'Publicação Excluida!');
         }
@@ -222,19 +218,21 @@ class PublicacoesController extends Controller
     public function controle()
     {
 
-      $tipousuario = auth()->user()->tipousuario;
+        $tipousuario = auth()->user()->tipousuario;
         $publicacao = $this->publicacao;
 
-        if ($tipousuario != 0) {
+        //se o usuario for admin
+        if ($tipousuario === 0) {
+            $publicacao = $publicacao->orderBy('situacao', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->simplePaginate(5);
+        }else{
             $publicacao = $publicacao->where('publicacoes.userid', '=', auth()->user()->id)
                 ->orderBy('situacao', 'asc')
-                ->orderBy('created_at', 'desc')->simplePaginate(6);
+                ->orderBy('created_at', 'desc')->simplePaginate();
         }
-
-        $publicacao = $publicacao->orderBy('situacao', 'asc')
-            ->orderBy('created_at', 'desc')
-            ->simplePaginate(6);
         return view('publicacoes.controle', compact('publicacao'));
+
     }
 
     /**
@@ -248,9 +246,7 @@ class PublicacoesController extends Controller
         $publicacao = Publicacao::pesquisa($request->pesquisar);
 
         if ($publicacao == true) {
-
             $publicacao = Publicacao::orderBy('created_at', 'asc')->simplePaginate(6);
-
             return view('publicacoes/search', compact('publicacao', 'pesquisa'));
         } else {
             return redirect()->action('PublicacoesController@Controle')

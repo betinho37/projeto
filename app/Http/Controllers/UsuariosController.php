@@ -79,7 +79,6 @@ class UsuariosController extends Controller
         $validator = $this->validator($inputs);
 
         if ($validator->fails()) {
-//                return Response::json(array('error' => $validator->getMessageBag()->toArray()));
             return Redirect::back()->withErrors($validator)->withInput();
 
 

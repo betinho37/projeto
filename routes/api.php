@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/publicacoes/create', ['as' => 'publicacoes.create', 'uses' => 'PublicacoesController@create']);
     Route::get('publicacao/{id}/edit/', ['as' => 'publicacao.edit', 'uses' => 'PublicacoesController@edit']);
     Route::get('publicacao/destroy/{id}', ['as' => 'publicacao.destroy', 'uses'=> 'PublicacoesController@destroy']);
+
     Route::apiResource('/publicacoes/categorias', 'CategoriasController');
     Route::post('/publicacao/pesquisar', 'PublicacoesController@search')->name('publicacao.pesquisar');
     Route::get('publicacoes/imagens', ['as' => 'publicacoes.imagens', 'uses' => 'CategoriasController@imagens']);
