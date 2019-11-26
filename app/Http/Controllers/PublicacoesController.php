@@ -53,8 +53,11 @@ class PublicacoesController extends Controller
      */
     public function index()
     {
-        $publicacao = Publicacao::where('situacao', '=', 1)
-            ->where('categoriaid', '!=', '3')->get();
+        $publicacao = Publicacao::where([
+            ['situacao', '=', 1],
+            ['categoriaid', '!=', '3'],
+            ['categoriaid', '!=', '4']
+        ])->get();
 
         return view('publicacoes.index', ['publicacao' => $publicacao]);
 
@@ -92,9 +95,6 @@ class PublicacoesController extends Controller
 
         if ($request->hasFile('capa')) {
             $path = $request->capa->store('/capas');
-           /* $ext = $request->capa->getClientOriginalExtension();
-            $request->capa->extension();
-            $mime = $request->capa->getMimeType();*/
             $publicacao->capa = $path;
             $publicacao->save();
 

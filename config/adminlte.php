@@ -110,12 +110,14 @@ return [
 
     'menu' => [
         '',
-       
+
         [
             'text'        => 'Controle',
             'url'         => '/api/home',
             'icon'        => 'file',
             'label_color' => 'success',
+            'can'         => 'admin'
+
         ],
         'Opções',
     

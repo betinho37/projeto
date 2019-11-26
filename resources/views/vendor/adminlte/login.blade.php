@@ -58,7 +58,6 @@
 			<div class="input-group mb-3">
 
 				<p class="">
-					<a href="/api/password/reset" >Esqueci minha senha</a><br>
 					<a  href="/api/register" class="text-center">Registrar</a>
 				</p>
 			</div>

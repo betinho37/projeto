@@ -35,7 +35,7 @@
                     @if (Auth::user()->tipousuario == 0  )
                         <a  href="{{@url('api/publicacao').'/' . $publicacoes->id .'/'. 'edit' }}" class="btn btn-success">Editar</a>
                     @endif
-                    <div class="d-flex justify-content-between align-items-center">
+                    {{--<div class="d-flex justify-content-between align-items-center">
                            
                                 <a href="" id="whatsapp-share-btt" rel="nofollow" target="_blank">WhatsApp</a>   
                                     <script type="text/javascript">
@@ -47,8 +47,8 @@
                                             document.getElementById("whatsapp-share-btt").href = "https://api.whatsapp.com/send?text=" + conteudo;
                                         }, false);
                                     </script>
-                                 
-                    </div>
+
+                    </div>--}}
                 </div>
 
             @endforeach

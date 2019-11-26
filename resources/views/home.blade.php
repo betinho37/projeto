@@ -4,7 +4,6 @@
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
 
 @section('content')
-    @if (Auth::user()->tipousuario == 0  )
     <div class="row">
         @foreach ($publicacao->slice(0, 1) as $publicacoes)
             <div class="col-md-6">
@@ -148,14 +147,6 @@
             </div>
         </div>
     </div>
-        @else
-        ola
-    @endif
-
-
-
-
-
 @endsection
 @section('scripts')
 

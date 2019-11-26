@@ -34,7 +34,7 @@ class RegisterController extends Controller
      * @var string
      */
     private  $estado;
-    protected $redirectTo = '/api/home';
+    protected $redirectTo = '/api/publicacao';
 
     /**
      * Create a new controller instance.
@@ -92,7 +92,7 @@ class RegisterController extends Controller
         } else {
             if (Auth::attempt($credentials)) {
 
-                return redirect()->intended( '/api/home');
+                return redirect()->intended( '/api/publicacao');
             }
         }
 

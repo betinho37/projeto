@@ -38,7 +38,6 @@ class UsuariosController extends Controller
         $this->estado = $estado;
 
 
-
     }
 
     /**
@@ -49,7 +48,7 @@ class UsuariosController extends Controller
 
         $usuario = User::paginate(10);
         $list_estado = $this->estado->listEstado();
-        return view('admin.index', compact('usuario', 'total_ids','list_estado'));
+        return view('admin.index', compact('usuario', 'total_ids', 'list_estado'));
 
     }
 
@@ -69,7 +68,7 @@ class UsuariosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -95,15 +94,16 @@ class UsuariosController extends Controller
         } else {
             if (Auth::attempt($credentials)) {
 
-                return redirect()->intended( '/api/home');
+                return redirect()->intended('/api/home');
             }
         }
 
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param \App\Usuario $usuario
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -117,7 +117,7 @@ class UsuariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param \App\Usuario $usuario
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -130,8 +130,8 @@ class UsuariosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Usuario $usuario
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -146,10 +146,10 @@ class UsuariosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Usuario  $usuario
+     * @param \App\Usuario $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $usuario = User::find($id);
         $usuario->delete();
@@ -172,12 +172,13 @@ class UsuariosController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $pesquisa = $request->pesquisar;
 
         $usuario = User::pesquisa($request->pesquisar);
 
-        if(count($usuario) > 0){
+        if (count($usuario) > 0) {
             return view('admin/search', compact('usuario', 'pesquisa'));
         } else {
             return redirect()->action('UsuariosController@index')
@@ -185,29 +186,20 @@ class UsuariosController extends Controller
         }
     }
 
+    public function updateprofile(Request $request)
+    {
+        $usuario = Auth::user(); // resgata o usuario
+        $list_estado = $this->estado->listEstado();
 
 
-
-       public function updateprofile(Request $request)
+        if (!(new \Illuminate\Http\Request)->input('password') == '') // verifica se a senha foi alterada
         {
-            $usuario = Auth::user(); // resgata o usuario
-            $list_estado = $this->estado->listEstado();
-
-
-            if ( ! (new \Illuminate\Http\Request)->input('password') == '') // verifica se a senha foi alterada
-            {
-                $usuario->password = bcrypt((new \Illuminate\Http\Request)->input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
-            }
-
-            $usuario->save(); // salva o usuario alterado =)
-            return view('admin.updateprof', compact('usuario', 'list_estado'));
-
-            /*Flash::message('Atualizado com sucesso!');
-            return Redirect::to('UsuariosController@index'); // redireciona pra rota que você achar melhor =)*/
+            $usuario->password = bcrypt((new \Illuminate\Http\Request)->input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
         }
 
-
-
+        $usuario->save(); // salva o usuario alterado =)
+        return view('admin.updateprof', compact('usuario', 'list_estado'));
+    }
 
 
 }
