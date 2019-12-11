@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html>
+<html  lang="pt-br">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AdminLTE 3 | Log in</title>
+	<title>{!! config('adminlte.title') !!}</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Font Awesome -->
@@ -21,9 +21,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
 	<div class="login-logo">
-		<b>Museu Virtual</b>
+		{!! config('adminlte.title') !!}
 	</div>
-	<!-- /.login-logo -->
 	<div class="card">
 		<div class="card-body login-card-body">
 
@@ -32,18 +31,18 @@
 			@endif
 
 			<form class="form-login" role="form" method="POST" action="{{ route('login') }}">
-				<label for="nome">Email <abbr title="campo obrigatório">*</abbr></label>
+				<label for="email">Email <abbr title="campo obrigatório">*</abbr></label>
 				<div class="input-group mb-3">
-					<input type="email" id="inputEmail" name="email" id="email" class="form-control" required >
+					<input type="email" name="email" id="email" class="form-control" required >
 					<div class="input-group-append">
 						<div class="input-group-text">
 							<span class="fas fa-envelope"></span>
 						</div>
 					</div>
 				</div>
-				<label for="nome">Senha <abbr title="campo obrigatório">*</abbr></label>
+				<label for="password">Senha <abbr title="campo obrigatório">*</abbr></label>
 				<div class="input-group mb-3">
-					<input type="password" id="inputPassword" name="password" id="password" class="form-control" required >
+					<input type="password"  name="password" id="password" class="form-control" required >
 					<div class="input-group-append">
 						<div class="input-group-text">
 							<span class="fas fa-lock"></span>
@@ -58,8 +57,10 @@
 			<div class="input-group mb-3">
 
 				<p class="">
-					<a  href="/api/register" class="text-center">Registrar</a>
+					<a  href="/api/register" class="text-center">Registrar</a><br>
+					<a  href="/api/password/reset" class="text-center">Esqueceu a senha ? </a>
 				</p>
+
 			</div>
 		</div>
 		<!-- /.login-card-body -->

@@ -4,7 +4,7 @@
     <meta name="author" content="">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>{!! config('adminlte.title') !!}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -23,20 +23,17 @@
   @include('componentes.carrousel')
 
         <div class="container" align="center">
-          <h1 class="jumbotron-heading">Sobre a Galeria</h1>
-          <p class="lead text-muted">Apresentação</p>
+          <p class="lead text-muted"><br >O objetivo geral do Sistema de Gerenciamento de Publicações é fazer com que os usuários possam compartilhar de forma pública ou privada imagens, vídeos, documentos e músicas de forma acessível e segura.</p>
           <p>
-            <a href="publicacoes/categorias" class="btn btn-primary my-2">Visualizar Obras</a>
+            <a href="publicacoes/categorias" class="btn btn-primary my-2">Visualizar publicações</a>
           </p>
         </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-slim.min.js"><\/script>')</script>
     <script src="../../../public/js/popper.min.js"></script>
     <script src="../../../public/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Dont actually copy the next line! -->
-    <script src="js/holder.min.js"></script>
   </body>
 </html>

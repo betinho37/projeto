@@ -48,41 +48,37 @@
             <div class="form-group">
 
                 @if($publicacao->arquivo != null )
-                    <div class="form-group row">
-                        <div class="col-md-5">
-                            @if($publicacao->categoriaid == 1 )
-                                <div class="row">
-                                    <div class="thumbnail">
-                                        <div class="caption">
-                                            <img src="{{asset('uploads/' . $publicacao->capa)}}"
-                                                 alt="{{'uploads/' . $publicacao->arquivo}}"
-                                                 class="img-responsive"/></a>
-                                        </div>
-                                    </div>
-                                    <div class="conteudo">
-                                        <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                                width="356px" height="200px">
-                                        </iframe>
-                                    </div>
+                    @if($publicacao->categoriaid == 1 )
+                        <div class="row">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <img src="{{asset('uploads/' . $publicacao->capa)}}"
+                                         alt="{{'uploads/' . $publicacao->arquivo}}"
+                                         class="img-responsive"/>
                                 </div>
-                            @elseif( $publicacao->categoriaid == 2 )
-                                <img id="grande"
-                                     src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                     style="width: 356px; height: 200px;" alt="foto indisponível" title="legenda">
-                            @elseif( $publicacao->categoriaid == 3 )
-                                <audio id="player" controls onpause="alertaPausa()">
-                                    <source src="arquivo.ogg" type="audio/ogg">
-                                    <source src="{{asset('uploads/' . $publicacao->arquivo)}}" type="audio/mp3">
-                                    Seu navegador não suporta áudio em HTML5, atualize-o.
-
-                                </audio>
-                            @else
-                                <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                                       height="278px" width="381px" controls>
-                                </video>
-                            @endif
+                            </div>
+                            <div class="conteudo">
+                                <iframe src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                                        width="356px" height="200px">
+                                </iframe>
+                            </div>
                         </div>
-                    </div><br/>
+                    @elseif( $publicacao->categoriaid == 2 )
+                        <img id="grande"
+                             src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                             style="width: 356px; height: 200px;" alt="foto indisponível" title="legenda">
+                    @elseif( $publicacao->categoriaid == 3 )
+                        <audio id="player" controls onpause="alertaPausa()">
+                            <source src="{{asset('uploads/' . $publicacao->arquivo)}}" type="audio/mp3">
+                            Seu navegador não suporta áudio em HTML5, atualize-o.
+
+                        </audio>
+                    @else
+                        <video src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
+                               height="278px" width="381px" controls>
+                        </video>
+                    @endif
+                    <br/>
                 @else
                 @endif
             </div>
@@ -115,21 +111,6 @@
                 </label><br>
             </div><p></p>
 
-            @if($publicacao->categoriaid === 2)
-                <div align="left"><p></p>
-                    <label>Posição da Imagem:
-                        <input type="radio" name="posicaoimagem" value="0"
-                                {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 0 ? 'checked' : '' }}
-                        >Vertical
-                    </label>
-                    <label>
-                        <input type="radio" name="posicaoimagem" value="1"
-                                {{isset($publicacao->posicaoimagem) && $publicacao->posicaoimagem == 1 ? 'checked' : '' }}
-                        >Horizontal
-                    </label><br>
-                </div><p></p>
-            @endif
-
             <div align="Center" class="form-group">
                 {!!Form::submit('Salvar', ['class="btn btn-primary"'])!!}
                 <td><a href="{{@url('api/publicacao').'/destroy/'.$publicacao->id}}" class="btn btn-danger"
@@ -158,7 +139,7 @@
                     <a href="{{asset('uploads/' . $publicacao->arquivo)}}">
                         <img id="preview"
                              src="{{asset((isset($publicacao) && $publicacao->arquivo!='')?'uploads/'.$publicacao->arquivo:'')}}"
-                             height="200px" width="200px"/>
+                             height="200px" width="200px" alt="#"/>
                     </a>
                 </div>
             </div><br/>

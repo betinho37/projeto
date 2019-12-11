@@ -89,7 +89,7 @@ class UsuariosController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::check()) {
-            return redirect()->action('UsuariosController@index');
+            return redirect()->action('UsuariosController@index')->with('sucesso', 'Usuário Inserído!');;
 
         } else {
             if (Auth::attempt($credentials)) {
@@ -140,7 +140,7 @@ class UsuariosController extends Controller
         $usuario->fill($request->all());
 
         $usuario->save();
-        return redirect()->action('UsuariosController@index');
+        return redirect()->action('UsuariosController@index')->with('sucesso', 'Usuário Atualizado!');;
     }
 
     /**
@@ -153,7 +153,7 @@ class UsuariosController extends Controller
     {
         $usuario = User::find($id);
         $usuario->delete();
-        return redirect()->action('UsuariosController@index');
+        return redirect()->action('UsuariosController@index')->with('sucesso', 'Usuário Excluido!');;
     }
 
     /**
@@ -192,9 +192,9 @@ class UsuariosController extends Controller
         $list_estado = $this->estado->listEstado();
 
 
-        if (!(new \Illuminate\Http\Request)->input('password') == '') // verifica se a senha foi alterada
+        if (!(new $request)->input('password') == '') // verifica se a senha foi alterada
         {
-            $usuario->password = bcrypt((new \Illuminate\Http\Request)->input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
+            $usuario->password = bcrypt((new $request)->input('password')); // muda a senha do seu usuario já criptografada pela função bcrypt
         }
 
         $usuario->save(); // salva o usuario alterado =)

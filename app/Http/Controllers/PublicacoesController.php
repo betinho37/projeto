@@ -55,6 +55,7 @@ class PublicacoesController extends Controller
     {
         $publicacao = Publicacao::where([
             ['situacao', '=', 1],
+            ['categoriaid', '!=', '1'],
             ['categoriaid', '!=', '3'],
             ['categoriaid', '!=', '4']
         ])->get();

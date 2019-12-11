@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
+    <title>{!! config('adminlte.title') !!}</title>
+
     <link href="{{ asset('css/customize.css') }}" rel="stylesheet">
     @include('componentes.navbar')
 </head>
@@ -19,12 +22,12 @@
         </div>
 
         <div class="col-lg-4">
-            <a href="/api/publicacoes/documentos">  <img style="width: 243px;" class="img-thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYLd1wewsCZOpEXuHpCfiFIrqpCaiWZKJqc8lrnyQnWyC-pR8Ag&s" alt="" ><a/>
+            <a href="/api/publicacoes/documentos">  <img style="width: 243px;" class="img-thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYLd1wewsCZOpEXuHpCfiFIrqpCaiWZKJqc8lrnyQnWyC-pR8Ag&s" alt="" ></a>
                 <h2 >Documentos </h2>
         </div>
 
         <div class="col-lg-4">
-            <a href="/api/publicacoes/musicas">  <img style="width: 243px;" class="img-thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTK-_z300vtF3GciFMTsWWZpvYJc9bGPy3xFuGecofeKqjBDZf&s" alt="" ><a/>
+            <a href="/api/publicacoes/musicas">  <img style="width: 243px;" class="img-thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTK-_z300vtF3GciFMTsWWZpvYJc9bGPy3xFuGecofeKqjBDZf&s" alt="" ></a>
                 <h2 >Musicas </h2>
         </div>
     </div>

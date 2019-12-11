@@ -1,9 +1,8 @@
 @extends('adminlte::page')
 <head>
     <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
-
+    <title>{!! config('adminlte.title') !!}</title>
 </head>
-
 @section('content')
     <body>
     <div class="box box-primary">
@@ -39,9 +38,8 @@
                 {!!Form::select('categoriaid', $list_categoria, null, ['class'=>'form-control',  'onclick' => 'selected(this.value)'])!!}
             </div>
             <div class="form-group">
-                <strong>Descrição</strong>
-                <textarea id="descricao" name="descricao" value="{{ old('descricao') }}" class="form-control" rows="3"
-                          required></textarea>
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" value="{{ old('descricao') }}" class="form-control" rows="3" required></textarea>
             </div>
             <div class="selectcategoria" style="display:none;">
                 <div class="form-group">
@@ -53,8 +51,7 @@
 
             <div class="form-group">
                 {!! Form::label('arquivo', 'Arquivo', ['class' => 'control-label']) !!}
-                <input id="arquivo" name="arquivo" type="file" class="file"
-                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="" required/>
+                <input id="arquivo" name="arquivo" type="file" class="file" data-show-upload="false" data-show-caption="true" data-msg-placeholder="" required/>
             </div>
 
             @if (Auth::user()->tipousuario == 0  )
@@ -92,5 +89,4 @@
         }
     </script>
 @endsection
-
 

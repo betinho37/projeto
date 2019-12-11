@@ -4,9 +4,9 @@
 
     {{--    verificar se o usuario logado é admin--}}
     @if (Auth::user()->tipousuario == 0  )
-            <a  style="color: white" class="navbar-brand" href="/api/home">Portal</a>
+            <a  style="color: white" class="navbar-brand" href="/api/home">Painel</a>
         @else
-            <a  style="color: white" class="navbar-brand" href="/api/publicacoes/controle">Portal</a>
+            <a  style="color: white" class="navbar-brand" href="/api/publicacoes/controle">Painel</a>
     @endif
 
     <a href="#"

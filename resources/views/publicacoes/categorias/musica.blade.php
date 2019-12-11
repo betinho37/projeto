@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 
-    <title>Sistema</title>
+    <title>{!! config('adminlte.title') !!}</title>
     <link href="{{ asset('css/customize.css') }}" rel="stylesheet">
     @include('componentes.navbar')
 
@@ -21,7 +21,6 @@
             <div id="cold" class="col-md-4">
                 <div id="card" class="card mb-4 shadow-sm">
                     <audio id="player" controls onpause="alertaPausa()" >
-                        <source src="arquivo.ogg" type="audio/ogg">
                         <source src="{{asset('uploads/' . $publicacoes->arquivo)}}" type="audio/mp3">
                         Seu navegador não suporta áudio em HTML5, atualize-o.
 

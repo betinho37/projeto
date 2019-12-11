@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'MV',
+    'title' => 'Sistema de Gerenciamento de Publicações',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Museu</b>Virtual',
+    'logo' => '<b>SGP</b>',
 
-    'logo_mini' => '<b></b>MV',
+    'logo_mini' => '<b></b>SGP',
     
 
     /*

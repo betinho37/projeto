@@ -9,7 +9,6 @@
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
-
             margin: auto;
         }
     </style>
@@ -19,16 +18,10 @@
     <!-- CARROUSSEL IMAGENS -->
     <div class="carousel-inner" role="listbox">
         @foreach( $publicacao as $publicacoes )
-                @if($publicacoes->posicaoimagem == 0)
                     <div class="item {{ $loop->first ? ' active' : '' }}" >
                         <a href="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}">
                             <img  src="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}"  width="300" height="225"> </a>
                     </div>
-                @else
-                    <div class="item {{ $loop->first ? 'active ' : '' }}" >
-                        <a href="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}">   <img src="{{asset((isset($publicacoes) && $publicacoes->arquivo!='')?'uploads/'.$publicacoes->arquivo:'')}}"  width="352" height="736" {{-- width="852" height="1136"--}}></a>
-                    </div>
-                @endif
         @endforeach
     </div>
     <!-- CARROUSSEL CONTROLES -->

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +12,15 @@ use Illuminate\Http\Request;
 |
 */
 Auth::routes();
+
+Route::get("password/reset", "Auth\ForgotPasswordController@showLinkRequestForm");
+Route::post("password/email", "Auth\ForgotPasswordController@sendResetLinkEmail");
+Route::get("password/reset/{token}", "Auth\ResetPasswordController@update");
+Route::post("/passwordreset", "Auth\ResetPasswordController@GetToken");
+
+
+
+
 Route::post('register/store', ['as' => 'register.store', 'uses' => 'Auth\RegisterController@register']);
 
 Route::middleware(['auth'])->group(function () {

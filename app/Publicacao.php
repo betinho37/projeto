@@ -27,8 +27,7 @@ class Publicacao extends Model
         'tipousuario',
         'userid',
         'situacao',
-        'categoriaid',
-        'posicaoimagem'
+        'categoriaid'
     ];
 
     /**
@@ -47,7 +46,6 @@ class Publicacao extends Model
 
         return static::where('nome', 'LIKE', '%' . $pesquisar . '%')
             ->orWhere('created_at','LIKE','%'.$pesquisar.'%');
-/*            ->orWhere('categoriaid','LIKE','%'.$pesquisar.'%');*/
     }
 
 

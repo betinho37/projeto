@@ -74,14 +74,6 @@ class HomeController extends Controller
             ],
         ];
 
-        $publicacoesmes = [
-
-            [
-                'title' => 'Publicacoes feitas durante o mes',
-                'number' => Publicacao::whereDate('created_at', '>', today()->subDays(30))->count()
-            ],
-        ];
-
         $publicacao = Publicacao::where('situacao', '=', 0)->get();
 
 
@@ -92,7 +84,6 @@ class HomeController extends Controller
             "publicacao",
             "publicacoesdia",
             "publicacaoes",
-            "publicacoesmes",
             "publipendentes"));
 
     }

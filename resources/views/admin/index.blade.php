@@ -1,12 +1,35 @@
 @extends('adminlte::page')
-
-@section('title', 'Museu Virtual')
+<head>
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css" >
+    <title>{!! config('adminlte.title') !!}</title>
 
-
+</head>
 @section('content')
 
     <h1 align="center" >Usuários</h1>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @if ($message = Session::get('sucesso'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i>{{ $message }}</h4>
+                </div>
+            @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-close"></i>{{ $message }}</h4>
+                </div>
+            @endif
+        </div>
+    </div>
 
     <div class="box-tools col-md-6" id="header">
         <form role="form" action="{{  route('usuario.pesquisar') }}" method="POST" >
@@ -61,8 +84,7 @@
     <!-- Bootstrap JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
 
-    <!-- toastr notifications -->
-    {{-- <script type="text/javascript" src="{{ asset('toastr/toastr.min.js') }}"></script> --}}
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- icheck checkboxes -->

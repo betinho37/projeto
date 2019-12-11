@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Museu Virtual')
+@section('title')
 
 <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
 

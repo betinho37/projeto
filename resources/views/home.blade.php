@@ -1,8 +1,8 @@
 @extends('adminlte::page')
-
-
-<link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
-
+<head>
+    <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css">
+    <title>{!! config('adminlte.title') !!}</title>
+</head>
 @section('content')
     <div class="row">
         @foreach ($publicacao->slice(0, 1) as $publicacoes)
@@ -47,7 +47,7 @@
                         <div class="info-box">
                             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Total de Usuarios</span>
+                                <span class="info-box-text">Total de Usuários</span>
                                 <span class="info-box-number">{{ $users }}</span>
                             </div>
                             <!-- /.info-box-content -->
@@ -58,7 +58,7 @@
                             <h4 align="center"> {{ $lista['title'] }}</h4>
                             <div class="table-responsive">
 
-                            <table class="table table-dark text-center" >
+                                <table class="table table-dark text-center">
                                     <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -75,7 +75,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4">{{ __('Nenhuma registro encontrada') }}</td>
+                                            <td colspan="4">{{ __('Nenhum registro encontrado') }}</td>
                                         </tr>
                                     @endforelse
                                     </tbody>
@@ -88,11 +88,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
     <div class="box box-success collapsed-box">
         <div class="box-header with-border">
             <h3 class="box-title">Publicações</h3>
@@ -102,18 +97,18 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
         </div>
-
         <div class="box-body">
             <div class="content">
                 <div class="row">
                     @foreach ($publicacoesdia as $dia)
-                    <div class="col-md-4 ">
+                        <div class="col-md-4 ">
                             <div class="info-box">
                                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
                                 <div class="info-box-content">
                                     <span class="info-box-text">{{ $dia['title'] }}</span>
                                     <span class="info-box-number">{{ $dia['number'] }}</span>
+                                    <span class="info-box-text">Total de Publicacoes Pendentes</span>
+                                    <span class="info-box-number">{{ $publipendentes }}</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -123,25 +118,15 @@
                         <div class="info-box">
                             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Total de Publicacoes</span>
+
+                                <span class="info-box-text">Total de Publicações</span>
                                 <span class="info-box-number">{{ $publicacaoes }}</span>
-                                <span class="info-box-text">Total de Publicacoes Pendentes</span>
-                                <span class="info-box-number">{{ $publipendentes }}</span>
+
                             </div>
                             <!-- /.info-box-content -->
                         </div>
                     </div>
-                        @foreach ($publicacoesmes as $mes)
-                            <div class="col-md-4 ">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">{{ $mes['title'] }}</span>
-                                        <span class="info-box-number">{{ $mes['number'] }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+
                 </div>
 
             </div>
